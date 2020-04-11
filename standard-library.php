@@ -3,6 +3,12 @@
  * @package Baizman Design Standard Library
  * @version 0.1
  */
+/*
+ * TODO
+ *
+ * + after commit, regenerate documentation
+ *
+ */
 
 define ( 'BZMNDSGN_DEBUG', false ) ;
 
@@ -27,8 +33,6 @@ define ( 'BZMNDSGN_PLUGIN_FOLDER_URL', trailingslashit ( dirname ( plugin_dir_ur
 define ( 'BZMNDSGN_LIBRARY_FOLDER_URI', trailingslashit ( plugin_dir_path ( __FILE__ ) ) ) ;
 
 define ( 'BZMNDSGN_LIBRARY_FOLDER_URL', trailingslashit ( plugin_dir_url ( __FILE__ ) ) ) ;
-
-//exit ;
 
 define ( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' ) ;
 
@@ -63,6 +67,7 @@ if ( BZMNDSGN_DEBUG ) {
 	// Note: sprintf() won't print the contents of this variable.
     echo $user_defined_constants  ;
     echo ( ' -->' ) ;
+	_bzmndsgn_debug ( $user_defined_constants ) ;
 }
 
 /**
@@ -227,7 +232,7 @@ add_shortcode ( 'bzmndsgn_get_theme_directory', 'bzmndsgn_get_theme_directory' )
 /**
  * Log 404 errors to a file. Works in conjunction with 404.php of the theme.
  */
-function bzmndsgn_log_404_error ( ) {
+function _bzmndsgn_log_404_error ( ) {
 
 	$date = date ( 'c' ) ;
 
@@ -245,4 +250,16 @@ function bzmndsgn_log_404_error ( ) {
 
 	file_put_contents ( $not_found_path, $not_found_details, FILE_APPEND | LOCK_EX ) ;
 
+}
+
+/**
+ * Write debugging information to debug log.
+ * @param $data
+ */
+function _bzmndsgn_debug ( $data ) {
+    if ( BZMNDSGN_DEBUG ) {
+        $timestamp = date('Y.m.d H.i.s');
+        $log_message = sprintf ( '%1$s: %2$s', $timestamp, $data ) . "\n" ;
+	    file_put_contents (BZMNDSGN_DEBUG_LOG, $log_message, FILE_APPEND | LOCK_EX ) ;
+    }
 }
