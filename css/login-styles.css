@@ -1,16 +1,14 @@
-<?php
 /**
  * WordPress login screen styles.
  */
 
-// Send header content-type declaration.
-header ( 'Content-Type: text/css' ) ;
+:root {
+    --primary-color: rgb(0,0,0);
+    --typeface: Helvetica, Arial, sans-serif ;
+}
 
-$primary_color = '#00205B' ;
-
-?>
 body {
-    font-family: CentSchbookBTWGL4WXX-Roman, Georgia, serif ;
+    font-family: var(--typeface) ;
     font-style: normal ;
     font-weight: normal ;
     background-color: #fff ;
@@ -25,7 +23,7 @@ body {
 }
 
 #login h2, .login h2 {
-    font-family: CentSchbookBTWGL4WXX-Italic ;
+    font-family: var(--typeface) ;
     font-style: normal ;
     font-weight: normal ;
     font-size: 2em ;
@@ -33,13 +31,13 @@ body {
 }
 
 #login h2 a, .login h2 a {
-    color: <?php echo $primary_color ; ?> ;
+    color: var(--primary-color) ;
     text-decoration: none ;
 }
 
 #login h2 a:hover, .login h2 a:hover {
-    color: <?php echo $primary_color ; ?> ;
-    border-bottom: 2px solid <?php echo $primary_color ; ?> ;
+    color: var(--primary-color) ;
+    border-bottom: 2px solid var(--primary-color) ;
 }
 #login h3, .login h3 {
     margin-top: 10px ;
@@ -52,22 +50,22 @@ h3, label, p {
 
 /* Style login button. */
 #wp-submit, #wp-submit:focus {
-    background-color: <?php echo $primary_color ; ?> ;
-    border-color: <?php echo $primary_color ; ?> ;
+    background-color: var(--primary-color) ;
+    border-color: var(--primary-color) ;
     /*text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799 ;*/
     text-shadow: none ;
-    box-shadow: 0 1px 0 <?php echo $primary_color ; ?> ;
+    box-shadow: 0 1px 0 var(--primary-color) ;
 }
 
 .login #backtoblog a, .login #nav a {
-    color: <?php echo $primary_color ; ?> ;
+    color: var(--primary-color) ;
     padding-bottom: 1px ;
 }
 
 .login #backtoblog a:hover, .login #nav a:hover,
 .login #backtoblog a:focus, .login #nav a:focus {
-    color: <?php echo $primary_color ; ?> ;
-    border-bottom: 1px solid <?php echo $primary_color ; ?> ;
+    color: var(--primary-color) ;
+    border-bottom: 1px solid var(--primary-color) ;
 }
 
 /* Add space above "You are now logged out." message. */
@@ -76,6 +74,6 @@ h3, label, p {
 }
 
 #login .message {
-    border-left: 4px solid <?php echo $primary_color ; ?> ;
+    border-left: 4px solid var(--primary-color) ;
     margin: 16px 0 ;
 }
