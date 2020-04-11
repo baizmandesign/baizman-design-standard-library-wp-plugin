@@ -4,36 +4,72 @@
  * @version 0.1
  */
 
-define ( 'DEBUG', false ) ;
+define ( 'BZMNDSGN_DEBUG', false ) ;
 
-define ( 'DEBUG_LOG', 'debug.log' ) ;
+define ( 'BZMNDSGN_DEBUG_LOG', 'debug.log' ) ;
 
-define ( 'DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'] ) ;
+define ( 'BZMNDSGN_DOCUMENT_ROOT_URI', trailingslashit ( $_SERVER['DOCUMENT_ROOT'] ) ) ;
 
-define ( 'THEME_FOLDER', trailingslashit ( get_stylesheet_directory_uri ( ) ) ) ;
+// https://developer.wordpress.org/reference/functions/home_url/
+// https://developer.wordpress.org/reference/functions/get_home_url/
+define ( 'BZMNDSGN_DOCUMENT_ROOT_URL', trailingslashit ( home_url ( ) ) ) ;
 
-define ( 'LIBRARY_FOLDER', trailingslashit ( plugin_dir_url ( __FILE__ ) ) ) ;
+// Note: this only retrieves the *child* theme path, not the parent theme.
+// https://developer.wordpress.org/reference/functions/get_stylesheet_directory_uri/
+define ( 'BZMNDSGN_THEME_FOLDER_URI', trailingslashit ( get_stylesheet_directory ( ) ) ) ;
 
-define ( 'AUTHOR_NAME', 'Saul Baizman' ) ;
+define ( 'BZMNDSGN_THEME_FOLDER_URL', trailingslashit ( get_stylesheet_directory_uri ( ) ) ) ;
 
-define ( 'AUTHOR_EMAIL', 'saul@baizmandesign.com' ) ;
+define ( 'BZMNDSGN_PLUGIN_FOLDER_URI', trailingslashit ( dirname ( dirname (__FILE__) ) ) ) ;
 
-define ( 'AUTHOR_COMPANY', 'Baizman Design' ) ;
+define ( 'BZMNDSGN_PLUGIN_FOLDER_URL', trailingslashit ( dirname ( plugin_dir_url ( __FILE__ ) ) ) ) ;
 
-define ( 'AUTHOR_COMPANY_URL', 'https://baizmandesign.com' ) ;
+define ( 'BZMNDSGN_LIBRARY_FOLDER_URI', trailingslashit ( plugin_dir_path ( __FILE__ ) ) ) ;
+
+define ( 'BZMNDSGN_LIBRARY_FOLDER_URL', trailingslashit ( plugin_dir_url ( __FILE__ ) ) ) ;
+
+//exit ;
+
+define ( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' ) ;
+
+define ( 'BZMNDSGN_AUTHOR_EMAIL', 'saul@baizmandesign.com' ) ;
+
+define ( 'BZMNDSGN_AUTHOR_COMPANY', 'Baizman Design' ) ;
+
+define ( 'BZMNDSGN_AUTHOR_COMPANY_URL', 'https://baizmandesign.com' ) ;
 
 define ( 'BZMNDSGN_CONFIG_OPTIONS', 'bzmndsgn_config_options' ) ;
+
+define ( 'BZMNDSGN_IS_MULTISITE' , is_multisite ( ) ) ;
+
+// Multisite constants.
+if ( BZMNDSGN_IS_MULTISITE ) {
+    define ( 'BZMNDSGN_MULTISITE_CONFIG_OPTIONS', 'bzmndsgn_multisite_config_options' ) ;
+
+	$network = get_network() ;
+	define ( 'BZMNDSGN_MULTISITE_NETWORK_NAME', $network->site_name ) ;
+}
 
 // Load per-site plugin settings.
 $bzmndsgn_config_options = get_option ( BZMNDSGN_CONFIG_OPTIONS ) ;
 
-define ( 'NOT_FOUND_404_LOG_FILE', sprintf ('%s-%s',$bzmndsgn_config_options['log_file_prefix'], '404.log' ) ) ;
+define ( 'BZMNDSGN_NOT_FOUND_404_LOG_FILE', sprintf ('%s-%s',$bzmndsgn_config_options['log_file_prefix'], '404.log' ) ) ;
+
+if ( BZMNDSGN_DEBUG ) {
+    $defined_constants = get_defined_constants (true) ;
+	$user_defined_constants = print_r ( $defined_constants['user'], true ) ;
+
+    echo ( '<!-- ' ) ;
+	// Note: sprintf() won't print the contents of this variable.
+    echo $user_defined_constants  ;
+    echo ( ' -->' ) ;
+}
 
 /**
  * Include admin interface if we are viewing the backend.
  */
 if ( is_admin ( ) ) {
-	require_once trailingslashit ( plugin_dir_path ( __FILE__ ) ) . 'admin.php' ;
+	require_once ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ;
 }
 
 /**
@@ -63,7 +99,7 @@ add_action ( 'wp_head', 'bzmndsgn_enqueue_google_analytics', 1 ) ;
  * Add custom styles to tinyMCE editor.
  */
 function bzmndsgn_custom_editor_styles ( ) {
-	add_editor_style ( LIBRARY_FOLDER . 'css/editor-styles.css' ) ;
+	add_editor_style ( BZMNDSGN_LIBRARY_FOLDER_URL . 'css/editor-styles.css' ) ;
 }
 add_action ( 'init', 'bzmndsgn_custom_editor_styles' ) ;
 
@@ -71,8 +107,8 @@ add_action ( 'init', 'bzmndsgn_custom_editor_styles' ) ;
  * Add CSS and JS for admin interface.
  */
 function admin_stylesheet() {
-	wp_enqueue_style ('bzmndsgn-admin-styles', LIBRARY_FOLDER . 'css/admin-style.css');
-	wp_enqueue_script ( 'bzmndsgn-admin-scripts', LIBRARY_FOLDER . 'js/admin-scripts.js' ) ;
+	wp_enqueue_style ('bzmndsgn-admin-styles', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/admin-style.css');
+	wp_enqueue_script ( 'bzmndsgn-admin-scripts', BZMNDSGN_LIBRARY_FOLDER_URL . 'js/admin-scripts.js' ) ;
 
 }
 add_action('admin_enqueue_scripts', 'admin_stylesheet');
@@ -81,8 +117,8 @@ add_action('admin_enqueue_scripts', 'admin_stylesheet');
  * Add custom styles on WP login screen.
  */
 function bzmndsgn_login_stylesheet ( ) {
-	wp_enqueue_style ( 'custom-login', LIBRARY_FOLDER . 'css/login-styles.css.php' ) ;
-	// wp_enqueue_style ( 'typography-styles', LIBRARY_FOLDER . 'css/fonts.css' ) ;
+	wp_enqueue_style ( 'custom-login', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/login-styles.css' ) ;
+	// wp_enqueue_style ( 'typography-styles', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/fonts.css' ) ;
 }
 add_action ( 'login_enqueue_scripts', 'bzmndsgn_login_stylesheet' ) ;
 
@@ -97,13 +133,15 @@ add_action ( 'login_enqueue_scripts', 'bzmndsgn_login_stylesheet' ) ;
  */
 function bzmndsgn_login_screen_message ( $message ) {
 	if ( empty ( $message ) ) {
-		$h2_text = get_bloginfo('name') ;
-		$h3_text = false ;
-		if ( is_multisite( ) ) {
-			$network = get_network() ;
-			$h2_text = $network->site_name ;
-			$h3_text = get_bloginfo('name') ;
+	    $website_name = get_bloginfo('name') ;
+		if ( BZMNDSGN_IS_MULTISITE ) {
+			$h2_text = BZMNDSGN_MULTISITE_NETWORK_NAME ;
+			$h3_text = $website_name ;
 		}
+		else {
+			$h2_text = $website_name ;
+			$h3_text = false ;
+        }
 		return sprintf ( '<h2><a title="%1$s" href="%3$s">%1$s</a></h2><h3>%2$s</h3>',$h2_text, $h3_text, home_url ( ) ) ;
 	} else {
 		return $message;
@@ -120,12 +158,11 @@ add_filter( 'login_message', 'bzmndsgn_login_screen_message' ) ;
  */
 function bzmndsgn_footer_site_name ( $default ) {
 
-	if ( is_multisite( ) ) {
+	if ( BZMNDSGN_IS_MULTISITE ) {
 		// https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite
 		global $blog_id;
 		$current_blog_details = get_blog_details ( array( 'blog_id' => $blog_id ) );
-		$network = get_network() ;
-		return sprintf ( '%1$s / %2$s', $network->site_name, $current_blog_details->blogname );
+		return sprintf ( '%1$s / %2$s', BZMNDSGN_MULTISITE_NETWORK_NAME, $current_blog_details->blogname );
 	}
 	return get_bloginfo ( 'name' ) ;
 }
@@ -139,7 +176,7 @@ add_filter ( 'admin_footer_text', 'bzmndsgn_footer_site_name' ) ;
  * @return string
  */
 function bzmndsgn_footer_credit ( $default ) {
-	return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', AUTHOR_COMPANY, AUTHOR_COMPANY_URL ) ;
+	return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 }
 add_filter ( 'update_footer', 'bzmndsgn_footer_credit', 11 ) ;
 
@@ -173,7 +210,7 @@ add_shortcode ( 'bzmndsgn_get_site_database_setting', 'bzmndsgn_get_site_databas
  * @return string
  */
 function bzmndsgn_get_theme_directory ( ) {
-	return THEME_FOLDER ;
+	return BZMNDSGN_THEME_FOLDER_URI ;
 }
 add_shortcode ( 'bzmndsgn_get_theme_directory', 'bzmndsgn_get_theme_directory' ) ;
 
@@ -182,10 +219,10 @@ add_shortcode ( 'bzmndsgn_get_theme_directory', 'bzmndsgn_get_theme_directory' )
  *
  * @return string
  */
-function bzmndsgn_get_theme_image_directory ( ) {
-	return IMAGE_SUBFOLDER ;
-}
-add_shortcode ( 'bzmndsgn_get_theme_image_directory', 'bzmndsgn_get_theme_image_directory' ) ;
+//function bzmndsgn_get_theme_image_directory ( ) {
+//	return BZMNDSGN_IMAGE_SUBFOLDER_URI ;
+//}
+//add_shortcode ( 'bzmndsgn_get_theme_image_directory', 'bzmndsgn_get_theme_image_directory' ) ;
 
 /**
  * Log 404 errors to a file. Works in conjunction with 404.php of the theme.
@@ -204,7 +241,7 @@ function bzmndsgn_log_404_error ( ) {
 
 	$not_found_details = sprintf ('%1$s - %4$s - %3$s - %2$s - %5$s'."\n", $date, $not_found_url, $user_agent , $client_ip_address, $referrer ) ;
 
-	$not_found_path = sprintf ( '%1$s/%2$s', DOCUMENT_ROOT, NOT_FOUND_404_LOG_FILE ) ;
+	$not_found_path = sprintf ( '%1$s/%2$s', BZMNDSGN_DOCUMENT_ROOT_URI, BZMNDSGN_NOT_FOUND_404_LOG_FILE ) ;
 
 	file_put_contents ( $not_found_path, $not_found_details, FILE_APPEND | LOCK_EX ) ;
 
