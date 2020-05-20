@@ -10,6 +10,8 @@
  *
  */
 
+defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+
 define ( 'BZMNDSGN_DEBUG', false ) ;
 
 define ( 'BZMNDSGN_DEBUG_LOG', 'debug.log' ) ;
