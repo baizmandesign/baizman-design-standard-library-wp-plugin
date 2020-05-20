@@ -38,6 +38,10 @@ define ( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' ) ;
 
 define ( 'BZMNDSGN_AUTHOR_EMAIL', 'saul@baizmandesign.com' ) ;
 
+define ( 'BZMNDSGN_SUPPORT_EMAIL', 'support@baizmandesign.com' ) ;
+
+define ( 'BZMNDSGN_AUTHOR_PHONE', '1-617-863-7165' ) ;
+
 define ( 'BZMNDSGN_AUTHOR_COMPANY', 'Baizman Design' ) ;
 
 define ( 'BZMNDSGN_AUTHOR_COMPANY_URL', 'https://baizmandesign.com' ) ;
@@ -45,6 +49,8 @@ define ( 'BZMNDSGN_AUTHOR_COMPANY_URL', 'https://baizmandesign.com' ) ;
 define ( 'BZMNDSGN_CONFIG_OPTIONS', 'bzmndsgn_config_options' ) ;
 
 define ( 'BZMNDSGN_IS_MULTISITE' , is_multisite ( ) ) ;
+
+define ( 'BZMNDSGN_SHOW_DASHBOARD_WIDGET', true ) ;
 
 // Multisite constants.
 if ( BZMNDSGN_IS_MULTISITE ) {
@@ -184,6 +190,44 @@ function bzmndsgn_footer_credit ( $default ) {
 	return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 }
 add_filter ( 'update_footer', 'bzmndsgn_footer_credit', 11 ) ;
+
+if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
+    /**
+     * This function outputs the content of the admin dashboard widget.
+     */
+    function bzmndsgn_admin_dashboard_widget( ) {
+
+        printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for monthly support and maintenance.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
+        printf( '
+<p>The contract includes up to two hours per month for any of the following activities:</p>
+<ul>
+<li>+ technical support via <a href="mailto:%1$s">email</a>, <a href="tel:%2$s">phone</a>, <a href="%3$s">videoconference</a>, or in-person consultation.</li> 
+<li>+ WordPress training for new and existing users.</li>
+<li>+ custom website development (e.g., a new feature).</li>
+</ul>
+', BZMNDSGN_SUPPORT_EMAIL, BZMNDSGN_AUTHOR_PHONE, 'https://meet.google.com' ) ;
+
+        if ( get_bloginfo('admin_email') != BZMNDSGN_AUTHOR_EMAIL ) {
+            printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), home_url('/wp-admin/options-general.php') ) ;
+
+        }
+    }
+    // Add the correct hook.
+    if ( BZMNDSGN_IS_MULTISITE ) {
+	    add_action( 'wp_network_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+    } else {
+	    add_action( 'wp_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+    }
+
+    /**
+     * Add the widget to the admin dashboard.
+     */
+    function bzmndsgn_add_admin_dashboard_widget( ) {
+        wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
+            'Website Support and Maintenance',
+            'bzmndsgn_admin_dashboard_widget' );
+    }
+}
 
 /**
  * Return requested site option value from the database.
