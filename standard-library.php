@@ -175,9 +175,9 @@ function bzmndsgn_footer_site_name ( $default ) {
 		// https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite
 		global $blog_id;
 		$current_blog_details = get_blog_details ( array( 'blog_id' => $blog_id ) );
-		return sprintf ( '%1$s / %2$s', BZMNDSGN_MULTISITE_NETWORK_NAME, $current_blog_details->blogname );
+		return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> &gt; <a href="%4$s" target="_blank">%3$s</a>', BZMNDSGN_MULTISITE_NETWORK_NAME, network_home_url (), $current_blog_details->blogname, $current_blog_details->home );
 	}
-	return get_bloginfo ( 'name' ) ;
+	return sprintf ( '<a href="%2$s" target="_blank">%1$s</a>',get_bloginfo ( 'name' ), home_url ( ) );
 }
 add_filter ( 'admin_footer_text', 'bzmndsgn_footer_site_name' ) ;
 
