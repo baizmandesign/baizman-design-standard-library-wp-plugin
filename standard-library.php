@@ -243,6 +243,19 @@ if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
 }
 
 /**
+ * Remove WP admin dashboard widgets.
+ * https://isabelcastillo.com/remove-wordpress-dashboard-widgets
+ * TODO: make this a setting in the admin panel.
+ */
+function bzmndsgn_disable_dashboard_widgets() {
+	// remove_meta_box('dashboard_right_now', 'dashboard', 'normal');// Remove "At a Glance"
+	remove_meta_box('dashboard_activity', 'dashboard', 'normal');// Remove "Activity" which includes "Recent Comments"
+	remove_meta_box('dashboard_quick_press', 'dashboard', 'side');// Remove Quick Draft
+	remove_meta_box('dashboard_primary', 'dashboard', 'core');// Remove WordPress Events and News
+}
+add_action('admin_menu', 'bzmndsgn_disable_dashboard_widgets');
+
+/**
  * Return requested site option value from the database.
  *
  * @param $attributes
