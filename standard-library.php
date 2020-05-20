@@ -193,6 +193,17 @@ function bzmndsgn_footer_credit ( $default ) {
 }
 add_filter ( 'update_footer', 'bzmndsgn_footer_credit', 11 ) ;
 
+/**
+ * Remove unused links in admin menu.
+ * TODO: make this a setting in the admin panel.
+ */
+function bzmndsgn_remove_menus ( )
+{
+	remove_menu_page ( 'edit-comments.php' ); // Comments
+	remove_menu_page ( 'edit.php' ); // Posts
+}
+add_action( 'admin_menu', 'bzmndsgn_remove_menus' );
+
 if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
     /**
      * This function outputs the content of the admin dashboard widget.
