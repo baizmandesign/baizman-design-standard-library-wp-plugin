@@ -19,3 +19,9 @@ thead.sticky th, thead.sticky #cb {
     position: sticky;
     background-color: rgb(255, 255, 255) ;
 }
+
+/* */
+table.not_found_log_entries td, table.not_found_log_entries th {
+    padding: 1em ;
+    text-align: left ;
+}
