@@ -73,7 +73,7 @@ function bzmndsgn_config_admin_menu ( ) {
 	$parent_menu = new menu ( BZMNDSGN_AUTHOR_COMPANY, 'bzmndsgn_website_settings','dashicons-admin-generic' ) ;
 
 	// Main configuration page.
-	$main_settings_submenu = new submenu ( 'Main Settings', 'bzmndsgn_website_settings' ) ;
+	$main_settings_submenu = new submenu ( 'General Settings', 'bzmndsgn_website_settings' ) ;
 	$parent_menu->add_submenu_item ( $main_settings_submenu ) ;
 
 	// 404 error log.
