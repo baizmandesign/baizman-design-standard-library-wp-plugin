@@ -82,11 +82,11 @@ function bzmndsgn_config_admin_menu ( ) {
 	$parent_menu->add_submenu_item ( $error_404_log_submenu ) ;
 
 	// Advanced submenu.
-	$advanced_submenu = new submenu( 'Advanced', 'bzmndsgn_advanced_settings') ;
-	$parent_menu->add_submenu_item ( $advanced_submenu ) ;
-
+	if ( WP_DEBUG ) {
+		$advanced_submenu = new submenu( 'Advanced', 'bzmndsgn_advanced_settings') ;
+		$parent_menu->add_submenu_item ( $advanced_submenu ) ;
+	}
 	$parent_menu->render_menu ( ) ;
 
 }
 add_action ( 'admin_menu', 'bzmndsgn_config_admin_menu', 1 ) ;
-
