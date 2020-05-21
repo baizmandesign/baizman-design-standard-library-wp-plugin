@@ -38,3 +38,14 @@ function _bzmndsgn_debug ( $data ) {
 		file_put_contents (BZMNDSGN_DEBUG_LOG, $log_message, FILE_APPEND | LOCK_EX ) ;
 	}
 }
+
+function _print_admin_settings_heading ( $subtitle, $title = '' ) {
+	printf ('<h1>%s Settings</h1>', $title == '' ? get_bloginfo ( 'name' ) : $title ) ;
+	if ( isset( $_GET['message'] ) && $_GET['message'] == '1' ) {
+		?>
+		<div id="message" class="notice notice-success is-dismissible">
+		<p><strong><?php echo $_GET['details'] ; ?></strong></p>
+		</div><?php
+	}
+	printf ( '<h2>%s</h2>', $subtitle ) ;
+}
