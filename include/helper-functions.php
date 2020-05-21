@@ -1,5 +1,4 @@
 <?php
-
 /**
  * All helper functions begin with an underscore. They are only called by other functions, not directly.
  */
