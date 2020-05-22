@@ -44,22 +44,30 @@ add_filter( 'the_content', 'pce_filter_content_blank_lines' );
  *
  * @return string
  */
-function bzmndsgn_illegal_tags ( $content ) {
+function bzmndsgn_strip_illegal_tags ( $content ) {
 
 	// These tags will not be stripped out.
 	// FIXME: limit to one or more post types?
 	// TODO: make these tags user-configurable via the admin interface.
 	$legal_tags[] = '<a>' ;
+	$legal_tags[] = '<b>' ;
+	$legal_tags[] = '<strong>' ;
+	$legal_tags[] = '<i>' ;
+	$legal_tags[] = '<em>' ;
 	$legal_tags[] = '<h1>' ;
 	$legal_tags[] = '<h2>' ;
 	$legal_tags[] = '<h3>' ;
 	$legal_tags[] = '<h4>' ;
 	$legal_tags[] = '<h5>' ;
 	$legal_tags[] = '<h6>' ;
+	$legal_tags[] = '<ul>' ;
+	$legal_tags[] = '<li>' ;
+	$legal_tags[] = '<blockquote>' ;
+	$legal_tags[] = '<p>' ; // necessary?
 
 	return strip_tags( $content, implode( '', $legal_tags ) );
 }
-add_filter( 'content_save_pre', 'bzmndsgn_illegal_tags', 10, 1 );
+add_filter( 'content_save_pre', 'bzmndsgn_strip_illegal_tags', 10, 1 );
 
 /**
  * Condense double-spaces into a single space when the_content is output.
