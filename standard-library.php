@@ -87,15 +87,17 @@ if ( is_admin ( ) ) {
 	require_once ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ;
 }
 
-/**
- * Include all *.php files in the given subfolder.
- * @param $folder
- */
-function _require_once_folder ( $folder ) {
-	// Note: the path needs the absolute path, not relative path.
-	// Or my relative path might just have been wrong!
-	foreach ( glob (__DIR__ . "/{$folder}/*.php") as $filename )
-	{
-		require_once $filename;
+if ( ! function_exists ( '_require_once_folder' ) ):
+	/**
+	 * Include all *.php files in the given subfolder.
+	 * @param $folder
+	 */
+	function _require_once_folder ( $folder ) {
+		// Note: the path needs the absolute path, not relative path.
+		// Or my relative path might just have been wrong!
+		foreach ( glob (__DIR__ . "/{$folder}/*.php") as $filename )
+		{
+			require_once $filename;
+		}
 	}
-}
+endif;
