@@ -113,3 +113,17 @@ function bzmndsgn_footer_credit ( $default ) {
 	return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 }
 add_filter ( 'update_footer', 'bzmndsgn_footer_credit', 11 ) ;
+
+/**
+ * Display global warning in WP dashboard if we are working on a dev site.
+ */
+function bzmndsgn_dev_site_warning ( ) {
+	if ( strpos ( $_SERVER['HTTP_HOST'], 'dev.' ) !== false ) {
+		?>
+		<div class="error bzmndsgn_dev_site_warning-error">
+			<p><strong>WARNING: this is a development server meant for experimental purposes only. Content saved on this site may be removed at any time without notice, and certain functions may not be fully configured or operational. Need assistance? <?php printf ( '<a href="mailto:%2$s">Please email %1$s.</a>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_SUPPORT_EMAIL) ;?></strong></p>
+		</div>
+	<?php
+	}
+}
+add_action ( 'admin_notices', 'bzmndsgn_dev_site_warning' ) ;
