@@ -38,6 +38,11 @@ function _bzmndsgn_debug ( $data ) {
 	}
 }
 
+/**
+ * Print the heading, subheading, and success messages for the admin panel pages.
+ * @param $subtitle
+ * @param string $title
+ */
 function _print_admin_settings_heading ( $subtitle, $title = '' ) {
 	printf ('<h1>%s Settings</h1>', $title == '' ? get_bloginfo ( 'name' ) : $title ) ;
 	if ( isset( $_GET['message'] ) && $_GET['message'] == '1' ) {
