@@ -25,3 +25,9 @@ table.not_found_log_entries td, table.not_found_log_entries th {
     padding: 1em ;
     text-align: left ;
 }
+
+/* Hide "Register toolset" message for lapsed subscriptions. */
+/* Better done in CSS because it works right away, but jQuery allows greater specificity. */
+div.toolset-notice-wp.notice.toolset-notice {
+    display: none ;
+}
