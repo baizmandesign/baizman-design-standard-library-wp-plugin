@@ -145,3 +145,42 @@ if ( ! function_exists ( 'bzmndsgn_dev_site_warning' ) ):
 	}
 	add_action ( 'admin_notices', 'bzmndsgn_dev_site_warning' ) ;
 endif;
+
+if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
+    /**
+     * Set background color of WP dashboard to distinguish dev and staging sites from production.
+     */
+	function bzmndsgn_set_dashboard_background_color() {
+
+		$body_background_color = '' ;
+		// How many periods are in the domain name?
+		$url_parts = _get_url_parts ( $_SERVER['HTTP_HOST'] ) ;
+		// Dev and staging environments: [dev,staging].domain.ext.
+		if ( $url_parts ) {
+            if ( count ( $url_parts )  == 3 ) {
+                $subdomain = $url_parts[0] ;
+                if ( $subdomain == 'dev' ) {
+	                $body_background_color = BZMNDSGN_DEV_BACKGROUND_COLOR;
+                }
+                if ( $subdomain == 'staging' ) {
+	                $body_background_color = BZMNDSGN_STAGING_BACKGROUND_COLOR;
+                }
+            }
+		}
+
+		// Mostly local development, or domain.ext.
+		if ( count ( $url_parts )  == 2 ) {
+		    $domain = _get_domain ( $_SERVER['HTTP_HOST'] ) ;
+            if ( $domain ) {
+                if ( $domain == 'local' ) {
+                    $body_background_color = BZMNDSGN_LOCAL_BACKGROUND_COLOR ;
+                }
+            }
+		}
+
+		if ( $body_background_color ) :
+			printf ('<!-- Special over-ride to distinguish dev and staging sites from production. --><style type="text/css">body { background-color: %s }</style>', $body_background_color );
+		endif ;
+	}
+	add_action( 'admin_head', 'bzmndsgn_set_dashboard_background_color' );
+endif;

@@ -59,3 +59,35 @@ if ( ! function_exists ( '_print_admin_settings_heading' ) ):
 		printf ( '<h2>%s</h2>', $subtitle ) ;
 	}
 endif;
+
+if ( ! function_exists('_get_url_parts' ) ):
+	/**
+	 * Return URL parts of a given URL in an array.
+	 * @param $fqdn
+	 *
+	 * @return false|string[]
+	 */
+	function _get_url_parts ( $fqdn ) {
+        $url_parts = explode ( '.', $fqdn ) ;
+        if ( $url_parts ) {
+            return $url_parts ;
+        }
+        return false ;
+    }
+endif;
+
+if ( ! function_exists ('_get_domain' ) ):
+	/**
+     * Return TLD extension of a given URL.
+	 * @param $fqdn
+	 *
+	 * @return bool|mixed|string
+	 */
+	function _get_domain ( $fqdn ) {
+        $url_parts = _get_url_parts ( $fqdn ) ;
+        if ( $url_parts ) {
+            return $url_parts[count($url_parts)-1] ;
+        }
+        return false ;
+    }
+endif;
