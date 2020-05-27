@@ -88,4 +88,5 @@ function bzmndsgn_config_admin_menu ( ) {
 	$parent_menu->render_menu ( ) ;
 
 }
-add_action ( 'admin_menu', 'bzmndsgn_config_admin_menu', 1 ) ;
+if ( BZMNDSGN_SHOW_DASHBOARD_INTERFACE )
+	add_action ( 'admin_menu', 'bzmndsgn_config_admin_menu', 1 ) ;

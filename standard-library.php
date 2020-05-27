@@ -83,7 +83,7 @@ if ( BZMNDSGN_DEBUG ) {
 /**
  * Include admin interface if we are viewing the backend.
  */
-if ( is_admin ( ) ) {
+if ( is_admin ( ) && file_exists ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ) {
 	require_once ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ;
 }
 

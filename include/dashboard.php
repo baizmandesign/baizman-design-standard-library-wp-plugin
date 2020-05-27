@@ -105,13 +105,15 @@ if ( ! function_exists ( 'bzmndsgn_footer_site_name' ) ):
 	 */
 	function bzmndsgn_footer_site_name ( $default ) {
 
+	    $environment = _get_environment_type ( );
+
 		if ( BZMNDSGN_IS_MULTISITE ) {
 			// https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite
 			global $blog_id;
 			$current_blog_details = get_blog_details ( array( 'blog_id' => $blog_id ) );
-			return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> &gt; <a href="%4$s" target="_blank">%3$s</a>', BZMNDSGN_MULTISITE_NETWORK_NAME, network_home_url (), $current_blog_details->blogname, $current_blog_details->home );
+			return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> &gt; <a href="%4$s" target="_blank">%3$s</a> (%5$s)', BZMNDSGN_MULTISITE_NETWORK_NAME, network_home_url (), $current_blog_details->blogname, $current_blog_details->home, $environment );
 		}
-		return sprintf ( '<a href="%2$s" target="_blank">%1$s</a>',get_bloginfo ( 'name' ), home_url ( ) );
+		return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> (%3$s)',get_bloginfo ( 'name' ), home_url ( ), $environment );
 	}
 	add_filter ( 'admin_footer_text', 'bzmndsgn_footer_site_name' ) ;
 endif;
@@ -153,34 +155,21 @@ if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
 	function bzmndsgn_set_dashboard_background_color() {
 
 		$body_background_color = '' ;
-		// How many periods are in the domain name?
-		$url_parts = _get_url_parts ( $_SERVER['HTTP_HOST'] ) ;
-		// Dev and staging environments: [dev,staging].domain.ext.
-		if ( $url_parts ) {
-            if ( count ( $url_parts )  == 3 ) {
-                $subdomain = $url_parts[0] ;
-                if ( $subdomain == 'dev' ) {
-	                $body_background_color = BZMNDSGN_DEV_BACKGROUND_COLOR;
-                }
-                if ( $subdomain == 'staging' ) {
-	                $body_background_color = BZMNDSGN_STAGING_BACKGROUND_COLOR;
-                }
-            }
+		$environment = _get_environment_type ( );
+
+		if ( $environment == 'Development' ) {
+			$body_background_color = BZMNDSGN_DEV_BACKGROUND_COLOR;
+		}
+		if ( $environment == 'Staging' ) {
+			$body_background_color = BZMNDSGN_STAGING_BACKGROUND_COLOR;
+		}
+		if ( $environment == 'Local Development' ) {
+			$body_background_color = BZMNDSGN_LOCAL_BACKGROUND_COLOR ;
 		}
 
-		// Mostly local development, or domain.ext.
-		if ( count ( $url_parts )  == 2 ) {
-		    $domain = _get_domain ( $_SERVER['HTTP_HOST'] ) ;
-            if ( $domain ) {
-                if ( $domain == 'local' ) {
-                    $body_background_color = BZMNDSGN_LOCAL_BACKGROUND_COLOR ;
-                }
-            }
-		}
-
-		if ( $body_background_color ) :
+		if ( $body_background_color ) {
 			printf ('<!-- Special over-ride to distinguish dev and staging sites from production. --><style type="text/css">body { background-color: %s }</style>', $body_background_color );
-		endif ;
+		}
 	}
 	add_action( 'admin_head', 'bzmndsgn_set_dashboard_background_color' );
 endif;

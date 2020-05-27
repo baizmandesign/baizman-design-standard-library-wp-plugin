@@ -60,34 +60,38 @@ if ( ! function_exists ( '_print_admin_settings_heading' ) ):
 	}
 endif;
 
-if ( ! function_exists('_get_url_parts' ) ):
+if ( ! function_exists ('_get_environment' ) ):
 	/**
-	 * Return URL parts of a given URL in an array.
-	 * @param $fqdn
-	 *
-	 * @return false|string[]
+	 * Get the server environment (Production, Staging, Development, or Local Development).
 	 */
-	function _get_url_parts ( $fqdn ) {
-        $url_parts = explode ( '.', $fqdn ) ;
-        if ( $url_parts ) {
-            return $url_parts ;
-        }
-        return false ;
-    }
-endif;
+	function _get_environment_type ( ) {
 
-if ( ! function_exists ('_get_domain' ) ):
-	/**
-     * Return TLD extension of a given URL.
-	 * @param $fqdn
-	 *
-	 * @return bool|mixed|string
-	 */
-	function _get_domain ( $fqdn ) {
-        $url_parts = _get_url_parts ( $fqdn ) ;
-        if ( $url_parts ) {
-            return $url_parts[count($url_parts)-1] ;
+	    $environment_type = 'Production' ;
+
+		$url_parts = explode ( '.', $_SERVER['HTTP_HOST'] ) ;
+		if ( $url_parts ) {
+			$url_parts_count = count ( $url_parts ) ;
+			if ( $url_parts_count  == 3 ) {
+				$subdomain = $url_parts[0] ;
+				if ( $subdomain == 'dev' ) {
+					$environment_type = 'Development';
+				}
+				if ( $subdomain == 'staging' ) {
+					$environment_type = 'Staging' ;
+				}
+			}
+
+			// Mostly local development, or domain.ext.
+			if ( count ( $url_parts )  == 2 ) {
+				$domain = $url_parts[count($url_parts)-1] ; // ".ext"
+				if ( $domain ) {
+					if ( $domain == 'local' ) {
+						$environment_type = 'Local Development' ;
+					}
+				}
+			}
+
         }
-        return false ;
+		return $environment_type ;
     }
 endif;
