@@ -68,19 +68,23 @@ function bzmndsgn_config_admin_menu ( ) {
 
 	global $submenu ;
 
-	// Top-level menu.
+	/* Top-level menu. */
 
-	$parent_menu = new menu ( BZMNDSGN_AUTHOR_COMPANY, 'bzmndsgn_general_settings','dashicons-admin-generic' ) ;
+	$parent_menu = new menu ( BZMNDSGN_AUTHOR_COMPANY. ' Standard Library', 'bzmndsgn_general_settings','dashicons-admin-generic' ) ;
 
-	// Main configuration page.
+	/* Main configuration page. */
 	$main_settings_submenu = new submenu ( 'General Settings', 'bzmndsgn_general_settings' ) ;
 	$parent_menu->add_submenu_item ( $main_settings_submenu ) ;
 
-	// 404 error log.
+	/* 404 error log. */
 	$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' ) ;
 	$parent_menu->add_submenu_item ( $error_404_log_submenu ) ;
 
-	// Advanced submenu.
+	/* 404 error log. */
+	$dashboard_submenu = new submenu ( 'Dashboard', 'bzmndsgn_dashboard' ) ;
+	$parent_menu->add_submenu_item ( $dashboard_submenu ) ;
+
+	/* Advanced submenu. */
 	if ( WP_DEBUG ) {
 		$advanced_submenu = new submenu( 'Advanced', 'bzmndsgn_advanced_settings') ;
 		$parent_menu->add_submenu_item ( $advanced_submenu ) ;
