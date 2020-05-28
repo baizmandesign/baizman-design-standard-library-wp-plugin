@@ -10,6 +10,8 @@
  *
  */
 
+namespace baizman_design;
+
 defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
 define ( 'BZMNDSGN_DEBUG', false ) ;
@@ -62,6 +64,21 @@ if ( BZMNDSGN_IS_MULTISITE ) {
 	define ( 'BZMNDSGN_MULTISITE_NETWORK_NAME', $network->site_name ) ;
 }
 
+if ( ! function_exists ( '_require_once_folder' ) ):
+	/**
+	 * Include all *.php files in the given subfolder.
+	 * @param $folder
+	 */
+	function _require_once_folder ( $folder ) {
+		// Note: the path needs the absolute path, not relative path.
+		// Or my relative path might just have been wrong!
+		foreach ( glob (__DIR__ . "/{$folder}/*.php") as $filename )
+		{
+			require_once $filename;
+		}
+	}
+endif;
+
 _require_once_folder ("include" ) ;
 
 // Load per-site plugin settings.
@@ -87,17 +104,3 @@ if ( is_admin ( ) && file_exists ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) )
 	require_once ( BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ;
 }
 
-if ( ! function_exists ( '_require_once_folder' ) ):
-	/**
-	 * Include all *.php files in the given subfolder.
-	 * @param $folder
-	 */
-	function _require_once_folder ( $folder ) {
-		// Note: the path needs the absolute path, not relative path.
-		// Or my relative path might just have been wrong!
-		foreach ( glob (__DIR__ . "/{$folder}/*.php") as $filename )
-		{
-			require_once $filename;
-		}
-	}
-endif;
