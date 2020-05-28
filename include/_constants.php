@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package Baizman Design Standard Library
+ * @version 0.1
+ */
+
+defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
 // Move all constants here?
 // Two issues to resolve:

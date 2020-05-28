@@ -1,6 +1,8 @@
 <?php
 /**
  * Class menu. Implements a top-level menu in the WP dashboard.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 class menu {

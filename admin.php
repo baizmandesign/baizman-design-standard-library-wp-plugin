@@ -6,11 +6,11 @@
 
 /******************************************************************************/
 
-_require_once_folder ("class" ) ;
+defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
-/*
- * User-configurable settings and admin page functions.
- */
+use baizman_design as bd;
+
+bd\_require_once_folder ("class" ) ;
 
 /*
  * User-configurable settings and admin page functions.

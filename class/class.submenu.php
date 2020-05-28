@@ -1,6 +1,8 @@
 <?php
 /**
  * Class submenu. Implements a submenu item in the WP dashboard.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 class submenu extends menu {

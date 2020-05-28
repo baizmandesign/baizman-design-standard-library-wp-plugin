@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package Baizman Design Standard Library
+ * @version 0.1
+ */
+
+defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
 if ( ! function_exists ( 'bzmndsgn_get_site_database_setting' ) ):
 	/**
