@@ -102,4 +102,20 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_double_spaces' ) ):
 	add_filter( 'the_content', 'bzmndsgn_filter_content_double_spaces' );
 endif;
 
+if ( ! function_exists ( 'bzmndsgn_strip_double_spaces' ) ):
+	/**
+	 * Condense double-spaces into a single space when the post is saved.
+	 * FIXME: this may need more testing before it is rolled out to clients' websites.
+	 * @param $content
+	 *
+	 * @return string
+	 * @link https://stackoverflow.com/questions/16563421/cant-get-str-replace-to-strip-out-spaces-in-a-php-string
+	 */
+	function bzmndsgn_strip_double_spaces( $content ) {
+
+		return preg_replace('/\s+/u', ' ', $content ) ;
+
+	}
+	add_filter( 'content_save_pre', 'bzmndsgn_strip_double_spaces', 10, 1 );
+endif;
 
