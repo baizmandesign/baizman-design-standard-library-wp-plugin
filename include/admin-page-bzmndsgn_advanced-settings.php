@@ -1,6 +1,8 @@
 <?php
 /**
  * Advanced settings.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 function bzmndsgn_advanced_settings () {

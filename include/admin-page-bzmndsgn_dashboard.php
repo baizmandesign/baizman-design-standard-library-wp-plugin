@@ -1,6 +1,8 @@
 <?php
 /**
  * WP dashboard customization.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 function bzmndsgn_dashboard ( ) {

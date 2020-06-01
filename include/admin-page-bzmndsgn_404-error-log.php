@@ -1,6 +1,8 @@
 <?php
 /**
  * 404 error log.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 function bzmndsgn_404_error_log () {
