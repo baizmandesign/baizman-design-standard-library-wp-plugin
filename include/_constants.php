@@ -29,8 +29,6 @@ if ( ! defined ( 'BZMNDSGN_STAGING_BACKGROUND_COLOR' ) )
 if ( ! defined ( 'BZMNDSGN_DEV_BACKGROUND_COLOR' ) )
 	define ( 'BZMNDSGN_DEV_BACKGROUND_COLOR', 'rgba(125,69,16,.1)' ) ;
 
-
-
 if ( ! defined ( 'BZMNDSGN_LOCAL_BACKGROUND_COLOR' ) ) {
 	define ( 'BZMNDSGN_LOCAL_BACKGROUND_COLOR', 'rgba(23,165,188,.1)' ) ;
 }

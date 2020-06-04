@@ -53,7 +53,7 @@ if ( ! function_exists ( '_print_admin_settings_heading' ) ):
 		if ( isset( $_GET['message'] ) && $_GET['message'] == '1' ) {
 			?>
             <div id="message" class="notice notice-success is-dismissible">
-            <p><strong><?php echo $_GET['details'] ; ?></strong></p>
+            <p><strong>Settings Saved.</strong></p>
             </div><?php
 		}
 		printf ( '<h2>%s</h2>', $subtitle ) ;

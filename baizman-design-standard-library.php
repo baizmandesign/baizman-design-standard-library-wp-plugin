@@ -1,5 +1,13 @@
 <?php
 /**
+ Plugin Name: Baizman Design Standard Library
+ Plugin URI: https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library
+ Description: A plugin for multiple clients' websites.
+ Author: Saul Baizman
+ Version: 0.1
+ Author URI: https://baizmandesign.com
+ License: GPLv2
+
  * @package Baizman Design Standard Library
  * @version 0.1
  */
@@ -53,6 +61,10 @@ namespace baizman_design {
 	define ( 'BZMNDSGN_AUTHOR_COMPANY_URL', 'https://baizmandesign.com' ) ;
 
 	define ( 'BZMNDSGN_CONFIG_OPTIONS', 'bzmndsgn_config_options' ) ;
+
+	define ('BZMNDSGN_SETTINGS_GROUP', 'bzmndsgn-standard-library-plugin-settings-group') ;
+
+	define ('BZMNDSGN_NETWORK_SETTINGS_GROUP', 'bzmndsgn-standard-library-plugin-network-settings-group') ;
 
 	define ( 'BZMNDSGN_IS_MULTISITE' , is_multisite ( ) ) ;
 

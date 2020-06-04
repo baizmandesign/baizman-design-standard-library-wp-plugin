@@ -154,17 +154,19 @@ if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
      */
 	function bzmndsgn_set_dashboard_background_color() {
 
+		$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+
 		$body_background_color = '' ;
 		$environment = _get_environment_type ( );
 
 		if ( $environment == 'Development' ) {
-			$body_background_color = BZMNDSGN_DEV_BACKGROUND_COLOR;
+			$body_background_color = $bzmndsgn_config_options_database['dev_dashboard_background_color'];
 		}
 		if ( $environment == 'Staging' ) {
-			$body_background_color = BZMNDSGN_STAGING_BACKGROUND_COLOR;
+			$body_background_color = $bzmndsgn_config_options_database['staging_dashboard_background_color'];
 		}
 		if ( $environment == 'Local Development' ) {
-			$body_background_color = BZMNDSGN_LOCAL_BACKGROUND_COLOR ;
+			$body_background_color = $bzmndsgn_config_options_database['local_dashboard_background_color'] ;
 		}
 
 		if ( $body_background_color ) {
@@ -173,3 +175,16 @@ if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
 	}
 	add_action( 'admin_head', 'bzmndsgn_set_dashboard_background_color' );
 endif;
+
+if ( ! function_exists('bzmndsgn_issue_link')):
+    /**
+     * Set URL of "Report an issue" link.
+     */
+    function bzmndsgn_issue_link ( ) {
+        global $menu ;
+        // FIXME: link value should be set in preferences.
+        // Set position in preferences too?
+        // $menu[28][2] = 'https://bitbucket.org/baizmandesign/carroll-and-sons-wp-plugin/issues/new' ;
+    }
+    add_action ( 'admin_menu' , 'bzmndsgn_issue_link' ) ;
+endif ;
