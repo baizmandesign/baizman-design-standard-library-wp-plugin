@@ -10,9 +10,8 @@ class bzmndsgn {
 
 	/**
 	 * Reserialize the database data, incorporating changes to fields.
-	 * @subcommand reserialize-options
-	 * @alias refresh
-	 * @when after_wp_load
+	 * @subcommand refresh
+	 * @param $args
 	 */
 	function reserialize ( $args ) {
 		__bzmndsgn_reserialize_data( ) ;
@@ -21,8 +20,7 @@ class bzmndsgn {
 
 	/**
 	 * Reset the plugin data to the defaults.
-	 * @subcommand reset-options
-	 * @alias reset
+	 * @subcommand reset
 	 * @param $args
 	 */
 	function reinitialize ( $args ) {
@@ -30,9 +28,6 @@ class bzmndsgn {
 		__bzmndsgn_reinitialize_default_data () ;
 
 		WP_CLI::success( 'The default plugin configuration has been successfully reinitialized.' );
-	}
-
-	function load_admin_php () {
 	}
 
 }
