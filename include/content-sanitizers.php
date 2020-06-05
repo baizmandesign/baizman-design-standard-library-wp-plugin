@@ -8,6 +8,8 @@
 
 defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
+$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+
 if ( ! function_exists ( 'bzmndsgn_remove_content_blank_lines' ) ):
 	/**
 	 * When a post is saved, remove any empty lines from the_content.
@@ -19,7 +21,9 @@ if ( ! function_exists ( 'bzmndsgn_remove_content_blank_lines' ) ):
 		$content = preg_replace ( "/^&nbsp;\s*/m", '', $content) ;
 		return trim ( $content) ;
 	}
-	add_filter( 'content_save_pre', 'bzmndsgn_remove_content_blank_lines', 10, 1 );
+	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_save'] ) && $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_save'] ) {
+		add_filter( 'content_save_pre', 'bzmndsgn_remove_content_blank_lines', 10, 1 );
+	}
 endif;
 
 /**
@@ -30,7 +34,7 @@ endif;
  *
  * @link https://developer.wordpress.org/reference/hooks/the_content/
  */
-if ( ! function_exists ( 'pce_filter_content_blank_lines' ) ):
+if ( ! function_exists ( 'bzmndsgn_filter_content_blank_lines' ) ):
 	function pce_filter_content_blank_lines( $content ) {
 
 		// Check if we're inside the main loop in a single post page.
@@ -43,7 +47,9 @@ if ( ! function_exists ( 'pce_filter_content_blank_lines' ) ):
 
 		return $content;
 	}
-	add_filter( 'the_content', 'pce_filter_content_blank_lines' );
+	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_display'] ) && $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_display'] ) {
+		add_filter( 'the_content', 'bzmndsgn_filter_content_blank_lines' );
+	}
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
@@ -76,7 +82,9 @@ if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
 
 		return strip_tags( $content, implode( '', $legal_tags ) );
 	}
-	add_filter( 'content_save_pre', 'bzmndsgn_strip_illegal_tags', 10, 1 );
+	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) && $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) {
+		add_filter( 'content_save_pre', 'bzmndsgn_strip_illegal_tags', 10, 1 );
+	}
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_filter_content_double_spaces' ) ):
@@ -99,7 +107,9 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_double_spaces' ) ):
 
 		return $content;
 	}
-	add_filter( 'the_content', 'bzmndsgn_filter_content_double_spaces' );
+	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_display'] ) && $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_display'] ) {
+		add_filter( 'the_content', 'bzmndsgn_filter_content_double_spaces' );
+	}
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_strip_double_spaces' ) ):
@@ -116,6 +126,8 @@ if ( ! function_exists ( 'bzmndsgn_strip_double_spaces' ) ):
 		return preg_replace('/\s+/u', ' ', $content ) ;
 
 	}
-	add_filter( 'content_save_pre', 'bzmndsgn_strip_double_spaces', 10, 1 );
+	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_save'] )  && $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_save'] ) {
+		add_filter( 'content_save_pre', 'bzmndsgn_strip_double_spaces', 10, 1 );
+	}
 endif;
 

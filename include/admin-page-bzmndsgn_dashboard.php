@@ -11,7 +11,6 @@ function bzmndsgn_dashboard ( ) {
 	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
 	$dashboard_settings_form = new form ( 'dashboard_settings' ) ;
-	$form_database_settings = $dashboard_settings_form->get_form_database_settings() ;
 	$dashboard_settings_form->set_settings_fields_option_group(BZMNDSGN_SETTINGS_GROUP);
 	$dashboard_settings_form->set_settings_fields_page(BZMNDSGN_SETTINGS_GROUP );
 

@@ -26,6 +26,13 @@ $site_defaults = array (
 	'staging_dashboard_background_color' => BZMNDSGN_STAGING_BACKGROUND_COLOR,
 	'production_dashboard_background_color' => '',
 	'local_plugin_option_name' => '',
+	// content sanitizers
+	'checkbox-strip_double_spaces_on_save' => '0',
+	'checkbox-strip_double_spaces_on_display' => '0',
+	'checkbox-strip_illegal_tags_on_save' => '0',
+	'checkbox-strip_content_blank_lines_on_display' => '0',
+	'checkbox-strip_content_blank_lines_on_save' => '0',
+	'textarea-illegal_tags' => '',
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
@@ -75,13 +82,17 @@ function bzmndsgn_config_admin_menu ( ) {
 	$general_settings_submenu = new submenu ( 'General Settings', 'bzmndsgn_general_settings' ) ;
 	$parent_menu->add_submenu_item ( $general_settings_submenu ) ;
 
-	/* 404 error log. */
-	$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' ) ;
-	$parent_menu->add_submenu_item ( $error_404_log_submenu ) ;
+	/* Content Sanitizers configuration page. */
+	$content_sanitizers_submenu = new submenu ( 'Content Sanitizers', 'bzmndsgn_content_sanitizers' ) ;
+	$parent_menu->add_submenu_item ( $content_sanitizers_submenu ) ;
 
 	/* 404 error log. */
 	$dashboard_submenu = new submenu ( 'Dashboard', 'bzmndsgn_dashboard' ) ;
 	$parent_menu->add_submenu_item ( $dashboard_submenu ) ;
+
+	/* 404 error log. */
+	$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' ) ;
+	$parent_menu->add_submenu_item ( $error_404_log_submenu ) ;
 
 	/* Advanced submenu. */
 	if ( WP_DEBUG ) {
@@ -117,6 +128,28 @@ function bzmndsgn_save_config_settings ( ) {
 		if ( isset ( $_POST[$option] ) ) {
 			$updated_options[$option] = stripslashes_deep ( $_POST[$option] ) ; // sanitize_option, sanitize_textarea_field
 		}
+	}
+
+	// Identify the checkboxes. The options are named "checkbox-*".
+	$checkboxes = [] ;
+	foreach ( $bzmndsgn_config_options_database as $option => $value ) {
+		if ( strpos ($option,'checkbox-') !== false ) {
+			$checkboxes[] = $option ;
+		}
+	}
+
+	// Force the values for checkboxes.
+	foreach ( $checkboxes as $checkbox ) {
+
+		if ( isset ( $_POST[$checkbox] ) ) {
+			// The field is checked. Set field value to '1'.
+			$updated_options[$checkbox] = '1' ;
+		}
+		else {
+			// The field is unchecked. Set field value to '0'.
+			$updated_options[$checkbox] = '0' ;
+		}
+
 	}
 
 	// Update the options.
