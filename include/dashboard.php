@@ -78,7 +78,7 @@ if ( ! function_exists ( 'bzmndsgn_custom_editor_styles' ) ):
 	 * Add custom styles to tinyMCE editor.
 	 */
 	function bzmndsgn_custom_editor_styles ( ) {
-		add_editor_style ( BZMNDSGN_LIBRARY_FOLDER_URL . 'css/editor-styles.css' ) ;
+		add_editor_style ( BZMNDSGN_PLUGIN_FOLDER_URL . 'css/editor-styles.css' ) ;
 	}
 	add_action ( 'init', 'bzmndsgn_custom_editor_styles' ) ;
 endif;
@@ -88,8 +88,8 @@ if ( ! function_exists ( 'bzmndsgn_admin_stylesheet' ) ):
 	 * Add CSS and JS for admin interface.
 	 */
 	function bzmndsgn_admin_stylesheet() {
-		wp_enqueue_style ('bzmndsgn-admin-styles', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/admin-style.css');
-		wp_enqueue_script ( 'bzmndsgn-admin-scripts', BZMNDSGN_LIBRARY_FOLDER_URL . 'js/admin-scripts.js' ) ;
+		wp_enqueue_style ('bzmndsgn-admin-styles', BZMNDSGN_PLUGIN_FOLDER_URL . 'css/admin-style.css');
+		wp_enqueue_script ( 'bzmndsgn-admin-scripts', BZMNDSGN_PLUGIN_FOLDER_URL . 'js/admin-scripts.js' ) ;
 
 	}
 	add_action('admin_enqueue_scripts', 'bzmndsgn_admin_stylesheet');

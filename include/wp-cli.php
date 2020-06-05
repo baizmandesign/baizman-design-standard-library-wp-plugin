@@ -42,7 +42,7 @@ if ( defined ( 'WP_CLI' ) && WP_CLI ) :
 			'before_invoke' => function () {
 				// admin.php has an important constant, so we need to load it prior to calling WP CLI commands.
 				// https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/
-				require_once ( BZMNDSGN_LIBRARY_ADMIN_URI ) ;
+				require_once ( BZMNDSGN_PLUGIN_ADMIN_URI ) ;
 			}
 		)
 	);

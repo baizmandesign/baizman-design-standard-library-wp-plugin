@@ -5,7 +5,7 @@ if ( ! function_exists ( 'bzmndsgn_login_stylesheet' ) ):
 	 * Add custom styles on WP login screen.
 	 */
 	function bzmndsgn_login_stylesheet ( ) {
-		wp_enqueue_style ( 'custom-login', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/login-styles.css' ) ;
+		wp_enqueue_style ( 'custom-login', BZMNDSGN_PLUGIN_FOLDER_URL . 'css/login-styles.css' ) ;
 		// wp_enqueue_style ( 'typography-styles', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/fonts.css' ) ;
 	}
 	add_action ( 'login_enqueue_scripts', 'bzmndsgn_login_stylesheet' ) ;

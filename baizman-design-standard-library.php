@@ -40,15 +40,11 @@ namespace baizman_design {
 
 	define ( 'BZMNDSGN_THEME_FOLDER_URL', trailingslashit ( get_stylesheet_directory_uri ( ) ) ) ;
 
-//	define ( 'BZMNDSGN_PLUGIN_FOLDER_URI', trailingslashit ( dirname ( dirname (__FILE__) ) ) ) ;
+	define ( 'BZMNDSGN_PLUGIN_FOLDER_URI', trailingslashit ( plugin_dir_path ( __FILE__ ) ) ) ;
 
-//	define ( 'BZMNDSGN_PLUGIN_FOLDER_URL', trailingslashit ( dirname ( plugin_dir_url ( __FILE__ ) ) ) ) ;
+	define ( 'BZMNDSGN_PLUGIN_FOLDER_URL', trailingslashit ( plugin_dir_url ( __FILE__ ) ) ) ;
 
-	define ( 'BZMNDSGN_LIBRARY_FOLDER_URI', trailingslashit ( plugin_dir_path ( __FILE__ ) ) ) ;
-
-	define ( 'BZMNDSGN_LIBRARY_FOLDER_URL', trailingslashit ( plugin_dir_url ( __FILE__ ) ) ) ;
-
-	define ( 'BZMNDSGN_LIBRARY_ADMIN_URI', BZMNDSGN_LIBRARY_FOLDER_URI . 'admin.php' ) ;
+	define ( 'BZMNDSGN_PLUGIN_ADMIN_URI', BZMNDSGN_PLUGIN_FOLDER_URI . 'admin.php' ) ;
 
 	define ( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' ) ;
 
@@ -116,8 +112,8 @@ namespace baizman_design {
 	/**
 	 * Include admin interface if we are viewing the backend.
 	 */
-	if ( is_admin ( ) && file_exists ( BZMNDSGN_LIBRARY_ADMIN_URI ) ) {
-		require_once ( BZMNDSGN_LIBRARY_ADMIN_URI ) ;
+	if ( is_admin ( ) && file_exists ( BZMNDSGN_PLUGIN_ADMIN_URI ) ) {
+		require_once ( BZMNDSGN_PLUGIN_ADMIN_URI ) ;
 	}
 
 }
