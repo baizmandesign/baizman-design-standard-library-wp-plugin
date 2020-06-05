@@ -19,27 +19,47 @@ function bzmndsgn_general_settings () {
 	$general_settings_form->set_settings_fields_option_group(BZMNDSGN_SETTINGS_GROUP);
 	$general_settings_form->set_settings_fields_page(BZMNDSGN_SETTINGS_GROUP );
 
+
+	// Google Analytics ID.
+	$google_analytics_id = new text_input( 'Google Analytics ID', 'google_analytics_id','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['google_analytics_id'] );
+	$general_settings_form->add_form_field( $google_analytics_id );
+
+	// 404 log file prefix
+	$four_zero_four_log_file_prefix = new text_input( '404 Log File Prefix', 'log_file_prefix','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['log_file_prefix'] );
+	$general_settings_form->add_form_field( $four_zero_four_log_file_prefix );
+
 	// Show correct background color prompt depending on the environment.
+
 	$environment = _get_environment_type ( );
 
-	if ( $environment == 'Local Development' ) {
-		$local_dashboard_background_color = new text_input( 'Local development dashboard background', 'local_dashboard_background_color','english, hex, rgb, rgba, or hsl, hsla color', $bzmndsgn_config_options_database['local_dashboard_background_color'] );
-		$local_dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
-		$general_settings_form->add_form_field( $local_dashboard_background_color );
+	$dashboard_field_label = '' ;
+	$dashboard_field_input_name = '' ;
+
+	switch ( $environment ) {
+		case 'Local Development':
+			$dashboard_field_label = 'Local development dashboard background';
+			$dashboard_field_input_name = 'local_dashboard_background_color' ;
+			break;
+
+		case 'Development':
+			$dashboard_field_label = 'Dev dashboard background';
+			$dashboard_field_input_name = 'dev_dashboard_background_color' ;
+			break;
+
+		case 'Staging':
+			$dashboard_field_label = 'Staging dashboard background';
+			$dashboard_field_input_name = 'staging_dashboard_background_color' ;
+			break;
+
+		default:
+			break;
 	}
 
-	if ( $environment == 'Development' ) {
-		$dev_dashboard_background_color = new text_input( 'Dev dashboard background', 'dev_dashboard_background_color','english, hex, rgb, rgba, hsl, or hsla color', $bzmndsgn_config_options_database['dev_dashboard_background_color'] );
-		$dev_dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
-		$general_settings_form->add_form_field( $dev_dashboard_background_color );
+	if ( $dashboard_field_label && $dashboard_field_input_name ) {
+		$dashboard_background_color = new text_input( $dashboard_field_label, $dashboard_field_input_name, 'english, hex, rgb, rgba, or hsl, hsla color', $bzmndsgn_config_options_database[$dashboard_field_input_name] );
+		$dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
+		$general_settings_form->add_form_field( $dashboard_background_color );
 	}
-
-	if ( $environment == 'Staging' ) {
-		$staging_dashboard_background_color = new text_input( 'Staging dashboard background', 'dev_dashboard_background_color', 'english, hex, rgb, rgba, or hsl, hsla color', $bzmndsgn_config_options_database['staging_dashboard_background_color'] );
-		$staging_dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
-		$general_settings_form->add_form_field( $staging_dashboard_background_color );
-	}
-
 	/*
 	$production_dashboard_background_color = new text_input( 'Production dashboard background', 'english, hex, rgb, rgba, hsl, hsla color', $bzmndsgn_config_options_database['production_dashboard_background_color'] ) ;
 	$general_settings_form->add_form_field($production_dashboard_background_color);
