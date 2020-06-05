@@ -223,9 +223,6 @@ class form {
 
 		printf ('</table>') ;
 
-
-
-
         wp_nonce_field ( 'bzmndsgn_save_config' ); // store nonce elsewhere?
 
         submit_button ( ) ;
