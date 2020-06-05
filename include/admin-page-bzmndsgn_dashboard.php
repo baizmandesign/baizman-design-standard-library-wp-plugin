@@ -43,7 +43,7 @@ function bzmndsgn_dashboard ( ) {
 	}
 
 	if ( $dashboard_field_label && $dashboard_field_input_name ) {
-		$dashboard_background_color = new text_input( $dashboard_field_label, $dashboard_field_input_name, 'english, hex, rgb, rgba, or hsl, hsla color', $bzmndsgn_config_options_database[$dashboard_field_input_name] );
+		$dashboard_background_color = new text_input( $dashboard_field_label, $dashboard_field_input_name, 'english, hex, rgb, rgba, hsl, or hsla color', $bzmndsgn_config_options_database[$dashboard_field_input_name] );
 		$dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
 		$dashboard_settings_form->add_form_field( $dashboard_background_color );
 	}
@@ -51,7 +51,7 @@ function bzmndsgn_dashboard ( ) {
 	$production_dashboard_background_color = new text_input( 'Production dashboard background', 'english, hex, rgb, rgba, hsl, hsla color', $bzmndsgn_config_options_database['production_dashboard_background_color'] ) ;
 	$general_settings_form->add_form_field($production_dashboard_background_color);
 	*/
-    
+
 	$dashboard_settings_form->render_form();
 
 }
