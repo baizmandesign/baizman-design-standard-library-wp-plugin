@@ -25,6 +25,7 @@ $site_defaults = array (
 	'dev_dashboard_background_color' => BZMNDSGN_DEV_BACKGROUND_COLOR,
 	'staging_dashboard_background_color' => BZMNDSGN_STAGING_BACKGROUND_COLOR,
 	'production_dashboard_background_color' => '',
+	'local_plugin_option_name' => '',
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;

@@ -52,6 +52,7 @@ function bzmndsgn_dashboard ( ) {
 	$general_settings_form->add_form_field($production_dashboard_background_color);
 	*/
 
+	// Output form.
 	$dashboard_settings_form->render_form();
 
 }
