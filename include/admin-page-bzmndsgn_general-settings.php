@@ -31,7 +31,6 @@ function bzmndsgn_general_settings () {
 
 	$general_settings_form->add_form_field( $local_plugin_option_name );
 
-
 	// var_dump($bzmndsgn_config_options_database);
 	// print_r($form_database_settings);
 	$general_settings_form->render_form();
