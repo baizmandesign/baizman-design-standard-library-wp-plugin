@@ -95,3 +95,30 @@ if ( ! function_exists ('_get_environment' ) ):
 		return $environment_type ;
     }
 endif;
+
+if ( ! function_exists( '_bzmndsgn_form_redirect')):
+	/**
+	 * Redirect page after submitting an admin form.
+	 */
+	function _bzmndsgn_form_redirect ( $message, $destination = 'admin.php' ) {
+
+		$referrer = $_POST['_wp_http_referer'] ;
+		$link_parts = parse_url ( $referrer ) ;
+		$query = $link_parts['query'] ;
+		parse_str ( $query, $query_array ) ;
+
+		$details_message = urlencode ( $message ) ;
+
+		// Redirect with success=1 query string.
+		wp_redirect (
+			add_query_arg (
+				array (
+					'page' => $query_array['page'],
+					'message' => '1',
+					'details' => $details_message,
+				),
+				admin_url ( $destination )
+			)
+		);
+	}
+endif;

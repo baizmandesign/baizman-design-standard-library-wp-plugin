@@ -123,25 +123,7 @@ function bzmndsgn_save_config_settings ( ) {
 	$merged_options = wp_parse_args ( $updated_options, $bzmndsgn_config_options_database ) ;
 	update_option ( BZMNDSGN_CONFIG_OPTIONS, $merged_options ) ;
 
-	// Get the referring page from the query string ($_GET['page']).
-	$referrer = $_POST['_wp_http_referer'] ;
-	$link_parts = parse_url ( $referrer ) ;
-	$query = $link_parts['query'] ;
-	parse_str ( $query, $query_array ) ;
-
-	$details_message = urlencode ('The settings have been saved.' ) ;
-
-	// Redirect with success=1 query string.
-	wp_redirect (
-		add_query_arg (
-			array (
-				'page' => $query_array['page'],
-				'message' => '1',
-				'details' => $details_message,
-			),
-			admin_url ( 'admin.php' )
-		)
-	);
+	_bzmndsgn_form_redirect ( 'The settings have been saved.' ) ;
 
 	exit ;
 

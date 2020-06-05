@@ -45,6 +45,39 @@ function bzmndsgn_reserialize_data ( ) {
 
 	check_admin_referer ( 'bzmndsgn_reserialize_data' ) ;
 
+	__bzmndsgn_reserialize_data () ;
+
+	_bzmndsgn_form_redirect ('The configuration data has been successfully reserialized.' );
+
+	exit ;
+
+}
+add_action ( 'admin_post_bzmndsgn_reserialize_data', 'bzmndsgn_reserialize_data' ) ;
+
+/**
+ * Reset the plugin data to the defaults.
+ */
+function bzmndsgn_reinitialize_default_data () {
+
+	if ( ! current_user_can ( 'manage_options' ) ) {
+		wp_die ( 'You do not have permission to update these settings.' ) ;
+	}
+
+	check_admin_referer ( 'bzmndsgn_reinitialize_default_data' ) ;
+
+	__bzmndsgn_reinitialize_default_data () ;
+
+	_bzmndsgn_form_redirect('The default plugin configuration has been successfully reinitialized.');
+
+	exit ;
+
+}
+add_action ( 'admin_post_bzmndsgn_reinitialize_default_data', 'bzmndsgn_reinitialize_default_data' ) ;
+
+/**
+ * Helper function to reserialize database data. Used by wp-cli.
+ */
+function __bzmndsgn_reserialize_data ( ){
 	// Get current settings.
 	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS ) ;
 
@@ -68,40 +101,12 @@ function bzmndsgn_reserialize_data ( ) {
 
 	update_option ( BZMNDSGN_CONFIG_OPTIONS, $merged_options ) ;
 
-	$referrer = $_POST['_wp_http_referer'] ;
-	$link_parts = parse_url ( $referrer ) ;
-	$query = $link_parts['query'] ;
-	parse_str ( $query, $query_array ) ;
-
-	$details_message = urlencode ('The configuration data has been successfully reserialized.' ) ;
-
-	// Redirect with success=1 query string.
-	wp_redirect (
-		add_query_arg (
-			array (
-				'page' => $query_array['page'],
-				'message' => '1',
-				'details' => $details_message,
-			),
-			admin_url ( 'admin.php' )
-		)
-	);
-
-	exit ;
-
 }
-add_action ( 'admin_post_bzmndsgn_reserialize_data', 'bzmndsgn_reserialize_data' ) ;
 
 /**
- * Reset the plugin data to the defaults.
+ * Helper function to reinitialize database data. Used by wp-cli.
  */
-function bzmndsgn_reinitialize_default_data () {
-
-	if ( ! current_user_can ( 'manage_options' ) ) {
-		wp_die ( 'You do not have permission to update these settings.' ) ;
-	}
-
-	check_admin_referer ( 'bzmndsgn_reinitialize_default_data' ) ;
+function __bzmndsgn_reinitialize_default_data () {
 
 	// Delete existing options.
 	delete_option ( BZMNDSGN_CONFIG_OPTIONS ) ;
@@ -109,27 +114,4 @@ function bzmndsgn_reinitialize_default_data () {
 	// Populate default options.
 	bzmndsgn_config_set_default_options_array ( ) ;
 
-	$referrer = $_POST['_wp_http_referer'] ;
-	$link_parts = parse_url ( $referrer ) ;
-	$query = $link_parts['query'] ;
-	parse_str ( $query, $query_array ) ;
-
-	$details_message = urlencode ('The default plugin configuration has been successfully reinitialized.' ) ;
-
-	// Redirect with success=1 query string.
-	wp_redirect (
-		add_query_arg (
-			array (
-				'page' => $query_array['page'],
-				'message' => '1',
-				'details' => $details_message,
-			),
-			admin_url ( 'admin.php' )
-		)
-	);
-
-	exit ;
-
 }
-add_action ( 'admin_post_bzmndsgn_reinitialize_default_data', 'bzmndsgn_reinitialize_default_data' ) ;
-
