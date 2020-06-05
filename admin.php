@@ -43,7 +43,6 @@ register_activation_hook ( $plugin_file_path, 'bzmndsgn_config_set_default_optio
  */
 function bzmndsgn_config_set_default_options_array ( ) {
 
-	file_put_contents( 'activated.txt','bzmndsgn_config_set_default_options_array') ;
 	update_option ( BZMNDSGN_CONFIG_OPTIONS, SITE_OPTIONS_DEFAULTS ) ;
 
 }
