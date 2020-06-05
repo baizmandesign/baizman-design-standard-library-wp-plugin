@@ -128,12 +128,15 @@ function bzmndsgn_save_config_settings ( ) {
 	$query = $link_parts['query'] ;
 	parse_str ( $query, $query_array ) ;
 
+	$details_message = urlencode ('The settings have been saved.' ) ;
+
 	// Redirect with success=1 query string.
 	wp_redirect (
 		add_query_arg (
 			array (
 				'page' => $query_array['page'],
 				'message' => '1',
+				'details' => $details_message,
 			),
 			admin_url ( 'admin.php' )
 		)
