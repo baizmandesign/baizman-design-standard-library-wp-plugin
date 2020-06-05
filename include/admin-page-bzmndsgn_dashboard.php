@@ -19,31 +19,31 @@ function bzmndsgn_dashboard ( ) {
 
 	$environment = _get_environment_type ( );
 
-	$dashboard_field_label = '' ;
-	$dashboard_field_input_name = '' ;
+	$dashboard_background_color_field_label = '' ;
+	$dashboard_background_color_field_input_name = '' ;
 
 	switch ( $environment ) {
 		case 'Local Development':
-			$dashboard_field_label = 'Local development dashboard background';
-			$dashboard_field_input_name = 'local_dashboard_background_color' ;
+			$dashboard_background_color_field_label = 'Local development dashboard background';
+			$dashboard_background_color_field_input_name = 'local_dashboard_background_color' ;
 			break;
 
 		case 'Development':
-			$dashboard_field_label = 'Dev dashboard background';
-			$dashboard_field_input_name = 'dev_dashboard_background_color' ;
+			$dashboard_background_color_field_label = 'Dev dashboard background';
+			$dashboard_background_color_field_input_name = 'dev_dashboard_background_color' ;
 			break;
 
 		case 'Staging':
-			$dashboard_field_label = 'Staging dashboard background';
-			$dashboard_field_input_name = 'staging_dashboard_background_color' ;
+			$dashboard_background_color_field_label = 'Staging dashboard background';
+			$dashboard_background_color_field_input_name = 'staging_dashboard_background_color' ;
 			break;
 
 		default:
 			break;
 	}
 
-	if ( $dashboard_field_label && $dashboard_field_input_name ) {
-		$dashboard_background_color = new text_input( $dashboard_field_label, $dashboard_field_input_name, 'english, hex, rgb, rgba, hsl, or hsla color', $bzmndsgn_config_options_database[$dashboard_field_input_name] );
+	if ( $dashboard_background_color_field_label && $dashboard_background_color_field_input_name ) {
+		$dashboard_background_color = new text_input( $dashboard_background_color_field_label, $dashboard_background_color_field_input_name, 'english, hex, rgb, rgba, hsl, or hsla color', $bzmndsgn_config_options_database[$dashboard_background_color_field_input_name] );
 		$dashboard_background_color->set_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
 		$dashboard_settings_form->add_form_field( $dashboard_background_color );
 	}
