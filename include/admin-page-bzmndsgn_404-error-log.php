@@ -9,7 +9,7 @@ function bzmndsgn_404_error_log () {
 
 	_print_admin_settings_heading ('404 Error Log' ) ;
 
-	$not_found_path = sprintf ( '%1$s/%2$s', BZMNDSGN_DOCUMENT_ROOT_URI, BZMNDSGN_NOT_FOUND_404_LOG_FILE ) ;
+	$not_found_path =  BZMNDSGN_DOCUMENT_ROOT_URI . BZMNDSGN_NOT_FOUND_404_LOG_FILE ;
 
 	if ( file_exists ( $not_found_path ) ) {
 
