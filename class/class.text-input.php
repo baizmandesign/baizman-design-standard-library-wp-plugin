@@ -1,6 +1,8 @@
 <?php
 /**
- * Class text_input
+ * Class text_input.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 class text_input extends field {
