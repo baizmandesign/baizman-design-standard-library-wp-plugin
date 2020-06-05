@@ -115,5 +115,21 @@ namespace baizman_design {
 	if ( is_admin ( ) && file_exists ( BZMNDSGN_PLUGIN_ADMIN_URI ) ) {
 		require_once ( BZMNDSGN_PLUGIN_ADMIN_URI ) ;
 	}
+	
+	/**
+	 * Include support for WP CLI, if appropriate.
+	 */
+	if ( defined ( 'WP_CLI' ) && WP_CLI ) {
+		require_once( sprintf( '%s/%s', BZMNDSGN_PLUGIN_FOLDER_URI, 'cli/class.wp-cli.php' ) );
+
+		\WP_CLI::add_command( 'bzmndsgn', 'bzmndsgn', array (
+				'before_invoke' => function () {
+					// admin.php has an important constant, so we need to load it prior to calling WP CLI commands.
+					// https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/
+					require_once( BZMNDSGN_PLUGIN_ADMIN_URI );
+				}
+			)
+		);
+	}
 
 }
