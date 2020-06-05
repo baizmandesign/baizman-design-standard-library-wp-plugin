@@ -46,6 +46,8 @@ namespace baizman_design {
 
 	define ( 'BZMNDSGN_PLUGIN_ADMIN_URI', BZMNDSGN_PLUGIN_FOLDER_URI . 'admin.php' ) ;
 
+	define ( 'BZMNDSGN_PLUGIN_WP_CLI', BZMNDSGN_PLUGIN_FOLDER_URI . 'cli/class.wp-cli.php' ) ;
+
 	define ( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' ) ;
 
 	define ( 'BZMNDSGN_AUTHOR_EMAIL', 'saul@baizmandesign.com' ) ;
@@ -115,12 +117,12 @@ namespace baizman_design {
 	if ( is_admin ( ) && file_exists ( BZMNDSGN_PLUGIN_ADMIN_URI ) ) {
 		require_once ( BZMNDSGN_PLUGIN_ADMIN_URI ) ;
 	}
-	
+
 	/**
 	 * Include support for WP CLI, if appropriate.
 	 */
 	if ( defined ( 'WP_CLI' ) && WP_CLI ) {
-		require_once( sprintf( '%s/%s', BZMNDSGN_PLUGIN_FOLDER_URI, 'cli/class.wp-cli.php' ) );
+		require_once( BZMNDSGN_PLUGIN_WP_CLI );
 
 		\WP_CLI::add_command( 'bzmndsgn', 'bzmndsgn', array (
 				'before_invoke' => function () {
