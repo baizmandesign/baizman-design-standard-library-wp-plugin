@@ -150,7 +150,6 @@ if ( BZMNDSGN_IS_MULTISITE ) {
 
 	}
 
-
 	/**
 	 * Register global settings.
 	 */
