@@ -102,8 +102,15 @@ class text_area extends field {
 		$this->columns = $columns;
 	}
 
-
-
+	/**
+	 * Sort values in a textarea.
+	 */
+	public function sort ( ) {
+		$values = explode ( "\r\n", $this->get_field_default_value() ) ;
+		sort ($values) ;
+		$this->set_field_default_value ( implode ( "\r\n", $values ) ) ;
+	}
+	
 	/**
 	 * @return mixed|void
 	 */
