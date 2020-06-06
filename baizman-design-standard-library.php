@@ -4,7 +4,7 @@
  Plugin URI: https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library
  Description: A plugin for multiple clients' websites.
  Author: Saul Baizman
- Version: 0.1
+ Version: 1.0
  Author URI: https://baizmandesign.com
  License: GPLv2
 
