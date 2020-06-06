@@ -31,3 +31,8 @@ table.not_found_log_entries td, table.not_found_log_entries th {
 div.toolset-notice-wp.notice.toolset-notice {
     display: none ;
 }
+
+table.form-table.content-sanitizers-settings-table th:nth-child(1){
+    width: 40% ;
+
+}
