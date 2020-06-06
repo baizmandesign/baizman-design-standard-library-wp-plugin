@@ -25,10 +25,11 @@ class hidden extends field {
 	 */
 	public function print_form_field() {
 		printf (
-			'<input type="%1$s" name="%2$s" value="%3$s">',
+			'<input type="%1$s" name="%2$s" id="%4$s" value="%3$s">',
 			$this->get_field_type(),
 			esc_attr ( $this->get_field_input_name() ),
-			esc_attr ( $this->get_field_default_value() )
+			esc_attr ( $this->get_field_default_value() ),
+			$this->get_field_id()
 		) ;
 	}
 }

@@ -29,9 +29,10 @@ class checkbox extends field {
 		printf('</th>' );
 
 		printf (
-			'<td><input type="checkbox" name="%2$s" id="%2$s" value="1"%1$s/>',
+			'<td><input type="checkbox" name="%2$s" id="%3$s" value="1"%1$s/>',
 			checked ( '1', $this->get_field_default_value( ), false ),
-			esc_attr ( $this->get_field_input_name( ) )
+			esc_attr ( $this->get_field_input_name( ) ),
+			$this->get_field_id()
 		) ;
 		if ( $this->get_field_help_text() ) {
 			printf(

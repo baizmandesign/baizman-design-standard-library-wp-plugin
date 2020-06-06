@@ -9,6 +9,7 @@
 abstract class field
 {
 	protected $field_input_name ;
+	protected $field_id ;
 	protected $field_label ;
 	protected $field_default_value ;
 	protected $field_value ;
@@ -22,9 +23,9 @@ abstract class field
 	 * field constructor.
 	 */
 	public function __construct ( $field_label, $field_input_name ) {
-
 		$this->set_field_label ( $field_label ) ;
 		$this->set_field_input_name ( $field_input_name ) ;
+		$this->set_field_id ( $field_input_name ) ;
 		$this->set_show_label ( true ) ;
 	}
 
@@ -140,6 +141,19 @@ abstract class field
 		$this->show_label = $show_label;
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function get_field_id() {
+		return $this->field_id;
+	}
+
+	/**
+	 * @param mixed $field_id
+	 */
+	public function set_field_id( $field_id ) {
+		$this->field_id = $field_id;
+	}
 
 	/**
 	 * Child classes need to define this themselves.

@@ -165,12 +165,13 @@ class text_area extends field {
 			}
 		}
 		printf (
-			'<textarea name="%1$s" rows="%4$d" cols="%5$d" placeholder="%2$s">%3$s</textarea>',
+			'<textarea name="%1$s" id="%6$s" rows="%4$d" cols="%5$d" placeholder="%2$s">%3$s</textarea>',
 			esc_attr ( $this->get_field_input_name() ),
 			esc_attr ( $this->get_text_area_placeholder() ),
 			esc_attr ( $this->get_field_default_value() ),
 			$this->get_rows(),
-			$this->get_columns()
+			$this->get_columns(),
+			$this->get_field_id()
 		) ;
 		if ( $this->get_field_help_text() ) {
 			printf (
