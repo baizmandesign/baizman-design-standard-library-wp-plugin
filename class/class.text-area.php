@@ -144,7 +144,7 @@ class text_area extends field {
 			if ( $this->get_label_help_text() ) {
 				printf(
 					'<br><small>%1$s</small>',
-					esc_attr( $this->get_label_help_text() )
+					$this->get_label_help_text()
 				);
 			}
 		}
