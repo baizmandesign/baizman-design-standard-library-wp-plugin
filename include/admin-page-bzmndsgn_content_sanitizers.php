@@ -29,17 +29,17 @@ function bzmndsgn_content_sanitizers () {
 		'checkbox-strip_illegal_tags_on_save',
 		$bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save']
 	) ;
-	$strip_illegal_tags_on_save->set_field_help_text('Specify the tags to strip in the field below.');
+	$strip_illegal_tags_on_save->set_field_help_text('Specify the tags to <u>keep</u> in the field below.');
 	$content_sanitizers_settings_form->add_form_field ($strip_illegal_tags_on_save) ;
 
-	$illegal_tags = new text_area(
-		'Illegal tags to strip when saving a post:',
-		'textarea-illegal_tags',
+	$legal_tags = new text_area (
+		'Legal tags to keep when saving a post:',
+		'textarea-legal_tags',
 		'span',
-		$bzmndsgn_config_options_database['textarea-illegal_tags']) ;
-	$illegal_tags->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
-	$illegal_tags->set_show_label( false ) ;
-	$content_sanitizers_settings_form->add_form_field ($illegal_tags) ;
+		$bzmndsgn_config_options_database['textarea-legal_tags']) ;
+	$legal_tags->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
+	$legal_tags->set_show_label( false ) ;
+	$content_sanitizers_settings_form->add_form_field ($legal_tags) ;
 
 	// Output form.
 	$content_sanitizers_settings_form->render_form();

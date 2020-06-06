@@ -16,6 +16,25 @@ bd\_require_once_folder ("class" ) ;
  * User-configurable settings and admin page functions.
  */
 
+// Legal HTML tag defaults.
+
+$legal_tags = [] ;
+$legal_tags[] = 'a' ;
+$legal_tags[] = 'b' ;
+$legal_tags[] = 'strong' ;
+$legal_tags[] = 'i' ;
+$legal_tags[] = 'em' ;
+$legal_tags[] = 'h1' ;
+$legal_tags[] = 'h2' ;
+$legal_tags[] = 'h3' ;
+$legal_tags[] = 'h4' ;
+$legal_tags[] = 'h5' ;
+$legal_tags[] = 'h6' ;
+$legal_tags[] = 'ul' ;
+$legal_tags[] = 'li' ;
+$legal_tags[] = 'blockquote' ;
+$legal_tags[] = 'p' ; // necessary?
+
 // Per-site database fields and default values.
 
 $site_defaults = array (
@@ -32,7 +51,7 @@ $site_defaults = array (
 	'checkbox-strip_illegal_tags_on_save' => '0',
 	'checkbox-strip_content_blank_lines_on_display' => '0',
 	'checkbox-strip_content_blank_lines_on_save' => '0',
-	'textarea-illegal_tags' => '',
+	'textarea-legal_tags' => implode ( "\n", $legal_tags ),
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;

@@ -53,33 +53,35 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_blank_lines' ) ):
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
+	/**
+	 * When a post is saved, remove all tags but the legal tags in the array.
+	 * @param $content
+	 *
+	 * @return string
+	 */
 	function bzmndsgn_strip_illegal_tags ( $content ) {
-		/**
-		 * When a post is saved, remove all tags but the legal tags in the array.
-		 * @param $content
-		 *
-		 * @return string
-		 */
 
 		// These tags will not be stripped out.
 		// FIXME: limit to one or more post types?
-		// TODO: make these tags user-configurable via the admin interface.
-		$legal_tags[] = '<a>' ;
-		$legal_tags[] = '<b>' ;
-		$legal_tags[] = '<strong>' ;
-		$legal_tags[] = '<i>' ;
-		$legal_tags[] = '<em>' ;
-		$legal_tags[] = '<h1>' ;
-		$legal_tags[] = '<h2>' ;
-		$legal_tags[] = '<h3>' ;
-		$legal_tags[] = '<h4>' ;
-		$legal_tags[] = '<h5>' ;
-		$legal_tags[] = '<h6>' ;
-		$legal_tags[] = '<ul>' ;
-		$legal_tags[] = '<li>' ;
-		$legal_tags[] = '<blockquote>' ;
-		$legal_tags[] = '<p>' ; // necessary?
+//		$legal_tags = '';
+		// FIXME: return to this line. 'global' keyword didn't work in this function, and it's not clear why. Perhaps the namespace was conflicting with it?
+		 $legal_tags = explode ("\r\n",$GLOBALS['bzmndsgn_config_options']['textarea-legal_tags'] ) ;
+//		 $legal_tags = explode ("\n",baizman_design\$bzmndsgn_config_options_database['textarea-legal_tags'] ) ;
+//		file_put_contents(
+//			'test.txt',
+//			print_r ( $GLOBALS['bzmndsgn_config_options_database'], true )
+//			print_r ( $GLOBALS, true )
+//		) ;
+//		file_put_contents('test.txt', print_r($legal_tags,true)) ;
 
+		$legal_tags = array_map (
+			function ( $tag ) {
+				// Add angle brackets to HTML tag.
+				return sprintf('<%s>',$tag) ;
+			},
+			$legal_tags
+		) ;
+//		file_put_contents('test.txt', print_r($legal_tags,true)) ;
 		return strip_tags( $content, implode( '', $legal_tags ) );
 	}
 	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) && $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) {
