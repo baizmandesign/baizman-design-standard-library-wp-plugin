@@ -13,7 +13,7 @@ class text_area extends field {
 	private $field_placeholder ;
 
 	/**
-	 * This should be either 'left', 'top', or bottom. Default: left.
+	 * This should be either 'left', 'top', or 'bottom'. Default: left.
 	 * @var
 	 */
 	private $label_position ;
@@ -131,8 +131,8 @@ class text_area extends field {
 	 * @return mixed|void
 	 */
 	public function print_form_field ( ) {
-		printf( '<tr valign="top">' );
-		printf('<th scope="row">');
+		printf ( '<tr valign="top">' );
+		printf ('<th scope="row">');
 		// Left-aligned label.
 		if ( $this->get_label_position() == 'left' ) {
 			if ($this->get_show_label() ) {
@@ -151,7 +151,7 @@ class text_area extends field {
 		printf ('</th>' );
 		printf ('<td>') ;
 		if ( $this->get_label_position() == 'top' ) {
-			if ($this->get_show_label()) {
+			if ( $this->get_show_label() ) {
 				printf(
 					'%1$s',
 					$this->get_field_label()
@@ -173,12 +173,12 @@ class text_area extends field {
 			$this->get_columns()
 		) ;
 		if ( $this->get_field_help_text() ) {
-			printf(
+			printf (
 				'<br><small>%1$s</small>',
 				$this->get_field_help_text()
 			);
 		}
-		printf ('</td></tr>');
+		printf ( '</td></tr>' );
 
 	}
 }
