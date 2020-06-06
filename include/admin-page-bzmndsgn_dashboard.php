@@ -47,6 +47,7 @@ function bzmndsgn_dashboard ( ) {
 	if ( $dashboard_background_color_field_label && $dashboard_background_color_field_input_name ) {
 		$dashboard_background_color = new color ( $dashboard_background_color_field_label, $dashboard_background_color_field_input_name,  $bzmndsgn_config_options_database[$dashboard_background_color_field_input_name] );
 		$dashboard_background_color->set_field_help_text('Or try <a href="javascript:set_wp_bg_color(\'aliceblue\')">aliceblue</a>, <a href="javascript:set_wp_bg_color(\'ivory\')">ivory</a>, <a href="javascript:set_wp_bg_color(\'seashell\')">seashell</a>, or <a href="javascript:set_wp_bg_color(\'ghostwhite\')">ghostwhite</a>.');
+		$dashboard_background_color->set_field_id ( 'wp_dashboard_color' );
 		$dashboard_settings_form->add_form_field( $dashboard_background_color );
 	}
 	/*
