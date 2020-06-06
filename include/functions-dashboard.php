@@ -3,7 +3,12 @@
  * Dashboard customizations.
  */
 
+defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+
 if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
+
+	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+
 	if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
 		/**
 		 * This function outputs the content of the admin dashboard widget.
@@ -115,7 +120,9 @@ if ( ! function_exists ( 'bzmndsgn_footer_site_name' ) ):
 		}
 		return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> (%3$s)',get_bloginfo ( 'name' ), home_url ( ), $environment );
 	}
-	add_filter ( 'admin_footer_text', 'bzmndsgn_footer_site_name' ) ;
+	if ( _is_enabled ( 'checkbox-show_site_name', $bzmndsgn_config_options_database ) ) {
+		add_filter( 'admin_footer_text', 'bzmndsgn_footer_site_name' );
+	}
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_footer_credit' ) ):
@@ -129,7 +136,9 @@ if ( ! function_exists ( 'bzmndsgn_footer_credit' ) ):
 	function bzmndsgn_footer_credit ( $default ) {
 		return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 	}
-	add_filter ( 'update_footer', 'bzmndsgn_footer_credit', 11 ) ;
+	if ( _is_enabled ( 'checkbox-show_marketing', $bzmndsgn_config_options_database ) ) {
+		add_filter( 'update_footer', 'bzmndsgn_footer_credit', 11 );
+	}
 endif ;
 
 if ( ! function_exists ( 'bzmndsgn_dev_site_warning' ) ):

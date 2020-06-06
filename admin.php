@@ -40,11 +40,14 @@ $legal_tags[] = 'p' ; // necessary?
 $site_defaults = array (
 	'google_analytics_id' => '',
 	'log_file_prefix' => str_replace ( ' ', '-', strtolower ( get_bloginfo ('name') ) ),
+	// dashboard
 	'local_dashboard_background_color' => BZMNDSGN_LOCAL_BACKGROUND_COLOR,
 	'dev_dashboard_background_color' => BZMNDSGN_DEV_BACKGROUND_COLOR,
 	'staging_dashboard_background_color' => BZMNDSGN_STAGING_BACKGROUND_COLOR,
 	'production_dashboard_background_color' => '',
 	'local_plugin_option_name' => '',
+	'checkbox-show_site_name' => '1',
+	'checkbox-show_marketing' => '1',
 	// content sanitizers
 	'checkbox-strip_double_spaces_on_save' => '0',
 	'checkbox-strip_double_spaces_on_display' => '0',

@@ -143,3 +143,18 @@ if ( ! function_exists ( '_array_key_first' ) ) :
         }
     }
 endif;
+
+if ( ! function_exists ( '_is_enabled' ) ) :
+	/**
+	 * @param $key
+	 * @param $options
+	 *
+	 * @return bool
+	 */
+	function _is_enabled ( $key, $options) {
+        if (isset ( $options[$key] ) && $options[$key]) {
+            return true ;
+        }
+        return false ;
+    }
+endif;
