@@ -43,8 +43,7 @@ function bzmndsgn_dashboard ( ) {
 	}
 
 	if ( $dashboard_background_color_field_label && $dashboard_background_color_field_input_name ) {
-		$dashboard_background_color = new text_input( $dashboard_background_color_field_label, $dashboard_background_color_field_input_name, 'english, hex, rgb, rgba, hsl, or hsla color', $bzmndsgn_config_options_database[$dashboard_background_color_field_input_name] );
-		$dashboard_background_color->set_field_help_text( 'View <a href="https://htmlcolorcodes.com/" target="_blank" rel="noopener">html color codes</a> to obtain color values.' );
+		$dashboard_background_color = new color ( $dashboard_background_color_field_label.': ', $dashboard_background_color_field_input_name,  $bzmndsgn_config_options_database[$dashboard_background_color_field_input_name] );
 		$dashboard_settings_form->add_form_field( $dashboard_background_color );
 	}
 	/*
