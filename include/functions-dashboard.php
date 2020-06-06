@@ -134,6 +134,11 @@ if ( ! function_exists ( 'bzmndsgn_footer_credit' ) ):
 	 * @return string
 	 */
 	function bzmndsgn_footer_credit ( $default ) {
+		$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+        if ( $bzmndsgn_config_options_database['textarea-branding_info'] ) {
+	        return $bzmndsgn_config_options_database['textarea-branding_info'] ;
+        }
+        // The default, if 'checkbox-show_marketing' is checked but the  'textarea-branding_info' is empty.
 		return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 	}
 	if ( _is_enabled ( 'checkbox-show_marketing', $bzmndsgn_config_options_database ) ) {

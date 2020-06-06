@@ -67,7 +67,19 @@ function bzmndsgn_dashboard ( ) {
 		$bzmndsgn_config_options_database['checkbox-show_marketing']
 	) ;
 	$show_marketing->set_label_help_text('This appears in the lower right corner of every page.');
+	$show_marketing->set_field_help_text('Enter branding information in the field below.') ;
 	$dashboard_settings_form->add_form_field ($show_marketing) ;
+
+	$branding_info = new text_area (
+		'Enter branding information:',
+		'textarea-branding_info',
+		'Your Company, Inc.',
+		$bzmndsgn_config_options_database['textarea-branding_info']) ;
+	// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
+	$branding_info->set_show_label( false ) ;
+	$branding_info->set_rows ( 2 );
+	$dashboard_settings_form->add_form_field ($branding_info) ;
+
 
 	// Output form.
 	$dashboard_settings_form->render_form();

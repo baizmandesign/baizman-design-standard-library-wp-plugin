@@ -55,6 +55,7 @@ $site_defaults = array (
 	'checkbox-strip_content_blank_lines_on_display' => '0',
 	'checkbox-strip_content_blank_lines_on_save' => '0',
 	'textarea-legal_tags' => implode ( "\n", $legal_tags ),
+	'textarea-branding_info' => sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ),
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
