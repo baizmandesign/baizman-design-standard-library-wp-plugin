@@ -24,11 +24,11 @@ if ( ! defined( 'BZMNDSGN_SHOW_DASHBOARD_INTERFACE' ) )
 	define ( 'BZMNDSGN_SHOW_DASHBOARD_INTERFACE', True ) ;
 
 if ( ! defined ( 'BZMNDSGN_STAGING_BACKGROUND_COLOR' ) )
-	define ( 'BZMNDSGN_STAGING_BACKGROUND_COLOR', 'rgba(255,96,188,.1)' ) ;
+	define ( 'BZMNDSGN_STAGING_BACKGROUND_COLOR', '#edeae6' ) ;
 
 if ( ! defined ( 'BZMNDSGN_DEV_BACKGROUND_COLOR' ) )
-	define ( 'BZMNDSGN_DEV_BACKGROUND_COLOR', 'rgba(125,69,16,.1)' ) ;
+	define ( 'BZMNDSGN_DEV_BACKGROUND_COLOR', '#f1ece7' ) ;
 
 if ( ! defined ( 'BZMNDSGN_LOCAL_BACKGROUND_COLOR' ) ) {
-	define ( 'BZMNDSGN_LOCAL_BACKGROUND_COLOR', 'rgba(23,165,188,.1)' ) ;
+	define ( 'BZMNDSGN_LOCAL_BACKGROUND_COLOR', '#e8f5f8' ) ;
 }
