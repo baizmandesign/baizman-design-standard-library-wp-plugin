@@ -99,6 +99,9 @@ endif;
 if ( ! function_exists( '_bzmndsgn_form_redirect')):
 	/**
 	 * Redirect page after submitting an admin form.
+	 *
+	 * @param $message
+	 * @param string $destination
 	 */
 	function _bzmndsgn_form_redirect ( $message, $destination = 'admin.php' ) {
 
@@ -121,4 +124,22 @@ if ( ! function_exists( '_bzmndsgn_form_redirect')):
 			)
 		);
 	}
+endif;
+
+if ( ! function_exists ( '_array_key_first' ) ) :
+	/**
+     * Get name of first key in an array. Backward-compatible, too.
+	 * @param $array
+	 *
+	 * @return int|mixed|string|null
+	 */
+	function _array_key_first ( $array ) {
+        if ( function_exists ('array_key_first') ) {
+            return array_key_first ( $array ) ;
+        }
+        else {
+            $array_keys = array_keys ( $array ) ;
+            return $array_keys[0] ;
+        }
+    }
 endif;

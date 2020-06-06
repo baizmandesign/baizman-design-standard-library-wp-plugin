@@ -125,6 +125,20 @@ if ( BZMNDSGN_SHOW_DASHBOARD_INTERFACE ):
 	add_action ( 'admin_menu', 'bzmndsgn_config_admin_menu', 1 ) ;
 endif;
 
+function bzmndsgn_filter_plugin_links ( $links, $file ) {
+	$plugin_info = get_plugins( '/' . explode( '/', plugin_basename( __FILE__ ) )[0] );
+	$plugin_parent_folder = trailingslashit ( basename ( dirname( __FILE__ ) ) );
+
+	$plugin_name = _array_key_first ($plugin_info) ;
+
+	if ( $file == $plugin_parent_folder . $plugin_name ) {
+		$links[] = sprintf ( '<a href="%s" rel="noopener"><span class="dashicons dashicons-admin-generic"></span> Settings</a>', home_url ('/wp-admin/admin.php?page=bzmndsgn_general_settings') );
+		$links[] = sprintf ( '<a href="%s"  rel="noopener" target="%s"><span class="dashicons dashicons-welcome-write-blog"></span> Report an Issue</a>', 'https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library/issues/new', '_blank') ;
+	}
+	return $links;
+}
+add_filter ( 'plugin_row_meta', 'bzmndsgn_filter_plugin_links', 10, 2 ) ;
+
 /**
  * Save per-site settings to database.
  */
