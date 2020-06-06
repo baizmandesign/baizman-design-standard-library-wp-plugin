@@ -103,14 +103,30 @@ class text_area extends field {
 	}
 
 	/**
-	 * Sort values in a textarea.
+	 * Sort values in a textarea. For the legal HTML tags.
+	 * TODO: move me somewhere else.
 	 */
 	public function sort ( ) {
 		$values = explode ( "\r\n", $this->get_field_default_value() ) ;
 		sort ($values) ;
 		$this->set_field_default_value ( implode ( "\r\n", $values ) ) ;
 	}
-	
+
+	/**
+	 * Remove duplicate items in a textarea. For the legal HTML tags.
+	 * TODO: move me somewhere else.
+	 */
+	public function remove_duplicates () {
+		$values = explode ( "\r\n", $this->get_field_default_value() ) ;
+		$unique_values = [] ;
+		foreach ( $values as $value ) {
+			if ( ! in_array ( $value, $unique_values ) ) {
+				$unique_values[] = $value ;
+			}
+		}
+		$this->set_field_default_value ( implode ( "\r\n", $unique_values ) ) ;
+	}
+
 	/**
 	 * @return mixed|void
 	 */

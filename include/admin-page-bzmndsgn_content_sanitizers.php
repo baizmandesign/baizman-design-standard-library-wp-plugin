@@ -39,6 +39,7 @@ function bzmndsgn_content_sanitizers () {
 		$bzmndsgn_config_options_database['textarea-legal_tags']) ;
 	$legal_tags->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
 	$legal_tags->set_show_label( false ) ;
+	$legal_tags->remove_duplicates() ;
 	$legal_tags->sort() ;
 	$content_sanitizers_settings_form->add_form_field ($legal_tags) ;
 
