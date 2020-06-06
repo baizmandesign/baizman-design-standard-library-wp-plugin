@@ -19,6 +19,16 @@ class text_area extends field {
 	private $label_position ;
 
 	/**
+	 * @var
+	 */
+	private $rows ;
+
+	/**
+	 * @var
+	 */
+	private $columns ;
+
+	/**
 	 * text_area constructor.
 	 *
 	 * @param $text_area_label
@@ -31,6 +41,8 @@ class text_area extends field {
 		$this->set_text_area_placeholder( $text_area_placeholder ) ;
 		$this->set_field_default_value ( $text_area_default_value ) ;
 		$this->set_label_position( 'top' );
+		$this->set_rows ( 8 ) ;
+		$this->set_columns ( 50 ) ;
 		$this->set_field_type( 'textarea' );
 	}
 
@@ -61,6 +73,36 @@ class text_area extends field {
 	public function set_label_position( $label_position ) {
 		$this->label_position = $label_position;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_rows() {
+		return $this->rows;
+	}
+
+	/**
+	 * @param mixed $rows
+	 */
+	public function set_rows( $rows ) {
+		$this->rows = $rows;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_columns() {
+		return $this->columns;
+	}
+
+	/**
+	 * @param mixed $columns
+	 */
+	public function set_columns( $columns ) {
+		$this->columns = $columns;
+	}
+
+
 
 	/**
 	 * @return mixed|void
@@ -100,11 +142,12 @@ class text_area extends field {
 			}
 		}
 		printf (
-			'<textarea name="%1$s" rows="8" cols="50" placeholder="%2$s">%3$s</textarea>',
+			'<textarea name="%1$s" rows="%4$d" cols="%5$d" placeholder="%2$s">%3$s</textarea>',
 			esc_attr ( $this->get_field_input_name() ),
 			esc_attr ( $this->get_text_area_placeholder() ),
-			esc_attr ( $this->get_field_default_value()
-			)
+			esc_attr ( $this->get_field_default_value() ),
+			$this->get_rows(),
+			$this->get_columns()
 		) ;
 		if ( $this->get_field_help_text() ) {
 			printf(
