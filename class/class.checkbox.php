@@ -14,17 +14,32 @@ class checkbox extends field {
 	}
 
 	public function print_form_field ( ) {
-            printf ('<tr valign="top">') ;
-            printf (
-            	'<th scope="row"><label for="%1$s">%2$s</label></th>',
-	            esc_attr ( $this->get_field_input_name( ) ),
-	            $this->get_field_label( )
-            ) ;
-                printf (
-                	'<td><input type="checkbox" name="%2$s" id="%2$s" value="1"%1$s/>',
-	                checked ( '1', $this->get_field_default_value( ), false ),
-	                esc_attr ( $this->get_field_input_name( ) )
-                ) ;
-                printf('</td></tr>');
+		printf ('<tr valign="top">') ;
+		printf (
+			'<th scope="row"><label for="%1$s">%2$s</label>',
+			esc_attr ( $this->get_field_input_name( ) ),
+			$this->get_field_label( )
+		) ;
+		if ( $this->get_label_help_text() ) {
+			printf(
+				'<br><small>%1$s</small>',
+				$this->get_label_help_text()
+			);
+		}
+		printf('</th>' );
+
+		printf (
+			'<td><input type="checkbox" name="%2$s" id="%2$s" value="1"%1$s/>',
+			checked ( '1', $this->get_field_default_value( ), false ),
+			esc_attr ( $this->get_field_input_name( ) )
+		) ;
+		if ( $this->get_field_help_text() ) {
+			printf(
+				'<br><small>%1$s</small>',
+				$this->get_field_help_text()
+			);
+		}
+
+		printf('</td></tr>');
 	}
 }

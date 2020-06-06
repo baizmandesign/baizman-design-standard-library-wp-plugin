@@ -23,7 +23,7 @@ class text_input extends field {
 	 */
 	public function __construct( $text_field_label, $text_field_input_name, $text_field_placeholder, $text_field_default_value ) {
 		parent::__construct( $text_field_label, $text_field_input_name );
-		$this->set_field_placeholder( $text_field_placeholder ) ;
+		$this->set_text_field_placeholder( $text_field_placeholder ) ;
 		$this->set_field_default_value ( $text_field_default_value ) ;
 		$this->set_field_type( 'input' );
 	}
@@ -38,7 +38,7 @@ class text_input extends field {
 	/**
 	 * @param mixed $field_placeholder
 	 */
-	public function set_field_placeholder( $field_placeholder ) {
+	public function set_text_field_placeholder( $field_placeholder ) {
 		$this->field_placeholder = $field_placeholder;
 	}
 
@@ -50,19 +50,26 @@ class text_input extends field {
 		printf ('<tr valign="top">') ;
 
 		printf (
-			'<th scope="row">%1$s:</th>',
+			'<th scope="row">%1$s:',
 			$this->get_field_label( )
 		) ;
+		if ( $this->get_label_help_text() ) {
+			printf(
+				'<br><small>%1$s</small>',
+				$this->get_label_help_text()
+			);
+		}
+		printf ('</th>' );
 		printf (
 			'<td><input type="text" name="%1$s" placeholder="%2$s" value="%3$s" size="50">',
 			esc_attr ( $this->get_field_input_name() ),
 			esc_attr ( $this->get_text_field_placeholder() ),
 			esc_attr ( $this->get_field_default_value() )
 		);
-		if ( $this->get_help_text() ) {
+		if ( $this->get_field_help_text() ) {
 			printf (
 				'<br><small>%1$s</small>',
-				$this->get_help_text()
+				$this->get_field_help_text()
 			) ;
 		}
 		printf (

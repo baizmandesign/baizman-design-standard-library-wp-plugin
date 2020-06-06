@@ -18,6 +18,7 @@ function bzmndsgn_general_settings () {
 
 	// Google Analytics ID.
 	$google_analytics_id = new text_input( 'Google Analytics ID', 'google_analytics_id','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['google_analytics_id'] );
+	$google_analytics_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Analytics ID.</a>');
 	$general_settings_form->add_form_field( $google_analytics_id );
 
 	// 404 log file prefix
@@ -27,7 +28,7 @@ function bzmndsgn_general_settings () {
 	$local_plugin_option_name_label = 'Local plugin option name' ;
 	$local_plugin_option_name_input_name = 'local_plugin_option_name' ;
 	$local_plugin_option_name = new text_input( $local_plugin_option_name_label, $local_plugin_option_name_input_name, 'option_name', $bzmndsgn_config_options_database[$local_plugin_option_name_input_name] );
-	$local_plugin_option_name->set_help_text( 'This is the <code><small>option_name</small></code> in the MySQL database.' );
+	$local_plugin_option_name->set_field_help_text( 'This is the <code><small>option_name</small></code> in the MySQL database.' );
 
 	$general_settings_form->add_form_field( $local_plugin_option_name );
 
