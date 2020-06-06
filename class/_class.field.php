@@ -13,7 +13,10 @@ abstract class field
 	protected $field_default_value ;
 	protected $field_value ;
 	protected $field_type ;
-	protected $help_text ;
+	protected $field_help_text ;
+	protected $label_help_text ;
+	// Show the label (boolean). Default: true.
+	protected $show_label ;
 
 	/**
 	 * field constructor.
@@ -22,7 +25,7 @@ abstract class field
 
 		$this->set_field_label ( $field_label ) ;
 		$this->set_field_input_name ( $field_input_name ) ;
-
+		$this->set_show_label ( true ) ;
 	}
 
 	/**
@@ -96,18 +99,47 @@ abstract class field
 	}
 
 	/**
-	 * @param $help_text
+	 * @param $field_help_text
 	 */
-	public function set_help_text ( $help_text ) {
-		$this->help_text = $help_text ;
+	public function set_field_help_text ( $field_help_text ) {
+		$this->field_help_text = $field_help_text ;
 	}
 
 	/**
 	 * @return mixed
 	 */
-	public function get_help_text ( ) {
-		return $this->help_text ;
+	public function get_field_help_text ( ) {
+		return $this->field_help_text ;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_label_help_text() {
+		return $this->label_help_text;
+	}
+
+	/**
+	 * @param mixed $label_help_text
+	 */
+	public function set_label_help_text( $label_help_text ) {
+		$this->label_help_text = $label_help_text;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_show_label() {
+		return $this->show_label;
+	}
+
+	/**
+	 * @param mixed $show_label
+	 */
+	public function set_show_label( $show_label ) {
+		$this->show_label = $show_label;
+	}
+
 
 	/**
 	 * Child classes need to define this themselves.
