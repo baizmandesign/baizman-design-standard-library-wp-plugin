@@ -21,7 +21,7 @@ if ( ! function_exists ( 'bzmndsgn_remove_content_blank_lines' ) ):
 		$content = preg_replace ( "/^&nbsp;\s*/m", '', $content) ;
 		return trim ( $content) ;
 	}
-	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_save'] ) && $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_save'] ) {
+	if ( _is_enabled ( 'checkbox-strip_content_blank_lines_on_save', $bzmndsgn_config_options_database ) ) {
 		add_filter( 'content_save_pre', 'bzmndsgn_remove_content_blank_lines', 10, 1 );
 	}
 endif;
@@ -47,7 +47,7 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_blank_lines' ) ):
 
 		return $content;
 	}
-	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_display'] ) && $bzmndsgn_config_options_database['checkbox-strip_content_blank_lines_on_display'] ) {
+	if ( _is_enabled ( 'checkbox-strip_content_blank_lines_on_display', $bzmndsgn_config_options_database ) ) {
 		add_filter( 'the_content', 'bzmndsgn_filter_content_blank_lines' );
 	}
 endif;
@@ -84,7 +84,7 @@ if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
 //		file_put_contents('test.txt', print_r($legal_tags,true)) ;
 		return strip_tags( $content, implode( '', $legal_tags ) );
 	}
-	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) && $bzmndsgn_config_options_database['checkbox-strip_illegal_tags_on_save'] ) {
+	if ( _is_enabled ( 'checkbox-strip_illegal_tags_on_save', $bzmndsgn_config_options_database ) ) {
 		add_filter( 'content_save_pre', 'bzmndsgn_strip_illegal_tags', 10, 1 );
 	}
 endif;
@@ -109,7 +109,7 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_double_spaces' ) ):
 
 		return $content;
 	}
-	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_display'] ) && $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_display'] ) {
+	if ( _is_enabled ( 'checkbox-strip_double_spaces_on_display', $bzmndsgn_config_options_database ) ) {
 		add_filter( 'the_content', 'bzmndsgn_filter_content_double_spaces' );
 	}
 endif;
@@ -128,7 +128,7 @@ if ( ! function_exists ( 'bzmndsgn_strip_double_spaces' ) ):
 		return preg_replace('/\s+/u', ' ', $content ) ;
 
 	}
-	if ( isset ( $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_save'] )  && $bzmndsgn_config_options_database['checkbox-strip_double_spaces_on_save'] ) {
+	if ( _is_enabled ( 'checkbox-strip_double_spaces_on_save', $bzmndsgn_config_options_database ) ) {
 		add_filter( 'content_save_pre', 'bzmndsgn_strip_double_spaces', 10, 1 );
 	}
 endif;
