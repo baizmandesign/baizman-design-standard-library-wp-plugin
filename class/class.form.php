@@ -55,13 +55,18 @@ class form {
 	private $settings_fields_page ;
 
 	/**
+	 * @var array
+	 */
+	private $table_classes = [] ;
+
+	/**
 	 * form constructor.
 	 *
 	 * @param $form_name
 	 */
 	public function __construct( $form_name ) {
 		$this->set_form_name ( $form_name ) ;
-
+		$this->add_table_class ( 'form-table' );
 	}
 
 	/**
@@ -205,6 +210,20 @@ class form {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function get_table_classes() {
+		return $this->table_classes;
+	}
+
+	/**
+	 * @param $table_class
+	 */
+	public function add_table_class( $table_class ) {
+		$this->table_classes[] = $table_class;
+	}
+
+	/**
 	 * Render form.
 	 */
 	public function render_form ():void {
@@ -215,7 +234,10 @@ class form {
 //		do_settings_sections ( $this->get_settings_fields_page() ) ;
 		// is the field below needed?
 
-		printf ('<table class="form-table">') ;
+		printf (
+			'<table class="%1$s">',
+			implode( ' ', $this->get_table_classes( ) )
+		) ;
 
 		foreach ( $this->get_form_fields() as $form_field ) {
 			$form_field->print_form_field() ;
