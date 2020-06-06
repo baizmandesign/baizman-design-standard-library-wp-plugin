@@ -46,7 +46,7 @@ class color extends field {
 		) ;
 		if ( $this->get_field_help_text() ) {
 			printf (
-				'<br><small>%1$s</small>',
+				' <small>%1$s</small>',
 				$this->get_field_help_text()
 			) ;
 		}
