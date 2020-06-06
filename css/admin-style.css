@@ -32,7 +32,10 @@ div.toolset-notice-wp.notice.toolset-notice {
     display: none ;
 }
 
-table.form-table.content-sanitizers-settings-table th:nth-child(1){
+table.form-table.content_sanitizers_settings-table th:nth-child(1){
     width: 40% ;
+}
 
+table.form-table.dashboard_settings-table th:nth-child(1){
+    width: 40% ;
 }

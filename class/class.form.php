@@ -67,6 +67,7 @@ class form {
 	public function __construct( $form_name ) {
 		$this->set_form_name ( $form_name ) ;
 		$this->add_table_class ( 'form-table' );
+		$this->add_table_class ( $form_name.'-table' );
 	}
 
 	/**
