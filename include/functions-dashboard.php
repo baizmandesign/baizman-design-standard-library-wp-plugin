@@ -15,9 +15,9 @@ if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
 		 */
 		function bzmndsgn_admin_dashboard_widget( ) {
 
-			printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for monthly support and maintenance.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
+			printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for a WordPress care package that includes monthly support and maintenance.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
 			printf( '
-<p>The contract includes up to two hours per month for the following:</p>
+<p>The package allocates up to two hours per month for the following:</p>
 <ul>
 <li>+ technical support via <a href="mailto:%1$s">email</a>, <a href="tel:%2$s">phone</a>, <a href="%3$s">videoconference</a>, or in-person consultation.</li> 
 <li>+ custom website development (e.g., a new feature).</li>
