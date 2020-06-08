@@ -7,7 +7,7 @@
 
 function bzmndsgn_404_error_log () {
 
-	_print_admin_settings_heading ('404 Error Log' ) ;
+	_print_admin_settings_heading ('404 Error Log', 'Baizman Design Standard Library' ) ;
 
 	$not_found_path =  BZMNDSGN_DOCUMENT_ROOT_URI . BZMNDSGN_NOT_FOUND_404_LOG_FILE ;
 

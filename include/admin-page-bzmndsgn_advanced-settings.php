@@ -6,7 +6,7 @@
  */
 
 function bzmndsgn_advanced_settings () {
-	_print_admin_settings_heading ('Advanced Settings') ;
+	_print_admin_settings_heading ('Advanced Settings', 'Baizman Design Standard Library' ) ;
 	?>
 	<h4>Reserialize data</h4>
 	<form method="post" action="<?php echo admin_url('admin-post.php') ; ?>">

@@ -57,7 +57,7 @@ $site_defaults = array (
 	'textarea-legal_tags' => implode ( "\n", $legal_tags ),
 	'textarea-branding_info' => sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ),
 	'checkbox-show_global_site_warning' => '0',
-	'textarea-global_site_warning' => '<strong>WARNING: this is a development server meant for experimental purposes only. Content saved on this site may be removed at any time without notice.</strong>',
+	'textarea-global_site_warning' => '<strong>WARNING: this is a development server meant for experimental purposes only. Content saved on this site may be removed at any time without notice, and certain functions may not be fully configured or operational.</strong>',
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;

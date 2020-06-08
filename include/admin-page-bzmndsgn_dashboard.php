@@ -7,7 +7,7 @@
  */
 
 function bzmndsgn_dashboard ( ) {
-	_print_admin_settings_heading ('WP Dashboard Customization') ;
+	_print_admin_settings_heading ('WP Dashboard Customization', 'Baizman Design Standard Library' ) ;
 
 	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
@@ -62,7 +62,7 @@ function bzmndsgn_dashboard ( ) {
 	$show_site_name->set_label_help_text('This appears in the lower left corner of every page.');
 	$dashboard_settings_form->add_form_field ( $show_site_name ) ;
 
-	$show_marketing = new checkbox ('Replace version number with branding?',
+	$show_marketing = new checkbox ('Replace WordPress version number with branding?',
 		'checkbox-show_marketing',
 		$bzmndsgn_config_options_database['checkbox-show_marketing']
 	) ;
