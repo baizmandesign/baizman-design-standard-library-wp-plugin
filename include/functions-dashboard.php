@@ -5,9 +5,9 @@
 
 defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
 
-if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
+$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
-	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
 
 	if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
 		/**
