@@ -80,6 +80,28 @@ function bzmndsgn_dashboard ( ) {
 	$branding_info->set_rows ( 2 );
 	$dashboard_settings_form->add_form_field ($branding_info) ;
 
+	if ( _get_environment_type ( ) != 'Production' ) {
+		$show_site_warning = new checkbox ('Display global site warning?',
+			'checkbox-show_global_site_warning',
+			$bzmndsgn_config_options_database['checkbox-show_global_site_warning']
+		) ;
+		$show_site_warning->set_field_help_text('Enter global site warning in the field below.') ;
+
+		$dashboard_settings_form->add_form_field ($show_site_warning) ;
+
+		$global_site_warning = new text_area (
+			'Global site warning:',
+			'textarea-global_site_warning',
+			'Your Company, Inc.',
+			$bzmndsgn_config_options_database['textarea-global_site_warning']) ;
+		// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
+		$global_site_warning->set_show_label( false ) ;
+		$global_site_warning->set_rows ( 4 );
+		$global_site_warning->set_field_help_text('Note: HTML is OK.');
+		$dashboard_settings_form->add_form_field ($global_site_warning) ;
+
+
+	}
 
 	// Output form.
 	$dashboard_settings_form->render_form();

@@ -190,6 +190,24 @@ if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
 	add_action( 'admin_head', 'bzmndsgn_set_dashboard_background_color' );
 endif;
 
+if ( ! function_exists('bzmndsgn_site_warning' ) ) {
+	/**
+	 * Display global warning in WP dashboard if we are working on a dev site.
+	 */
+	function bzmndsgn_site_warning ( ) {
+			$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+        if ( $bzmndsgn_config_options_database['textarea-global_site_warning'] ) {
+            printf ('<div class="error">') ;
+            printf( '<p>%s</p>', $bzmndsgn_config_options_database['textarea-global_site_warning'] ) ;
+            printf ('</div>') ;
+        }
+    }
+
+    if ( _is_enabled ('checkbox-show_global_site_warning', $bzmndsgn_config_options_database ) ) {
+        add_action ( 'admin_notices', 'bzmndsgn_site_warning' ) ;
+    }
+}
+
 if ( ! function_exists('bzmndsgn_issue_link')):
     /**
      * Set URL of "Report an issue" link.
