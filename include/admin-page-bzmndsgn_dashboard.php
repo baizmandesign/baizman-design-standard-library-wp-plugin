@@ -78,6 +78,8 @@ function bzmndsgn_dashboard ( ) {
 	// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
 	$branding_info->set_show_label( false ) ;
 	$branding_info->set_rows ( 2 );
+	$branding_info->set_field_help_text('Note: HTML is OK.');
+
 	$dashboard_settings_form->add_form_field ($branding_info) ;
 
 	if ( _get_environment_type ( ) != 'Production' ) {
