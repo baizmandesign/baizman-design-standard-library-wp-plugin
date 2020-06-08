@@ -2,7 +2,7 @@
 /**
  Plugin Name: Baizman Design Standard Library
  Plugin URI: https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library
- Description: A plugin for multiple clients' websites.
+ Description: A standard set of commonly-requested WordPress features and functions in a customizable interface.
  Author: Saul Baizman
  Version: 1.0
  Author URI: https://baizmandesign.com
