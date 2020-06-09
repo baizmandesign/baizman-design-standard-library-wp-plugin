@@ -26,7 +26,7 @@ class color extends field {
 		printf ('<tr valign="top">') ;
 
 		printf (
-			'<th scope="row"><label for="%1$s">%2$s</label>',
+			'<th scope="row">%2$s',
 			esc_attr ( $this->get_field_input_name() ),
 			$this->get_field_label( )
 		) ;
