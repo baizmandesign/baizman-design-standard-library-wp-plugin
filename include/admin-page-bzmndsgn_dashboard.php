@@ -87,6 +87,7 @@ function bzmndsgn_dashboard ( ) {
 			'checkbox-show_global_site_warning',
 			$bzmndsgn_config_options_database['checkbox-show_global_site_warning']
 		) ;
+		$show_site_warning->set_label_help_text('This message appears as a call-out at the top of every page in the dashboard.') ;
 		$show_site_warning->set_field_help_text('Enter global site warning in the field below.') ;
 
 		$dashboard_settings_form->add_form_field ($show_site_warning) ;
@@ -103,7 +104,7 @@ function bzmndsgn_dashboard ( ) {
 		$dashboard_settings_form->add_form_field ($global_site_warning) ;
 	}
 
-	$show_dashboard_widget = new checkbox ('Show WordPress Care Package dashboard widget?',
+	$show_dashboard_widget = new checkbox ('Display WordPress Care Package dashboard widget?',
 		'checkbox-show_dashboard_widget',
 		$bzmndsgn_config_options_database['checkbox-show_dashboard_widget']
 	) ;

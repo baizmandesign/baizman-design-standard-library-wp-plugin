@@ -154,22 +154,6 @@ if ( ! function_exists ( 'bzmndsgn_footer_credit' ) ):
 	}
 endif ;
 
-if ( ! function_exists ( 'bzmndsgn_dev_site_warning' ) ):
-	/**
-	 * Display global warning in WP dashboard if we are working on a dev site.
-	 */
-	function bzmndsgn_dev_site_warning ( ) {
-		if ( strpos ( $_SERVER['HTTP_HOST'], 'dev.' ) !== false ) {
-			?>
-			<div class="error bzmndsgn_dev_site_warning-error">
-				<p><strong>WARNING: this is a development server meant for experimental purposes only. Content saved on this site may be removed at any time without notice, and certain functions may not be fully configured or operational. Need assistance? <?php printf ( '<a href="mailto:%2$s">Please email %1$s.</a>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_SUPPORT_EMAIL) ;?></strong></p>
-			</div>
-			<?php
-		}
-	}
-	add_action ( 'admin_notices', 'bzmndsgn_dev_site_warning' ) ;
-endif;
-
 if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
     /**
      * Set background color of WP dashboard to distinguish dev and staging sites from production.
@@ -205,7 +189,7 @@ if ( ! function_exists('bzmndsgn_site_warning' ) ) {
 	function bzmndsgn_site_warning ( ) {
 			$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
         if ( $bzmndsgn_config_options_database['textarea-global_site_warning'] ) {
-            printf ('<div class="error">') ;
+            printf ('<div class="notice notice-warning bzmndsgn_site_warning">') ;
             printf( '<p>%s</p>', $bzmndsgn_config_options_database['textarea-global_site_warning'] ) ;
             printf ('</div>') ;
         }
