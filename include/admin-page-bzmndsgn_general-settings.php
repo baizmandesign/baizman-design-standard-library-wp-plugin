@@ -23,6 +23,7 @@ function bzmndsgn_general_settings () {
 
 	// 404 log file prefix
 	$four_zero_four_log_file_prefix = new text_input( '404 Log File Prefix:', 'log_file_prefix','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['log_file_prefix'] );
+	$four_zero_four_log_file_prefix->set_field_help_text('To log 404 errors, add <code><small>_bzmndsgn_log_404_error()</small></code> to the theme\'s 404.php.<br><a href="/wp-admin/admin.php?page=bzmndsgn_404_error_log">Visit the 404 Error Log.</a>');
 	$general_settings_form->add_form_field( $four_zero_four_log_file_prefix );
 
 	$local_plugin_option_name_label = 'Local plugin option name' ;
