@@ -48,11 +48,13 @@ class text_input extends field {
 	public function print_form_field ( ) {
 
 		printf ('<tr valign="top">') ;
-
-		printf (
-			'<th scope="row">%1$s',
-			$this->get_field_label( )
-		) ;
+		printf ('<th scope="row">');
+		if ( $this->get_show_label() ) {
+			printf(
+				'%1$s',
+				$this->get_field_label()
+			);
+		}
 		if ( $this->get_label_help_text() ) {
 			printf(
 				'<br><small>%1$s</small>',
