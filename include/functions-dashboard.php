@@ -7,17 +7,15 @@ defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' )
 
 $bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
-if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
+if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
+    /**
+     * This function outputs the content of the admin dashboard widget.
+     */
+    function bzmndsgn_admin_dashboard_widget( ) {
 
-	if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
-		/**
-		 * This function outputs the content of the admin dashboard widget.
-		 */
-		function bzmndsgn_admin_dashboard_widget( ) {
-
-			printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for a WordPress care package that includes monthly support and maintenance.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
-			printf( '
-<p>The package allocates up to two hours per month for the following:</p>
+        printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for a WordPress Website Care Package.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
+        printf( '
+<p>In addition to monthly monitoring and maintenance of the website, the package includes up to two hours per month for the following:</p>
 <ul>
 <li>+ technical support via <a href="mailto:%1$s">email</a>, <a href="tel:%2$s">phone</a>, <a href="%3$s">videoconference</a>, or in-person consultation.</li> 
 <li>+ custom website development (e.g., a new feature).</li>
@@ -25,30 +23,31 @@ if ( BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
 </ul>
 ', BZMNDSGN_SUPPORT_EMAIL, BZMNDSGN_AUTHOR_PHONE, 'https://meet.google.com' ) ;
 
-			if ( get_bloginfo('admin_email') != BZMNDSGN_AUTHOR_EMAIL ) {
-				printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), home_url('/wp-admin/options-general.php') ) ;
+        if ( get_bloginfo('admin_email') != BZMNDSGN_AUTHOR_EMAIL ) {
+            printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), home_url('/wp-admin/options-general.php') ) ;
+        }
+    }
 
-			}
-		}
-		// Add the correct hook.
-		if ( BZMNDSGN_IS_MULTISITE ) {
-			add_action( 'wp_network_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
-		} else {
-			add_action( 'wp_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
-		}
-	endif;
+    if ( _is_enabled ( 'checkbox-show_dashboard_widget', $bzmndsgn_config_options_database ) && BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
+        // Add the correct hook.
+        if ( BZMNDSGN_IS_MULTISITE ) {
+            add_action( 'wp_network_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+        } else {
+            add_action( 'wp_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+        }
+    }
+endif;
 
-	if ( ! function_exists ( 'bzmndsgn_add_admin_dashboard_widget' ) ):
-	/**
-	 * Add the widget to the admin dashboard.
-	 */
-		function bzmndsgn_add_admin_dashboard_widget( ) {
-			wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
-				'Website Support and Maintenance',
-				'bzmndsgn_admin_dashboard_widget' );
-		}
-	endif;
-}
+if ( ! function_exists ( 'bzmndsgn_add_admin_dashboard_widget' ) ):
+    /**
+     * Add the widget to the admin dashboard.
+     */
+    function bzmndsgn_add_admin_dashboard_widget( ) {
+        wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
+            'WordPress Website Care Package',
+            'bzmndsgn_admin_dashboard_widget' );
+    }
+endif;
 
 if ( ! function_exists ( 'bzmndsgn_disable_dashboard_widgets' ) ):
 	/**

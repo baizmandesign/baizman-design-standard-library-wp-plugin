@@ -101,9 +101,14 @@ function bzmndsgn_dashboard ( ) {
 		$global_site_warning->set_rows ( 4 );
 		$global_site_warning->set_field_help_text('Note: HTML is OK.');
 		$dashboard_settings_form->add_form_field ($global_site_warning) ;
-
-
 	}
+
+	$show_dashboard_widget = new checkbox ('Show WordPress Care Package dashboard widget?',
+		'checkbox-show_dashboard_widget',
+		$bzmndsgn_config_options_database['checkbox-show_dashboard_widget']
+	) ;
+	$show_dashboard_widget->set_label_help_text('Constant BZMNDSGN_SHOW_DASHBOARD_WIDGET must also be true.');
+	$dashboard_settings_form->add_form_field ( $show_dashboard_widget ) ;
 
 	// Output form.
 	$dashboard_settings_form->render_form();
