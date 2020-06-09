@@ -80,8 +80,8 @@ if ( ! function_exists ( 'bzmndsgn_remove_menus' ) ):
 	 */
 	function bzmndsgn_remove_menus ( )
 	{
-		remove_menu_page ( 'edit-comments.php' ); // Comments
-		remove_menu_page ( 'edit.php' ); // Posts
+		// remove_menu_page ( 'edit-comments.php' ); // Comments
+		// remove_menu_page ( 'edit.php' ); // Posts
 	}
 	add_action( 'admin_menu', 'bzmndsgn_remove_menus' );
 endif;
