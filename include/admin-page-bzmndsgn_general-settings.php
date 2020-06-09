@@ -7,7 +7,7 @@
 
 function bzmndsgn_general_settings () {
 
-	_print_admin_settings_heading ('General Settings', 'Baizman Design Standard Library' ) ;
+	_print_admin_settings_heading ('General Settings:', 'Baizman Design Standard Library' ) ;
 
 	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
@@ -17,12 +17,12 @@ function bzmndsgn_general_settings () {
 	$general_settings_form->set_settings_fields_page(BZMNDSGN_SETTINGS_GROUP );
 
 	// Google Analytics ID.
-	$google_analytics_id = new text_input( 'Google Analytics ID', 'google_analytics_id','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['google_analytics_id'] );
+	$google_analytics_id = new text_input( 'Google Analytics ID:', 'google_analytics_id','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['google_analytics_id'] );
 	$google_analytics_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Analytics ID.</a>');
 	$general_settings_form->add_form_field( $google_analytics_id );
 
 	// 404 log file prefix
-	$four_zero_four_log_file_prefix = new text_input( '404 Log File Prefix', 'log_file_prefix','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['log_file_prefix'] );
+	$four_zero_four_log_file_prefix = new text_input( '404 Log File Prefix:', 'log_file_prefix','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['log_file_prefix'] );
 	$general_settings_form->add_form_field( $four_zero_four_log_file_prefix );
 
 	$local_plugin_option_name_label = 'Local plugin option name' ;

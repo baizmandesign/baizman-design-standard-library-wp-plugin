@@ -50,7 +50,7 @@ class text_input extends field {
 		printf ('<tr valign="top">') ;
 
 		printf (
-			'<th scope="row">%1$s:',
+			'<th scope="row">%1$s',
 			$this->get_field_label( )
 		) ;
 		if ( $this->get_label_help_text() ) {
