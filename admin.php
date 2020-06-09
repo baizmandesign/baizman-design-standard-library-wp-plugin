@@ -60,7 +60,7 @@ $site_defaults = array (
 	'textarea-global_site_warning' => '<strong>WARNING: this is a development server meant for experimental purposes only. Content saved on this site may be removed at any time without notice, and certain functions may not be fully configured or operational.</strong>',
 	'checkbox-show_dashboard_widget'=> '1',
 	'text-dashboard_widget_title' => 'WordPress Website Care Package',
-	'textarea-dashboard_widget_body' => '<p>This website (<a href="{home_url}">{hostname}</a>) has a contract with <a href="{author_company_url}" target="_blank">{author_company}</a> for a WordPress Website Care Package.</p>
+	'textarea-dashboard_widget_body' => '<p>This website (<a href="{home_url}">{hostname}</a>) has a contract with <a href="{author_company_url}" target="_blank" rel="noopener">{author_company}</a> for a WordPress Website Care Package.</p>
 <p>In addition to monthly monitoring and maintenance of the website, the package includes up to two hours per month for the following:</p>
 <ul>
 <li>+ technical support via <a href="mailto:{support_email}">email</a>, <a href="tel:{support_phone}">phone</a>, <a href="{videoconference_url}">videoconference</a>, or in-person consultation.</li>
