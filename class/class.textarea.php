@@ -107,9 +107,9 @@ class text_area extends field {
 	 * TODO: move me somewhere else.
 	 */
 	public function sort ( ) {
-		$values = explode ( "\r\n", $this->get_field_default_value() ) ;
+		$values = explode ( "\n", $this->get_field_default_value() ) ;
 		sort ($values) ;
-		$this->set_field_default_value ( implode ( "\r\n", $values ) ) ;
+		$this->set_field_default_value ( implode ( "\n", $values ) ) ;
 	}
 
 	/**
