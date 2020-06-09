@@ -108,7 +108,25 @@ function bzmndsgn_dashboard ( ) {
 		$bzmndsgn_config_options_database['checkbox-show_dashboard_widget']
 	) ;
 	$show_dashboard_widget->set_label_help_text('Constant BZMNDSGN_SHOW_DASHBOARD_WIDGET must also be true.');
+	$show_dashboard_widget->set_field_help_text('Enter the widget title and body in the fields below.');
 	$dashboard_settings_form->add_form_field ( $show_dashboard_widget ) ;
+
+	$dashboard_widget_title = new text_input( 'Dashboard widget title:', 'text-dashboard_widget_title','Widget title', $bzmndsgn_config_options_database['text-dashboard_widget_title'] );
+	$dashboard_widget_title->set_show_label ( false ) ;
+	$dashboard_widget_title->set_field_help_text('Widget Title') ;
+	$dashboard_settings_form->add_form_field ( $dashboard_widget_title ) ;
+
+	$dashboard_widget_body = new text_area (
+		'Dashboard widget body:',
+		'textarea-dashboard_widget_body',
+		'Widget body',
+		$bzmndsgn_config_options_database['textarea-dashboard_widget_body']) ;
+	// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
+	$dashboard_widget_body->set_show_label( false ) ;
+	$dashboard_widget_body->set_rows ( 4 );
+	$dashboard_widget_body->set_field_help_text('Widget Body. Note: HTML is OK.<br>The following variables are available: {author_company}, {author_company_url}, {home_url}, {hostname}, {support_email}, {support_phone}, {videoconference_url}.' ) ;
+	$dashboard_settings_form->add_form_field ($dashboard_widget_body) ;
+
 
 	// Output form.
 	$dashboard_settings_form->render_form();

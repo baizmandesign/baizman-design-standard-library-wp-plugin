@@ -13,18 +13,25 @@ if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
      */
     function bzmndsgn_admin_dashboard_widget( ) {
 
-        printf( '<p>This website (<a href="%3$s">%4$s</a>) has a contract with <a href="%2$s" target="_blank">%1$s</a> for a WordPress Website Care Package.</p>',BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL, home_url(), parse_url(home_url(),PHP_URL_HOST)) ;
-        printf( '
-<p>In addition to monthly monitoring and maintenance of the website, the package includes up to two hours per month for the following:</p>
-<ul>
-<li>+ technical support via <a href="mailto:%1$s">email</a>, <a href="tel:%2$s">phone</a>, <a href="%3$s">videoconference</a>, or in-person consultation.</li> 
-<li>+ custom website development (e.g., a new feature).</li>
-<li>+ WordPress training for new and existing users.</li>
-</ul>
-', BZMNDSGN_SUPPORT_EMAIL, BZMNDSGN_AUTHOR_PHONE, 'https://meet.google.com' ) ;
+        $substitutions = array (
+            '{author_company}' => BZMNDSGN_AUTHOR_COMPANY,
+            '{author_company_url}' => BZMNDSGN_AUTHOR_COMPANY_URL,
+            '{home_url}' => home_url(),
+            '{hostname}' => parse_url(home_url(),PHP_URL_HOST),
+            '{support_email}' => BZMNDSGN_SUPPORT_EMAIL,
+            '{support_phone}' => BZMNDSGN_AUTHOR_PHONE,
+            '{videoconference_url}' => 'https://meet.google.com',
+        ) ;
 
-        if ( get_bloginfo('admin_email') != BZMNDSGN_AUTHOR_EMAIL ) {
-            printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), home_url('/wp-admin/options-general.php') ) ;
+        // FIXME: return to the GLOBALS issue.
+        $dashboard_widget_body = $GLOBALS['bzmndsgn_config_options']['textarea-dashboard_widget_body'] ;
+	    if ( $dashboard_widget_body ) {
+            $dashboard_widget_body = strtr ( $dashboard_widget_body, $substitutions ) ;
+            printf ( '%s', $dashboard_widget_body ) ;
+
+            if ( get_bloginfo('admin_email') != BZMNDSGN_AUTHOR_EMAIL ) {
+                printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), home_url('/wp-admin/options-general.php') ) ;
+            }
         }
     }
 
@@ -43,8 +50,10 @@ if ( ! function_exists ( 'bzmndsgn_add_admin_dashboard_widget' ) ):
      * Add the widget to the admin dashboard.
      */
     function bzmndsgn_add_admin_dashboard_widget( ) {
-        wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
-            'WordPress Website Care Package',
+	    $dashboard_widget_title = $GLOBALS['bzmndsgn_config_options']['text-dashboard_widget_title'] ? $GLOBALS['bzmndsgn_config_options']['text-dashboard_widget_title'] : 'Widget Title' ;
+
+	    wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
+		    $dashboard_widget_title,
             'bzmndsgn_admin_dashboard_widget' );
     }
 endif;
