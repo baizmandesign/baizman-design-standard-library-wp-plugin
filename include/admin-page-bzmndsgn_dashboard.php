@@ -128,6 +128,29 @@ function bzmndsgn_dashboard ( ) {
 	$dashboard_widget_body->set_field_help_text('Widget Body. Note: HTML is OK.<br>The following variables are available: {author_company}, {author_company_url}, {home_url}, {hostname}, {support_email}, {support_phone}, {videoconference_url}.' ) ;
 	$dashboard_settings_form->add_form_field ($dashboard_widget_body) ;
 
+	$items = [] ;
+	foreach ( $GLOBALS['menu'] as $menu ) {
+		$menu_name         = $menu[0];
+		$menu_url          = $menu[2];
+		if ( $menu_url == 'plugins.php' ) {
+			// There's some HTML embedded in the name, so we clean it up.
+			$menu_name = 'Plugins' ;
+		}
+		if ( $menu_url == 'edit-comments.php' ) {
+			// There's some HTML embedded in the name, so we clean it up.
+			$menu_name = 'Comments' ;
+		}
+		if ( $menu_name != '' && $menu_name != BZMNDSGN_PLUGIN_NAME ) {
+			$items[$menu_name] = $menu_url ;
+		}
+	}
+
+	$dashboard_links = new checkboxes(
+		'Dashboard links to hide:',
+		'checkboxes-dashboard_links_to_hide',
+		$items
+	) ;
+	$dashboard_settings_form->add_form_field ($dashboard_links) ;
 
 	// Output form.
 	$dashboard_settings_form->render_form();

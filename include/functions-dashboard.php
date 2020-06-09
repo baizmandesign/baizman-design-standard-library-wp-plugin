@@ -24,7 +24,7 @@ if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
         ) ;
 
         // FIXME: return to the GLOBALS issue.
-        $dashboard_widget_body = $GLOBALS['bzmndsgn_config_options']['textarea-dashboard_widget_body'] ;
+        $dashboard_widget_body = $GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['textarea-dashboard_widget_body'] ;
 	    if ( $dashboard_widget_body ) {
             $dashboard_widget_body = strtr ( $dashboard_widget_body, $substitutions ) ;
             printf ( '%s', $dashboard_widget_body ) ;
@@ -76,12 +76,17 @@ endif;
 if ( ! function_exists ( 'bzmndsgn_remove_menus' ) ):
 	/**
 	 * Remove unused links in admin menu.
-	 * TODO: make this a setting in the admin panel.
 	 */
 	function bzmndsgn_remove_menus ( )
 	{
-		// remove_menu_page ( 'edit-comments.php' ); // Comments
-		// remove_menu_page ( 'edit.php' ); // Posts
+		$dashboard_links_to_remove = $GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['checkboxes-dashboard_links_to_hide'] ;
+
+		if ( count ( $dashboard_links_to_remove ) > 0 ) {
+			// the only items in this array are the items that have been checked.
+			foreach ( $dashboard_links_to_remove as $name => $url ) {
+				remove_menu_page ( $url );
+			}
+		}
 	}
 	add_action( 'admin_menu', 'bzmndsgn_remove_menus' );
 endif;

@@ -67,6 +67,7 @@ $site_defaults = array (
 <li>+ custom website development (e.g., a new feature).</li>
 <li>+ WordPress training for new and existing users.</li>
 </ul>',
+	'checkboxes-dashboard_links_to_hide' => [], // empty array
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
@@ -181,14 +182,13 @@ function bzmndsgn_save_config_settings ( ) {
 	// Identify the checkboxes. The options are named "checkbox-*".
 	$checkboxes = [] ;
 	foreach ( $bzmndsgn_config_options_database as $option => $value ) {
-		if ( strpos ($option,'checkbox-') !== false ) {
+		if ( strpos ( $option, 'checkbox-' ) !== false ) {
 			$checkboxes[] = $option ;
 		}
 	}
 
 	// Force the values for checkboxes.
 	foreach ( $checkboxes as $checkbox ) {
-
 		if ( isset ( $_POST[$checkbox] ) ) {
 			// The field is checked. Set field value to '1'.
 			$updated_options[$checkbox] = '1' ;
@@ -197,7 +197,26 @@ function bzmndsgn_save_config_settings ( ) {
 			// The field is unchecked. Set field value to '0'.
 			$updated_options[$checkbox] = '0' ;
 		}
+	}
 
+	// Identify checkbox groups.
+	$checkbox_groups = [] ;
+	foreach ( $bzmndsgn_config_options_database as $option => $value ) {
+		if ( strpos ( $option, 'checkboxes-' ) !== false ) {
+			$checkbox_groups[] = $option ;
+		}
+	}
+
+	// Force the values for checkbox groups.
+	foreach ( $checkbox_groups as $checkbox_group ) {
+		if ( isset ( $_POST[$checkbox_group] ) ) {
+			// A field in the group is checked. Set the field value to its array in the $_POST variable.
+			$updated_options[$checkbox_group] = $_POST[$checkbox_group] ;
+		}
+		else {
+			// No fields in the group are checked. Set the field value to an empty array.
+			$updated_options[$checkbox_group] = [] ;
+		}
 	}
 
 	// Update the options.

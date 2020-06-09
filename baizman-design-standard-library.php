@@ -25,6 +25,8 @@ namespace baizman_design {
 
 	define ( 'BZMNDSGN_DEBUG', false ) ;
 
+	define ( 'BZMNDSGN_PLUGIN_NAME', 'Baizman Design Standard Library' ) ;
+
 	define ( 'BZMNDSGN_DEBUG_LOG', 'debug.log' ) ;
 
 	define ( 'BZMNDSGN_DOCUMENT_ROOT_URI', trailingslashit ( $_SERVER['DOCUMENT_ROOT'] ) ) ;
