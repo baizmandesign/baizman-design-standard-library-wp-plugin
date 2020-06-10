@@ -132,14 +132,12 @@ function bzmndsgn_dashboard ( ) {
 	foreach ( $GLOBALS['menu'] as $menu ) {
 		$menu_name = $menu[0];
 		$menu_url  = $menu[2];
-		if ( $menu_url == 'plugins.php' ) {
-			// There's some HTML embedded in the name, so we clean it up.
-			$menu_name = 'Plugins' ;
+		// strip out menu names that contain html
+		if ( strpos ( $menu_name, '<' ) !== false ) {
+			list ( $menu_name_and_whitespace, ) = explode( '<', $menu_name ) ;
+			$menu_name = trim ( $menu_name_and_whitespace ) ;
 		}
-		if ( $menu_url == 'edit-comments.php' ) {
-			// There's some HTML embedded in the name, so we clean it up.
-			$menu_name = 'Comments' ;
-		}
+
 		if ( $menu_name != '' && $menu_name != BZMNDSGN_PLUGIN_NAME ) {
 			$items[$menu_name] = $menu_url ;
 		}
