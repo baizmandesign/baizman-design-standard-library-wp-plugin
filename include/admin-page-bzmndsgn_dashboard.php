@@ -130,8 +130,8 @@ function bzmndsgn_dashboard ( ) {
 
 	$items = [] ;
 	foreach ( $GLOBALS['menu'] as $menu ) {
-		$menu_name         = $menu[0];
-		$menu_url          = $menu[2];
+		$menu_name = $menu[0];
+		$menu_url  = $menu[2];
 		if ( $menu_url == 'plugins.php' ) {
 			// There's some HTML embedded in the name, so we clean it up.
 			$menu_name = 'Plugins' ;
@@ -145,7 +145,7 @@ function bzmndsgn_dashboard ( ) {
 		}
 	}
 
-	$dashboard_links = new checkboxes(
+	$dashboard_links = new checkbox_group (
 		'Dashboard links to hide:',
 		'checkboxes-dashboard_links_to_hide',
 		$items

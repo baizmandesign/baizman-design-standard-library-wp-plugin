@@ -1,11 +1,11 @@
 <?php
 /**
- * Class checkboxes.
+ * Checkbox group class.
  * @package Baizman Design Standard Library
  * @version 0.1
  */
 
-class checkboxes {
+class checkbox_group {
 
 	/**
 	 * @var array
@@ -104,6 +104,9 @@ class checkboxes {
 		$this->checkbox_input_name = $checkbox_input_name;
 	}
 
+	/**
+	 * Print the form field.
+	 */
 	public function print_form_field ( ) {
 		printf ('<tr valign="top">') ;
 		printf (
