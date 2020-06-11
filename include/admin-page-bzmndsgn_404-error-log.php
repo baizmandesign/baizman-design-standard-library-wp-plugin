@@ -30,6 +30,6 @@ function bzmndsgn_404_error_log () {
 		printf ('</table>') ;
 	}
 	else {
-		printf ('The log file %s does not exist.', $not_found_path ) ;
+		printf ('The log file <strong>%s</strong> does not exist. Please add <code>_bzmndsgn_log_404_error()</code> to the theme\'s 404.php template.', $not_found_path ) ;
 	}
 }
