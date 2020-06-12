@@ -15,7 +15,7 @@ class bzmndsgn {
 	 */
 	function reserialize ( $args ) {
 		__bzmndsgn_reserialize_data( ) ;
-		WP_CLI::success( 'The configuration data has been successfully reserialized.' );
+		WP_CLI::success( 'The configuration data has been reserialized.' );
 	}
 
 	/**
@@ -27,7 +27,7 @@ class bzmndsgn {
 
 		__bzmndsgn_reinitialize_default_data () ;
 
-		WP_CLI::success( 'The default plugin configuration has been successfully reinitialized.' );
+		WP_CLI::success( 'The default plugin configuration has been reinitialized.' );
 	}
 
 }
