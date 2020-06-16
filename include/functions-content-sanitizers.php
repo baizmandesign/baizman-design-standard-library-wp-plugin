@@ -35,7 +35,7 @@ endif;
  * @link https://developer.wordpress.org/reference/hooks/the_content/
  */
 if ( ! function_exists ( 'bzmndsgn_filter_content_blank_lines' ) ):
-	function pce_filter_content_blank_lines( $content ) {
+	function bzmndsgn_filter_content_blank_lines( $content ) {
 
 		// Check if we're inside the main loop in a single post page.
 		if ( is_single() && in_the_loop() && is_main_query() ) {
