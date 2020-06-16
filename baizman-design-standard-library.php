@@ -89,7 +89,7 @@ namespace baizman_design {
 			/* Or my relative path might just have been wrong! */
 			foreach ( glob (__DIR__ . "/{$folder}/*.php") as $filename )
 			{
-				require_once $filename;
+				require_once ( $filename );
 			}
 		}
 	endif;
@@ -129,7 +129,7 @@ namespace baizman_design {
 				'before_invoke' => function () {
 					// admin.php has an important constant (SITE_OPTIONS_DEFAULTS), so we need to load it prior to calling WP CLI commands.
 					// https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/
-					require_once( BZMNDSGN_PLUGIN_ADMIN_URI );
+					require_once ( BZMNDSGN_PLUGIN_ADMIN_URI );
 				}
 			)
 		);
