@@ -217,3 +217,19 @@ if ( ! function_exists('bzmndsgn_issue_link')):
     }
     add_action ( 'admin_menu' , 'bzmndsgn_issue_link' ) ;
 endif ;
+
+if ( ! function_exists('bzmndsgn_quell_toolset_expiration_notice')) :
+	/**
+	 * Quell Toolset expiration notice.
+	 */
+	function bzmndsgn_quell_toolset_expiration_notice () {
+		$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+		printf ( '<style type="text/css">' ) ;
+		printf ( '/* Hide "Register Toolset" message for lapsed subscriptions. */ ' );
+		printf ( 'div.toolset-notice-wp.notice.toolset-notice { display: none ; }' ) ;
+		printf ( '</style>' ) ;
+	}
+	if ( _is_enabled ('checkbox-hide_toolset_expiration_notice', $bzmndsgn_config_options_database ) ) {
+		add_action( 'admin_head', 'bzmndsgn_quell_toolset_expiration_notice' );
+	}
+endif;

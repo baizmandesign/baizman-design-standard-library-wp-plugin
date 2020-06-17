@@ -150,6 +150,14 @@ function bzmndsgn_dashboard ( ) {
 	) ;
 	$dashboard_settings_form->add_form_field ($dashboard_links) ;
 
+	// only show if toolset plugin is enabled?
+	$hide_toolset_expiration_notice = new checkbox ('Hide Toolset plugin expiration notice?',
+		'checkbox-hide_toolset_expiration_notice',
+		$bzmndsgn_config_options_database['checkbox-hide_toolset_expiration_notice']
+	) ;
+	$hide_toolset_expiration_notice->set_label_help_text('If <a href="https://toolset.com" target="_blank" rel="noopener">Toolset</a> has expired, check the box to hide the administrative notice.');
+	$dashboard_settings_form->add_form_field ( $hide_toolset_expiration_notice ) ;
+
 	// Output form.
 	$dashboard_settings_form->render_form();
 

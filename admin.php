@@ -68,6 +68,7 @@ $site_defaults = array (
 <li>+ WordPress training for new and existing users.</li>
 </ul>',
 	'checkboxes-dashboard_links_to_hide' => [], // empty array
+	'checkbox-hide_toolset_expiration_notice' => '0', // don't hide it
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
