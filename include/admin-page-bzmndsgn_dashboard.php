@@ -122,7 +122,6 @@ function bzmndsgn_dashboard ( ) {
 		'textarea-dashboard_widget_body',
 		'Widget body',
 		$bzmndsgn_config_options_database['textarea-dashboard_widget_body']) ;
-	// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
 	$dashboard_widget_body->set_show_label( false ) ;
 	$dashboard_widget_body->set_rows ( 4 );
 	$dashboard_widget_body->set_field_help_text('Widget Body. Note: HTML is OK.<br>The following variables are available: {author_company}, {author_company_url}, {home_url}, {hostname}, {support_email}, {support_phone}, {videoconference_url}.' ) ;
@@ -150,12 +149,20 @@ function bzmndsgn_dashboard ( ) {
 	) ;
 	$dashboard_settings_form->add_form_field ($dashboard_links) ;
 
+	// enable fixed table headers.
 	$enable_fixed_admin_table_headers = new checkbox ('Enable fixed table headers on edit listing screens?',
 		'checkbox-enable_fixed_admin_table_headers',
 		$bzmndsgn_config_options_database['checkbox-enable_fixed_admin_table_headers']
 	) ;
-	$dashboard_settings_form->add_form_field ($enable_fixed_admin_table_headers) ;
+	$dashboard_settings_form->add_form_field ( $enable_fixed_admin_table_headers ) ;
 
+	// disable file editing
+	$disable_file_editing = new checkbox ('Disable theme and plugin file editor?',
+		'checkbox-disable_file_editor',
+		$bzmndsgn_config_options_database['checkbox-disable_file_editor']
+	) ;
+	$disable_file_editing->set_label_help_text('Hides links to "Appearance > Theme Editor" and "Plugins > Plugin Editor."');
+	$dashboard_settings_form->add_form_field ( $disable_file_editing ) ;
 
 	// only show if toolset plugin is enabled?
 	$hide_toolset_expiration_notice = new checkbox ('Hide Toolset plugin expiration notice?',

@@ -255,3 +255,18 @@ if ( ! function_exists ( 'bzmndsgn_add_fixed_header_to_admin_tables' ) ) :
 		add_action( 'admin_head', 'bzmndsgn_add_fixed_header_to_admin_tables' );
 	}
 endif;
+
+if ( ! function_exists ( 'bzmndsgn_disable_file_editor' ) ) :
+	/**
+	 * Disable theme and plugin file editor.
+	 * Hides "Appearance > Theme Editor" and "Plugins > Plugin Editor."
+	 * @link https://wisdmlabs.com/blog/14-least-known-wordpress-constants-an-overview/
+	 */
+	function bzmndsgn_disable_file_editor ( ) {
+		define( 'DISALLOW_FILE_EDIT', true );
+	}
+	if ( _is_enabled ('checkbox-disable_file_editor', $bzmndsgn_config_options_database ) ) {
+		// no hook needed.
+		bzmndsgn_disable_file_editor ( ) ;
+	}
+endif;
