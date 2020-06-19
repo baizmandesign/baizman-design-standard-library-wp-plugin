@@ -69,6 +69,7 @@ $site_defaults = array (
 </ul>',
 	'checkboxes-dashboard_links_to_hide' => [], // empty array
 	'checkbox-hide_toolset_expiration_notice' => '0', // don't hide it
+	'checkbox-enable_fixed_admin_table_headers' => '1', // enable fixed headers
 	) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;

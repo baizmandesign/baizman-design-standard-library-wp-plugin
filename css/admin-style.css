@@ -4,21 +4,9 @@
 
 /******************************************************************************
 
-Admin screen modifications.
+Admin screen customization.
 
 ******************************************************************************/
-
-/* https://catalin.red/sticky-table-th/ */
-/* Add sticky header to admin tables / indexical listings. */
-thead.sticky th, thead.sticky #cb {
-    top: 32px ;
-    position: -webkit-sticky;
-    position: -moz-sticky;
-    position: -ms-sticky;
-    position: -o-sticky;
-    position: sticky;
-    background-color: rgb(255, 255, 255) ;
-}
 
 /* */
 table.not_found_log_entries td, table.not_found_log_entries th {

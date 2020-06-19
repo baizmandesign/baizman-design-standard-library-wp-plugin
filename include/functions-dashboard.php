@@ -222,7 +222,6 @@ if ( ! function_exists('bzmndsgn_quell_toolset_expiration_notice')) :
 	 * Quell Toolset expiration notice.
 	 */
 	function bzmndsgn_quell_toolset_expiration_notice () {
-		$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 		printf ( '<style type="text/css">' ) ;
 		printf ( '/* Hide "Register Toolset" message for lapsed subscriptions. */ ' );
 		printf ( 'div.toolset-notice-wp.notice.toolset-notice { display: none ; }' ) ;
@@ -230,5 +229,29 @@ if ( ! function_exists('bzmndsgn_quell_toolset_expiration_notice')) :
 	}
 	if ( _is_enabled ('checkbox-hide_toolset_expiration_notice', $bzmndsgn_config_options_database ) ) {
 		add_action( 'admin_head', 'bzmndsgn_quell_toolset_expiration_notice' );
+	}
+endif;
+
+if ( ! function_exists ( 'bzmndsgn_add_fixed_header_to_admin_tables' ) ) :
+	/**
+	 * Add sticky header to admin tables / indexical listings.
+	 */
+	function bzmndsgn_add_fixed_header_to_admin_tables ( ) {
+		printf ( '<style type="text/css">' ) ;
+		printf ( '/* https://catalin.red/sticky-table-th/ */ ');
+		printf ( '/* Add sticky header to admin tables / indexical listings. */ ');
+		printf ( 'thead.sticky th, thead.sticky #cb { ');
+		printf ( 'top: 32px ;');
+		printf ( 'position: -webkit-sticky;');
+		printf ( 'position: -moz-sticky;');
+		printf ( 'position: -ms-sticky;');
+		printf ( 'position: -o-sticky;');
+		printf ( 'position: sticky;');
+		printf ( 'background-color: rgb(255, 255, 255) ; }');
+		printf ( '</style>' ) ;
+	}
+
+	if ( _is_enabled ('checkbox-enable_fixed_admin_table_headers', $bzmndsgn_config_options_database ) ) {
+		add_action( 'admin_head', 'bzmndsgn_add_fixed_header_to_admin_tables' );
 	}
 endif;

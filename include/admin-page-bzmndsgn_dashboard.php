@@ -150,6 +150,13 @@ function bzmndsgn_dashboard ( ) {
 	) ;
 	$dashboard_settings_form->add_form_field ($dashboard_links) ;
 
+	$enable_fixed_admin_table_headers = new checkbox ('Enable fixed table headers on edit listing screens?',
+		'checkbox-enable_fixed_admin_table_headers',
+		$bzmndsgn_config_options_database['checkbox-enable_fixed_admin_table_headers']
+	) ;
+	$dashboard_settings_form->add_form_field ($enable_fixed_admin_table_headers) ;
+
+
 	// only show if toolset plugin is enabled?
 	$hide_toolset_expiration_notice = new checkbox ('Hide Toolset plugin expiration notice?',
 		'checkbox-hide_toolset_expiration_notice',
