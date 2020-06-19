@@ -23,7 +23,6 @@ if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
             '{videoconference_url}' => 'https://meet.google.com',
         ) ;
 
-        // FIXME: return to the GLOBALS issue.
         $dashboard_widget_body = $GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['textarea-dashboard_widget_body'] ;
 	    if ( $dashboard_widget_body ) {
             $dashboard_widget_body = strtr ( $dashboard_widget_body, $substitutions ) ;
@@ -50,7 +49,7 @@ if ( ! function_exists ( 'bzmndsgn_add_admin_dashboard_widget' ) ):
      * Add the widget to the admin dashboard.
      */
     function bzmndsgn_add_admin_dashboard_widget( ) {
-	    $dashboard_widget_title = $GLOBALS['bzmndsgn_config_options']['text-dashboard_widget_title'] ? $GLOBALS['bzmndsgn_config_options']['text-dashboard_widget_title'] : 'Widget Title' ;
+	    $dashboard_widget_title = $GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['text-dashboard_widget_title'] ? $GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['text-dashboard_widget_title'] : 'Widget Title' ;
 
 	    wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
 		    $dashboard_widget_title,

@@ -61,18 +61,9 @@ if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
 	 */
 	function bzmndsgn_strip_illegal_tags ( $content ) {
 
-		// These tags will not be stripped out.
 		// FIXME: limit to one or more post types?
-//		$legal_tags = '';
-		// FIXME: return to this line. 'global' keyword didn't work in this function, and it's not clear why. Perhaps the namespace was conflicting with it?
-		 $legal_tags = explode ("\r\n",$GLOBALS['bzmndsgn_config_options']['textarea-legal_tags'] ) ;
-//		 $legal_tags = explode ("\n",baizman_design\$bzmndsgn_config_options_database['textarea-legal_tags'] ) ;
-//		file_put_contents(
-//			'test.txt',
-//			print_r ( $GLOBALS['bzmndsgn_config_options_database'], true )
-//			print_r ( $GLOBALS, true )
-//		) ;
-//		file_put_contents('test.txt', print_r($legal_tags,true)) ;
+		// These tags will not be stripped out.
+		$legal_tags = explode ("\r\n",$GLOBALS[BZMNDSGN_CONFIG_OPTIONS]['textarea-legal_tags'] ) ;
 
 		$legal_tags = array_map (
 			function ( $tag ) {
@@ -81,7 +72,6 @@ if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
 			},
 			$legal_tags
 		) ;
-//		file_put_contents('test.txt', print_r($legal_tags,true)) ;
 		return strip_tags( $content, implode( '', $legal_tags ) );
 	}
 	if ( _is_enabled ( 'checkbox-strip_illegal_tags_on_save', $bzmndsgn_config_options_database ) ) {

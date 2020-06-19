@@ -11,11 +11,6 @@
  * @package Baizman Design Standard Library
  * @version 0.1
  */
-/*
- * TODO
- * + add namespace
- *
- */
 
 namespace {
 	defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' );
