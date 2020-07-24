@@ -229,12 +229,7 @@ class form {
 	 */
 	public function render_form ():void {
 		printf ( '<form method="post" action="%s">', admin_url( 'admin-post.php' ) );
-		// FIXME: resolve the two nonces! (and other fields)
-		// https://developer.wordpress.org/apis/handbook/settings/
-		settings_fields ( $this->get_settings_fields_option_group() );
-//		do_settings_sections ( $this->get_settings_fields_page() ) ;
-		// is the field below needed?
-
+		
 		printf (
 			'<table class="%1$s">',
 			implode( ' ', $this->get_table_classes( ) )
@@ -246,7 +241,11 @@ class form {
 
 		printf ('</table>') ;
 
-        wp_nonce_field ( 'bzmndsgn_save_config' ); // store nonce elsewhere?
+		// Important to prevent nonce conflicts with other plugins, especially my own.
+		// Action value must match hook. update_bdsl --> admin_post_update_bdsl
+		printf ( '<input type="hidden" name="action" value="update_bdsl" />' ) ;
+		printf ( '<input type="hidden" name="option_page" value="bzmndsgn-standard-library-plugin-settings-group">' ) ;
+        wp_nonce_field ( 'bzmndsgn_save_config' );
 
         submit_button ( ) ;
 

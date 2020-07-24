@@ -231,7 +231,7 @@ function bzmndsgn_save_config_settings ( ) {
 	exit ;
 
 }
-add_action ( 'admin_post_update', 'bzmndsgn_save_config_settings' ) ;
+add_action ( 'admin_post_update_bdsl', 'bzmndsgn_save_config_settings' ) ;
 
 /* Multi-site stuff. */
 
