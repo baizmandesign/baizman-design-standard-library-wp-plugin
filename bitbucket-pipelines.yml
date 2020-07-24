@@ -14,7 +14,7 @@ pipelines:
         deployment: production__826-boston
         script:
           # exclude bitbucket-pipelines.yml and .git from being copied to the remote host
-          - rm -rf bitbucket-pipelines.yml .git
+          - rm -rf bitbucket-pipelines.yml .git README.md
           - pipe: atlassian/sftp-deploy:0.5.6
             variables:
               USER: $BOS_SFTP_USER
@@ -33,14 +33,14 @@ pipelines:
               HOST: $PIPELINE_NOTIFICATION_SMTP_HOST
               PORT: $PIPELINE_NOTIFICATION_SMTP_PORT
               # can we add variables in this?
-              SUBJECT: 'Bitbucket SFTP Deployment to 826 Boston'
-              BODY_PLAIN: 'The update for $BITBUCKET_REPO_FULL_NAME was successfully deployed to the 826 Boston website on Flywheel.'
+              SUBJECT: 'Bitbucket SFTP deployment to 826boston.org'
+              BODY_PLAIN: 'The update to $BITBUCKET_REPO_FULL_NAME was successfully deployed to the 826 Boston website on Flywheel.'
     - step:
         name: publish to pce
         deployment: production__pce
         script:
           # exclude bitbucket-pipelines.yml and .git from being copied to the remote host
-          - rm -rf bitbucket-pipelines.yml .git
+          - rm -rf bitbucket-pipelines.yml .git README.md
           - pipe: atlassian/sftp-deploy:0.5.6
             variables:
               USER: $PCE_SFTP_USER
@@ -59,5 +59,5 @@ pipelines:
               HOST: $PIPELINE_NOTIFICATION_SMTP_HOST
               PORT: $PIPELINE_NOTIFICATION_SMTP_PORT
               # can we add variables in this?
-              SUBJECT: 'Bitbucket SFTP Deployment to PCE'
-              BODY_PLAIN: 'The update for $BITBUCKET_REPO_FULL_NAME was successfully deployed to the PCE catalog website on Flywheel.'
+              SUBJECT: 'Bitbucket SFTP deployment to pce.massart.edu'
+              BODY_PLAIN: 'The update to $BITBUCKET_REPO_FULL_NAME was successfully deployed to the PCE catalog website on Flywheel.'
