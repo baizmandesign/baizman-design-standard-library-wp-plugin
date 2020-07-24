@@ -49,7 +49,8 @@ if ( ! function_exists ( '_print_admin_settings_heading' ) ):
 	 * @param string $title
 	 */
 	function _print_admin_settings_heading ( $subtitle, $title = '' ) {
-		printf ('<h1>%s Settings</h1>', $title == '' ? get_bloginfo ( 'name' ) : $title ) ;
+		printf ('<div class="wrap">');
+	    printf ('<h1>%s Settings</h1>', $title == '' ? get_bloginfo ( 'name' ) : $title ) ;
 		if ( isset( $_GET['message'] ) && $_GET['message'] == '1' ) {
 			?>
             <div id="message" class="notice notice-success is-dismissible">
@@ -57,6 +58,15 @@ if ( ! function_exists ( '_print_admin_settings_heading' ) ):
             </div><?php
 		}
 		printf ( '<h2>%s</h2>', $subtitle ) ;
+	}
+endif;
+
+if ( ! function_exists ( '_print_admin_settings_footer' ) ):
+	/**
+	 * Print admin settings footer.
+	 */
+	function _print_admin_settings_footer ( ) {
+		printf ('</div>'); // for div.wrap
 	}
 endif;
 
