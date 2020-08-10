@@ -270,3 +270,19 @@ if ( ! function_exists ( 'bzmndsgn_disable_file_editor' ) ) :
 		bzmndsgn_disable_file_editor ( ) ;
 	}
 endif;
+
+if ( ! function_exists ('bzmndsgn_sort_custom_toolset_taxonomies') ) :
+	/**
+	 * Sort Toolset custom taxonomies alphabetically in the WP dashboard.
+	 * @param $taxonomies
+	 * @link https://toolset.com/forums/topic/custom-taxonomies-admin-menu-order/
+	 * @return mixed
+	 */
+	function bzmndsgn_sort_custom_toolset_taxonomies ( $taxonomies ) {
+		ksort ($taxonomies ) ;
+		return $taxonomies;
+	}
+	if ( _is_enabled ('checkbox-enable_toolset_taxonomy_sort', $bzmndsgn_config_options_database ) ) {
+		add_filter( 'option_wpcf-custom-taxonomies', 'bzmndsgn_sort_custom_toolset_taxonomies' );
+	}
+endif;

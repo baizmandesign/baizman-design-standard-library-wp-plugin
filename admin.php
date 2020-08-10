@@ -71,7 +71,8 @@ $site_defaults = array (
 	'checkbox-hide_toolset_expiration_notice' => '0', // don't hide it
 	'checkbox-enable_fixed_admin_table_headers' => '1', // enable fixed headers
 	'checkbox-disable_file_editor' => '1', // disable theme and plugin editor
-	) ;
+	'checkbox-enable_toolset_taxonomy_sort' => '1', // sort toolset custom taxonomies alphabetically in the dashboard
+) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
 

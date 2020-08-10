@@ -156,7 +156,7 @@ function bzmndsgn_dashboard ( ) {
 	) ;
 	$dashboard_settings_form->add_form_field ( $enable_fixed_admin_table_headers ) ;
 
-	// disable file editing
+	// disable file editing.
 	$disable_file_editing = new checkbox ('Disable theme and plugin file editor?',
 		'checkbox-disable_file_editor',
 		$bzmndsgn_config_options_database['checkbox-disable_file_editor']
@@ -165,12 +165,21 @@ function bzmndsgn_dashboard ( ) {
 	$dashboard_settings_form->add_form_field ( $disable_file_editing ) ;
 
 	// only show if toolset plugin is enabled?
+	// hide toolset expiration notice.
 	$hide_toolset_expiration_notice = new checkbox ('Hide Toolset plugin expiration notice?',
 		'checkbox-hide_toolset_expiration_notice',
 		$bzmndsgn_config_options_database['checkbox-hide_toolset_expiration_notice']
 	) ;
 	$hide_toolset_expiration_notice->set_label_help_text('If <a href="https://toolset.com" target="_blank" rel="noopener">Toolset</a> has expired, check the box to hide the administrative notice.');
 	$dashboard_settings_form->add_form_field ( $hide_toolset_expiration_notice ) ;
+
+	// only show if toolset plugin is enabled?
+	// sort Toolset custom taxonomies alphabetically.
+	$enable_toolset_taxonomy_sort = new checkbox ('Sort Toolset custom taxonomies alphabetically?',
+		'checkbox-enable_toolset_taxonomy_sort',
+		$bzmndsgn_config_options_database['checkbox-enable_toolset_taxonomy_sort']
+	) ;
+	$dashboard_settings_form->add_form_field ( $enable_toolset_taxonomy_sort ) ;
 
 	// Output form.
 	$dashboard_settings_form->render_form();
