@@ -164,22 +164,26 @@ function bzmndsgn_dashboard ( ) {
 	$disable_file_editing->set_label_help_text('Hides links to "Appearance > Theme Editor" and "Plugins > Plugin Editor."');
 	$dashboard_settings_form->add_form_field ( $disable_file_editing ) ;
 
-	// only show if toolset plugin is enabled?
-	// hide toolset expiration notice.
-	$hide_toolset_expiration_notice = new checkbox ('Hide Toolset plugin expiration notice?',
-		'checkbox-hide_toolset_expiration_notice',
-		$bzmndsgn_config_options_database['checkbox-hide_toolset_expiration_notice']
-	) ;
-	$hide_toolset_expiration_notice->set_label_help_text('If <a href="https://toolset.com" target="_blank" rel="noopener">Toolset</a> has expired, check the box to hide the administrative notice.');
-	$dashboard_settings_form->add_form_field ( $hide_toolset_expiration_notice ) ;
+	// only show if toolset plugin is enabled.
+	if ( BZMNDSGN_HAS_TOOLSET ) {
+		// hide toolset expiration notice.
+		$hide_toolset_expiration_notice = new checkbox ( 'Hide Toolset plugin expiration notice?',
+			'checkbox-hide_toolset_expiration_notice',
+			$bzmndsgn_config_options_database['checkbox-hide_toolset_expiration_notice']
+		);
+		$hide_toolset_expiration_notice->set_label_help_text( 'If <a href="https://toolset.com" target="_blank" rel="noopener">Toolset</a> has expired, check the box to hide the administrative notice.' );
+		$dashboard_settings_form->add_form_field( $hide_toolset_expiration_notice );
+	}
 
-	// only show if toolset plugin is enabled?
-	// sort Toolset custom taxonomies alphabetically.
-	$enable_toolset_taxonomy_sort = new checkbox ('Sort Toolset custom taxonomies alphabetically?',
-		'checkbox-enable_toolset_taxonomy_sort',
-		$bzmndsgn_config_options_database['checkbox-enable_toolset_taxonomy_sort']
-	) ;
-	$dashboard_settings_form->add_form_field ( $enable_toolset_taxonomy_sort ) ;
+	// only show if toolset plugin is enabled.
+	if ( BZMNDSGN_HAS_TOOLSET ) {
+		// sort Toolset custom taxonomies alphabetically.
+		$enable_toolset_taxonomy_sort = new checkbox ( 'Sort Toolset custom taxonomies alphabetically?',
+			'checkbox-enable_toolset_taxonomy_sort',
+			$bzmndsgn_config_options_database['checkbox-enable_toolset_taxonomy_sort']
+		);
+		$dashboard_settings_form->add_form_field( $enable_toolset_taxonomy_sort );
+	}
 
 	// Output form.
 	$dashboard_settings_form->render_form();

@@ -76,6 +76,11 @@ $site_defaults = array (
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
 
+if ( ! function_exists ( 'is_plugin_active' ) ) {
+	require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
+define ( 'BZMNDSGN_HAS_TOOLSET', is_plugin_active ( 'types/wpcf.php' ) );
+
 /* "The thing to know is that the first argument is the name required to get your code to fire, not what file the code is in."
 - https://developer.wordpress.org/reference/functions/register_activation_hook/
 */
