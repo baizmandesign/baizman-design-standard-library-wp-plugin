@@ -182,6 +182,7 @@ function bzmndsgn_dashboard ( ) {
 			'checkbox-enable_toolset_taxonomy_sort',
 			$bzmndsgn_config_options_database['checkbox-enable_toolset_taxonomy_sort']
 		);
+		$enable_toolset_taxonomy_sort->set_label_help_text('This sorts taxonomies in post submenus in alphabetical order. ') ;
 		$dashboard_settings_form->add_form_field( $enable_toolset_taxonomy_sort );
 	}
 
