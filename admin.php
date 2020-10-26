@@ -39,6 +39,7 @@ $legal_tags[] = 'p' ; // necessary?
 
 $site_defaults = array (
 	'google_analytics_id' => '',
+	'google_measurement_id' => '',
 	'log_file_prefix' => str_replace ( ' ', '-', strtolower ( get_bloginfo ('name') ) ),
 	// dashboard
 	'local_dashboard_background_color' => BZMNDSGN_LOCAL_BACKGROUND_COLOR,

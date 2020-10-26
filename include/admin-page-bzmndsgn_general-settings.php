@@ -21,6 +21,12 @@ function bzmndsgn_general_settings () {
 	$google_analytics_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Analytics ID.</a>');
 	$general_settings_form->add_form_field( $google_analytics_id );
 
+	// Google Measurement ID.
+	// https://support.google.com/analytics/answer/9539598
+	$google_measurement_id = new text_input( 'Google Measurement ID:', 'google_measurement_id','G-NNNNNNNNNN', $bzmndsgn_config_options_database['google_measurement_id'] );
+	$google_measurement_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Analytics ID.</a>');
+	$general_settings_form->add_form_field( $google_measurement_id );
+
 	// 404 log file prefix
 	$four_zero_four_log_file_prefix = new text_input( '404 Log File Prefix:', 'log_file_prefix','UA-NNNNNNNNN-N', $bzmndsgn_config_options_database['log_file_prefix'] );
 	$four_zero_four_log_file_prefix->set_field_help_text('To log 404 errors, add <code><small>_bzmndsgn_log_404_error()</small></code> to the theme\'s 404.php.<br><a href="/wp-admin/admin.php?page=bzmndsgn_404_error_log">Visit the 404 Error Log.</a>');
