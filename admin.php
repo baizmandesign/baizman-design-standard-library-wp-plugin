@@ -73,6 +73,8 @@ $site_defaults = array (
 	'checkbox-enable_fixed_admin_table_headers' => '1', // enable fixed headers
 	'checkbox-disable_file_editor' => '1', // disable theme and plugin editor
 	'checkbox-enable_toolset_taxonomy_sort' => '1', // sort toolset custom taxonomies alphabetically in the dashboard
+	'checkbox-disable_plugin_auto_update_email_notifications' => '1', // disable plugins auto-update email notifications
+	'checkbox-disable_theme_auto_update_email_notifications' => '1', // disable themes auto-update email notifications
 ) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
