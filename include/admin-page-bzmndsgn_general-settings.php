@@ -24,7 +24,7 @@ function bzmndsgn_general_settings () {
 	// Google Measurement ID
 	// https://support.google.com/analytics/answer/9539598
 	$google_measurement_id = new text_input( 'Google Measurement ID:', 'google_measurement_id','G-NNNNNNNNNN', $bzmndsgn_config_options_database['google_measurement_id'] );
-	$google_measurement_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/1008080?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Analytics ID.</a>');
+	$google_measurement_id->set_field_help_text('<a href="https://support.google.com/analytics/answer/9539598?hl=en" target="_blank" rel="noopener">Learn where to obtain your Google Measurement ID.</a>');
 	$general_settings_form->add_form_field( $google_measurement_id );
 
 	// 404 log file prefix
