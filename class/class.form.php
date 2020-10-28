@@ -241,6 +241,30 @@ class form {
 
 		printf ('</table>') ;
 
+		// Print checkbox fields in an invisible field.
+		$checkbox_fields = [] ;
+		foreach ( $this->get_form_fields() as $form_field ) {
+			if ( $form_field->get_field_type() == 'checkbox' ) {
+				$checkbox_fields[] = $form_field->get_field_input_name();
+			}
+		}
+
+		if ( count ( $checkbox_fields ) > 0 ) {
+			printf ( '<input type="hidden" name="single_checkboxes" value="%s" />', implode ( ',', $checkbox_fields ) ) ;
+		}
+
+		// Print checkbox groups names in an invisible field.
+		$checkbox_groups = [] ;
+		foreach ( $this->get_form_fields() as $form_field ) {
+			if ( $form_field->get_field_type() == 'checkbox_group' ) {
+				$checkbox_groups[] = $form_field->get_checkbox_input_name();
+			}
+		}
+
+		if ( count ( $checkbox_groups ) > 0 ) {
+			printf ( '<input type="hidden" name="checkbox_groups" value="%s" />', implode ( ',', $checkbox_groups ) ) ;
+		}
+
 		// Important to prevent nonce conflicts with other plugins, especially my own.
 		// Action value must match hook. update_bdsl --> admin_post_update_bdsl
 		printf ( '<input type="hidden" name="action" value="update_bdsl" />' ) ;

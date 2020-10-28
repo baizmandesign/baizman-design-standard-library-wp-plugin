@@ -191,43 +191,42 @@ function bzmndsgn_save_config_settings ( ) {
 		}
 	}
 
-	// Identify the checkboxes. The options are named "checkbox-*".
-	$checkboxes = [] ;
-	foreach ( $bzmndsgn_config_options_database as $option => $value ) {
-		if ( strpos ( $option, 'checkbox-' ) !== false ) {
-			$checkboxes[] = $option ;
-		}
+	$checkboxes = 0 ;
+	// Identify the checkboxes. Get them from the hidden field, "single_checkboxes".
+	if ( isset ( $_POST['single_checkboxes'] ) ) {
+		$checkboxes = explode ( ',', $_POST['single_checkboxes'] ) ;
 	}
 
 	// Force the values for checkboxes.
-	foreach ( $checkboxes as $checkbox ) {
-		if ( isset ( $_POST[$checkbox] ) ) {
-			// The field is checked. Set field value to '1'.
-			$updated_options[$checkbox] = '1' ;
-		}
-		else {
-			// The field is unchecked. Set field value to '0'.
-			$updated_options[$checkbox] = '0' ;
+	if ( count ( $checkboxes ) > 0 ) {
+		foreach ( $checkboxes as $checkbox ) {
+			if ( isset ( $_POST[$checkbox] ) ) {
+				// The field is checked. Set field value to '1'.
+				$updated_options[$checkbox] = '1';
+			} else {
+				// The field was unchecked. Set field value to '0'.
+				$updated_options[$checkbox] = '0';
+			}
 		}
 	}
 
-	// Identify checkbox groups.
-	$checkbox_groups = [] ;
-	foreach ( $bzmndsgn_config_options_database as $option => $value ) {
-		if ( strpos ( $option, 'checkboxes-' ) !== false ) {
-			$checkbox_groups[] = $option ;
-		}
+	$checkbox_groups = 0 ;
+	// Identify checkbox groups. Get them from the hidden field, "checkbox_groups".
+	if ( isset ( $_POST['checkbox_groups'] ) ) {
+		$checkbox_groups = explode ( ',', $_POST['checkbox_groups'] ) ;
 	}
 
 	// Force the values for checkbox groups.
-	foreach ( $checkbox_groups as $checkbox_group ) {
-		if ( isset ( $_POST[$checkbox_group] ) ) {
-			// A field in the group is checked. Set the field value to its array in the $_POST variable.
-			$updated_options[$checkbox_group] = $_POST[$checkbox_group] ;
-		}
-		else {
-			// No fields in the group are checked. Set the field value to an empty array.
-			$updated_options[$checkbox_group] = [] ;
+	if ( count ( $checkbox_groups ) > 0 ) {
+		foreach ( $checkbox_groups as $checkbox_group ) {
+			if ( isset ( $_POST[$checkbox_group] ) ) {
+				// A field in the group is checked. Set the field value to its array in the $_POST variable.
+				$updated_options[$checkbox_group] = $_POST[$checkbox_group] ;
+			}
+			else {
+				// No fields in the group are checked. Set the field value to an empty array.
+				$updated_options[$checkbox_group] = [] ;
+			}
 		}
 	}
 

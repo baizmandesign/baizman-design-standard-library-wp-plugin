@@ -28,6 +28,11 @@ class checkbox_group {
 	public $checkbox_label ;
 
 	/**
+	 * @var
+	 */
+	protected $field_type ;
+
+	/**
 	 * checkboxes constructor.
 	 *
 	 * @param $checkbox_label
@@ -59,6 +64,9 @@ class checkbox_group {
 			$this->add_checkbox( $checkbox ) ;
 
 		}
+
+		$this->set_checkbox_input_name ( $checkbox_input_name ) ;
+		$this->set_field_type ( 'checkbox_group' ) ;
 
 	}
 
@@ -104,6 +112,19 @@ class checkbox_group {
 		$this->checkbox_input_name = $checkbox_input_name;
 	}
 
+	/**
+	 * @param $field_type
+	 */
+	public function set_field_type ( $field_type ) {
+		$this->field_type = $field_type ;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_field_type ( ) {
+		return $this->field_type ;
+	}
 	/**
 	 * Print the form field.
 	 */
