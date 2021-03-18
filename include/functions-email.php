@@ -3,6 +3,9 @@
  * Email settings functions.
  */
 
+// https://developer.wordpress.org/reference/functions/is_plugin_active/
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) :
 
 	defined( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' );
