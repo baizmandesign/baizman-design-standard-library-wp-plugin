@@ -77,6 +77,7 @@ $site_defaults = array (
 	'checkbox-disable_theme_auto_update_email_notifications' => '1', // disable themes auto-update email notifications
 	'email_sender_name' => '', // email sender name (WP default is "WordPress")
 	'email_sender_address' => '', // email sender address (WP default is "wordpress@domain")
+	'email_reply_to_address' => '', // email reply-to address (WP default is absent)
 ) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;

@@ -26,6 +26,12 @@ function bzmndsgn_email () {
 	$email_sender_address->set_field_help_text( sprintf ("Note: some email programs may flag emails whose sender address domain differs from the server's domain (%s) as spam.", $_SERVER['HTTP_HOST']));
 	$email_settings_form->add_form_field( $email_sender_address );
 
+	// Reply-to email address
+	$email_reply_to_address = new email_input( 'Reply-To Address:', 'email_reply_to_address','user@domain.com', $bzmndsgn_config_options_database['email_reply_to_address'] );
+	$email_reply_to_address->set_field_help_text('If empty, the reply-to address defaults to the sender address.');
+
+	$email_settings_form->add_form_field( $email_reply_to_address );
+
 	// TODO: reply-to address. Use wp_mail() hook?
 	// https://developer.wordpress.org/reference/hooks/wp_mail/
 
