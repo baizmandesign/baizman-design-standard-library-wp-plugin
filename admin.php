@@ -75,6 +75,8 @@ $site_defaults = array (
 	'checkbox-enable_toolset_taxonomy_sort' => '1', // sort toolset custom taxonomies alphabetically in the dashboard
 	'checkbox-disable_plugin_auto_update_email_notifications' => '1', // disable plugins auto-update email notifications
 	'checkbox-disable_theme_auto_update_email_notifications' => '1', // disable themes auto-update email notifications
+	'email_sender_name' => '', // email sender name (WP default is "WordPress")
+	'email_sender_address' => '', // email sender address (WP default is "wordpress@domain")
 ) ;
 
 define ( 'SITE_OPTIONS_DEFAULTS', $site_defaults ) ;
@@ -136,6 +138,10 @@ function bzmndsgn_config_admin_menu ( ) {
 	/* Dashboard configuration page. */
 	$dashboard_submenu = new submenu ( 'Dashboard', 'bzmndsgn_dashboard' ) ;
 	$parent_menu->add_submenu_item ( $dashboard_submenu ) ;
+
+	/* Email configuration page. */
+	$email_submenu = new submenu ( 'Email', 'bzmndsgn_email' ) ;
+	$parent_menu->add_submenu_item ( $email_submenu ) ;
 
 	/* 404 error log. */
 	$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' ) ;
