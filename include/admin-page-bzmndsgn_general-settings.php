@@ -7,7 +7,7 @@
 
 function bzmndsgn_general_settings () {
 
-	_print_admin_settings_heading ('General Settings:', 'Baizman Design Standard Library' ) ;
+	_print_admin_settings_heading ('General Settings', 'Baizman Design Standard Library' ) ;
 
 	$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
