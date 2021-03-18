@@ -141,8 +141,11 @@ function bzmndsgn_config_admin_menu ( ) {
 	$parent_menu->add_submenu_item ( $dashboard_submenu ) ;
 
 	/* Email configuration page. */
-	$email_submenu = new submenu ( 'Email', 'bzmndsgn_email' ) ;
-	$parent_menu->add_submenu_item ( $email_submenu ) ;
+	/* Hide menu / page if Easy WP SMTP is active. */
+	if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) {
+		$email_submenu = new submenu ( 'Email', 'bzmndsgn_email' );
+		$parent_menu->add_submenu_item( $email_submenu );
+	}
 
 	/* 404 error log. */
 	$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' ) ;
