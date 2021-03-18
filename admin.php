@@ -133,7 +133,7 @@ function bzmndsgn_config_admin_menu ( ) {
 	$content_sanitizers_submenu = new submenu ( 'Content Sanitizers', 'bzmndsgn_content_sanitizers' ) ;
 	$parent_menu->add_submenu_item ( $content_sanitizers_submenu ) ;
 
-	/* 404 error log. */
+	/* Dashboard configuration page. */
 	$dashboard_submenu = new submenu ( 'Dashboard', 'bzmndsgn_dashboard' ) ;
 	$parent_menu->add_submenu_item ( $dashboard_submenu ) ;
 
