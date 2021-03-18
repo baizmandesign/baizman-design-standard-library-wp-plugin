@@ -9,7 +9,7 @@
  License: GPLv2
 
  * @package Baizman Design Standard Library
- * @version 0.1
+ * @version 1.0
  */
 
 namespace {
