@@ -263,7 +263,9 @@ if ( ! function_exists ( 'bzmndsgn_disable_file_editor' ) ) :
 	 * @link https://wisdmlabs.com/blog/14-least-known-wordpress-constants-an-overview/
 	 */
 	function bzmndsgn_disable_file_editor ( ) {
-		define( 'DISALLOW_FILE_EDIT', true );
+		if ( ! defined ( 'DISALLOW_FILE_EDIT' ) ) {
+			define( 'DISALLOW_FILE_EDIT', true );
+		}
 	}
 	if ( _is_enabled ('checkbox-disable_file_editor', $bzmndsgn_config_options_database ) ) {
 		// no hook needed.
