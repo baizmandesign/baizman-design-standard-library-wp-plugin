@@ -6,6 +6,8 @@
  * FIXME: add setting for fixed column headings.
  */
 
+namespace baizman_design ;
+
 function bzmndsgn_dashboard ( ) {
 	_print_admin_settings_heading ('WP Dashboard Customization', 'Baizman Design Standard Library' ) ;
 

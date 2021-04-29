@@ -1,5 +1,7 @@
 <?php
 
+namespace baizman_design ;
+
 if ( ! function_exists ( 'bzmndsgn_login_stylesheet' ) ):
 	/**
 	 * Add custom styles on WP login screen.
@@ -8,7 +10,7 @@ if ( ! function_exists ( 'bzmndsgn_login_stylesheet' ) ):
 		wp_enqueue_style ( 'custom-login', BZMNDSGN_PLUGIN_FOLDER_URL . 'css/login-styles.css' ) ;
 		// wp_enqueue_style ( 'typography-styles', BZMNDSGN_LIBRARY_FOLDER_URL . 'css/fonts.css' ) ;
 	}
-	add_action ( 'login_enqueue_scripts', 'bzmndsgn_login_stylesheet' ) ;
+	add_action ( 'login_enqueue_scripts', __NAMESPACE__.'\bzmndsgn_login_stylesheet' ) ;
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_login_screen_message' ) ):
@@ -37,5 +39,5 @@ if ( ! function_exists ( 'bzmndsgn_login_screen_message' ) ):
 			return $message;
 		}
 	}
-	add_filter( 'login_message', 'bzmndsgn_login_screen_message' ) ;
+	add_filter( 'login_message', __NAMESPACE__.'\bzmndsgn_login_screen_message' ) ;
 endif;

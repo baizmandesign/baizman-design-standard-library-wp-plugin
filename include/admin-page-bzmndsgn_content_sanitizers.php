@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 function bzmndsgn_content_sanitizers () {
 	_print_admin_settings_heading ('Content Sanitizer Settings', 'Baizman Design Standard Library' ) ;
 

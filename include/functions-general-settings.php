@@ -3,7 +3,7 @@
  * General settings.
  */
 
-defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+namespace baizman_design ;
 
 $bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 

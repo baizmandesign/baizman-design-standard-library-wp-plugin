@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 function bzmndsgn_advanced_settings () {
 	_print_admin_settings_heading ('Advanced Settings', 'Baizman Design Standard Library' ) ;
 	?>
@@ -52,7 +54,7 @@ function bzmndsgn_reserialize_data ( ) {
 	exit ;
 
 }
-add_action ( 'admin_post_bzmndsgn_reserialize_data', 'bzmndsgn_reserialize_data' ) ;
+add_action ( 'admin_post_bzmndsgn_reserialize_data', __NAMESPACE__.'\bzmndsgn_reserialize_data' ) ;
 
 /**
  * Reset the plugin data to the defaults.
@@ -72,7 +74,7 @@ function bzmndsgn_reinitialize_default_data () {
 	exit ;
 
 }
-add_action ( 'admin_post_bzmndsgn_reinitialize_default_data', 'bzmndsgn_reinitialize_default_data' ) ;
+add_action ( 'admin_post_bzmndsgn_reinitialize_default_data', __NAMESPACE__.'\bzmndsgn_reinitialize_default_data' ) ;
 
 /**
  * Helper function to reserialize database data. Used by wp-cli.

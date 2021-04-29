@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 class text_input extends field {
 
 	// add data validation? for example, for length?

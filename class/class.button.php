@@ -7,6 +7,8 @@
  * FIXME: add $other_attributes.
  */
 
+namespace baizman_design ;
+
 class button extends field {
 
 	/**

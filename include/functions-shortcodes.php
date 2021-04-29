@@ -4,7 +4,7 @@
  * @version 0.1
  */
 
-defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+namespace baizman_design ;
 
 if ( ! function_exists ( 'bzmndsgn_get_site_database_setting' ) ):
 	/**
@@ -29,7 +29,7 @@ if ( ! function_exists ( 'bzmndsgn_get_site_database_setting' ) ):
 			return sprintf ('The key %s does not exist.', $attributes['key'] );
 		}
 	}
-	add_shortcode ( 'bzmndsgn_get_site_database_setting', 'bzmndsgn_get_site_database_setting' ) ;
+	add_shortcode ( 'bzmndsgn_get_site_database_setting', __NAMESPACE__.'\bzmndsgn_get_site_database_setting' ) ;
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_get_theme_directory' ) ):
@@ -41,5 +41,5 @@ if ( ! function_exists ( 'bzmndsgn_get_theme_directory' ) ):
 	function bzmndsgn_get_theme_directory ( ) {
 		return BZMNDSGN_THEME_FOLDER_URI ;
 	}
-	add_shortcode ( 'bzmndsgn_get_theme_directory', 'bzmndsgn_get_theme_directory' ) ;
+	add_shortcode ( 'bzmndsgn_get_theme_directory', __NAMESPACE__.'\bzmndsgn_get_theme_directory' ) ;
 endif;

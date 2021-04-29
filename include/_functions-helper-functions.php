@@ -3,6 +3,8 @@
  * All helper functions begin with an underscore. They are only called by other functions, not directly.
  */
 
+namespace baizman_design ;
+
 if ( ! function_exists ( '_bzmndsgn_log_404_error' ) ):
 	/**
 	 * Log 404 errors to a file. Works in conjunction with 404.php of the theme.

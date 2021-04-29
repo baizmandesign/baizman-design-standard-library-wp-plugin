@@ -4,7 +4,7 @@
  * @version 0.1
  */
 
-defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+namespace baizman_design ;
 
 // Move all constants here?
 // Two issues to resolve:

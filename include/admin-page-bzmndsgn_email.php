@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 function bzmndsgn_email () {
 
 	_print_admin_settings_heading ('Email Settings', 'Baizman Design Standard Library' ) ;

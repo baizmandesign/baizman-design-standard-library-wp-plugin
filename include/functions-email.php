@@ -3,7 +3,7 @@
  * Email settings functions.
  */
 
-defined( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' );
+namespace baizman_design ;
 
 // https://developer.wordpress.org/reference/functions/is_plugin_active/
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -22,7 +22,7 @@ if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) :
 		}
 
 		if ( $bzmndsgn_config_options_database['email_sender_address'] ) {
-			add_filter( 'wp_mail_from', 'bzmndsgn_email_sender_address' );
+			add_filter( 'wp_mail_from', __NAMESPACE__.'\bzmndsgn_email_sender_address' );
 		}
 
 	endif;
@@ -37,7 +37,7 @@ if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) :
 		}
 
 		if ( $bzmndsgn_config_options_database['email_sender_name'] ) {
-			add_filter( 'wp_mail_from_name', 'bzmndsgn_email_sender_name' );
+			add_filter( 'wp_mail_from_name', __NAMESPACE__.'\bzmndsgn_email_sender_name' );
 		}
 
 	endif;
@@ -56,7 +56,7 @@ if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) :
 		}
 
 		if ( $bzmndsgn_config_options_database['email_reply_to_address'] ) {
-			add_filter( 'wp_mail', 'bzmndsgn_email_reply_to_address', 10, 1 );
+			add_filter( 'wp_mail', __NAMESPACE__.'\bzmndsgn_email_reply_to_address', 10, 1 );
 		}
 
 	endif;

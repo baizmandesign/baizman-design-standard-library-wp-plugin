@@ -6,6 +6,8 @@
  * @version 0.1
  */
 
+use baizman_design;
+
 class bzmndsgn {
 
 	/**
@@ -14,7 +16,7 @@ class bzmndsgn {
 	 * @param $args
 	 */
 	function reserialize ( $args ) {
-		__bzmndsgn_reserialize_data( ) ;
+		baizman_design\__bzmndsgn_reserialize_data( ) ;
 		WP_CLI::success( 'The configuration data has been reserialized.' );
 	}
 
@@ -25,7 +27,7 @@ class bzmndsgn {
 	 */
 	function reinitialize ( $args ) {
 
-		__bzmndsgn_reinitialize_default_data () ;
+		baizman_design\__bzmndsgn_reinitialize_default_data () ;
 
 		WP_CLI::success( 'The default plugin configuration has been reinitialized.' );
 	}

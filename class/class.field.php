@@ -6,6 +6,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 abstract class field
 {
 	protected $field_input_name ;

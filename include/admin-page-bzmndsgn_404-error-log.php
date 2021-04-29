@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 function bzmndsgn_404_error_log () {
 
 	_print_admin_settings_heading ('404 Error Log', 'Baizman Design Standard Library' ) ;

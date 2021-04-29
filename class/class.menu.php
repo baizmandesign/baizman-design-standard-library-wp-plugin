@@ -5,6 +5,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 class menu {
 
 	/**
@@ -119,7 +121,7 @@ class menu {
 	 * @param $function
 	 */
 	public function set_function ( $function ) {
-		$this->function = $function ;
+		$this->function = __NAMESPACE__.'\\' . $function ;
 	}
 
 	/**

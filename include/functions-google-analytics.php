@@ -1,5 +1,7 @@
 <?php
 
+namespace baizman_design ;
+
 if ( ! function_exists ( 'bzmndsgn_enqueue_google_analytics' ) ):
     /**
      * Add Google Analytics tracking code to global header.
@@ -38,5 +40,5 @@ if ( ! function_exists ( 'bzmndsgn_enqueue_google_analytics' ) ):
 	    }
 
     }
-    add_action ( 'wp_head', 'bzmndsgn_enqueue_google_analytics', 1 ) ;
+    add_action ( 'wp_head', __NAMESPACE__.'\bzmndsgn_enqueue_google_analytics', 1 ) ;
 endif;

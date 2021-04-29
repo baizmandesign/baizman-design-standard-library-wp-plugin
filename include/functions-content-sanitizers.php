@@ -6,7 +6,7 @@
  * @version 0.1
  */
 
-defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+namespace baizman_design ;
 
 $bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
@@ -22,7 +22,7 @@ if ( ! function_exists ( 'bzmndsgn_remove_content_blank_lines' ) ):
 		return trim ( $content) ;
 	}
 	if ( _is_enabled ( 'checkbox-strip_content_blank_lines_on_save', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'content_save_pre', 'bzmndsgn_remove_content_blank_lines', 10, 1 );
+		add_filter( 'content_save_pre', __NAMESPACE__.'\bzmndsgn_remove_content_blank_lines', 10, 1 );
 	}
 endif;
 
@@ -48,7 +48,7 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_blank_lines' ) ):
 		return $content;
 	}
 	if ( _is_enabled ( 'checkbox-strip_content_blank_lines_on_display', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'the_content', 'bzmndsgn_filter_content_blank_lines' );
+		add_filter( 'the_content', __NAMESPACE__.'\bzmndsgn_filter_content_blank_lines' );
 	}
 endif;
 
@@ -75,7 +75,7 @@ if ( ! function_exists ( 'bzmndsgn_strip_illegal_tags' ) ):
 		return strip_tags( $content, implode( '', $legal_tags ) );
 	}
 	if ( _is_enabled ( 'checkbox-strip_illegal_tags_on_save', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'content_save_pre', 'bzmndsgn_strip_illegal_tags', 10, 1 );
+		add_filter( 'content_save_pre', __NAMESPACE__.'\bzmndsgn_strip_illegal_tags', 10, 1 );
 	}
 endif;
 
@@ -100,7 +100,7 @@ if ( ! function_exists ( 'bzmndsgn_filter_content_double_spaces' ) ):
 		return $content;
 	}
 	if ( _is_enabled ( 'checkbox-strip_double_spaces_on_display', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'the_content', 'bzmndsgn_filter_content_double_spaces' );
+		add_filter( 'the_content', __NAMESPACE__.'\bzmndsgn_filter_content_double_spaces' );
 	}
 endif;
 
@@ -119,7 +119,7 @@ if ( ! function_exists ( 'bzmndsgn_strip_double_spaces' ) ):
 
 	}
 	if ( _is_enabled ( 'checkbox-strip_double_spaces_on_save', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'content_save_pre', 'bzmndsgn_strip_double_spaces', 10, 1 );
+		add_filter( 'content_save_pre', __NAMESPACE__.'\bzmndsgn_strip_double_spaces', 10, 1 );
 	}
 endif;
 

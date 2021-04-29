@@ -3,7 +3,7 @@
  * Dashboard customizations.
  */
 
-defined ( 'ABSPATH' ) or die ( 'This file cannot be run outside of WordPress.' ) ;
+namespace baizman_design ;
 
 $bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
 
@@ -37,9 +37,9 @@ if ( ! function_exists ( 'bzmndsgn_admin_dashboard_widget' ) ):
     if ( _is_enabled ( 'checkbox-show_dashboard_widget', $bzmndsgn_config_options_database ) && BZMNDSGN_SHOW_DASHBOARD_WIDGET ) {
         // Add the correct hook.
         if ( BZMNDSGN_IS_MULTISITE ) {
-            add_action( 'wp_network_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+            add_action( 'wp_network_dashboard_setup', __NAMESPACE__.'\bzmndsgn_add_admin_dashboard_widget' );
         } else {
-            add_action( 'wp_dashboard_setup', 'bzmndsgn_add_admin_dashboard_widget' );
+            add_action( 'wp_dashboard_setup', __NAMESPACE__.'\bzmndsgn_add_admin_dashboard_widget' );
         }
     }
 endif;
@@ -53,7 +53,7 @@ if ( ! function_exists ( 'bzmndsgn_add_admin_dashboard_widget' ) ):
 
 	    wp_add_dashboard_widget( 'bzmndsgn_admin_dashboard_widget',
 		    $dashboard_widget_title,
-            'bzmndsgn_admin_dashboard_widget' );
+		    __NAMESPACE__.'\bzmndsgn_admin_dashboard_widget' );
     }
 endif;
 
@@ -69,7 +69,7 @@ if ( ! function_exists ( 'bzmndsgn_disable_dashboard_widgets' ) ):
 		remove_meta_box ('dashboard_quick_press', 'dashboard', 'side');// Remove Quick Draft
 		remove_meta_box ('dashboard_primary', 'dashboard', 'core');// Remove WordPress Events and News
 	}
-	add_action('admin_menu', 'bzmndsgn_disable_dashboard_widgets');
+	add_action('admin_menu', __NAMESPACE__.'\bzmndsgn_disable_dashboard_widgets');
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_remove_menus' ) ):
@@ -87,7 +87,7 @@ if ( ! function_exists ( 'bzmndsgn_remove_menus' ) ):
 			}
 		}
 	}
-	add_action( 'admin_menu', 'bzmndsgn_remove_menus' );
+	add_action( 'admin_menu', __NAMESPACE__.'\bzmndsgn_remove_menus' );
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_custom_editor_styles' ) ):
@@ -97,7 +97,7 @@ if ( ! function_exists ( 'bzmndsgn_custom_editor_styles' ) ):
 	function bzmndsgn_custom_editor_styles ( ) {
 		add_editor_style ( BZMNDSGN_PLUGIN_FOLDER_URL . 'css/editor-styles.css' ) ;
 	}
-	add_action ( 'init', 'bzmndsgn_custom_editor_styles' ) ;
+	add_action ( 'init', __NAMESPACE__.'\bzmndsgn_custom_editor_styles' ) ;
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_admin_stylesheet' ) ):
@@ -109,7 +109,7 @@ if ( ! function_exists ( 'bzmndsgn_admin_stylesheet' ) ):
 		wp_enqueue_script ( 'bzmndsgn-admin-scripts', BZMNDSGN_PLUGIN_FOLDER_URL . 'js/admin-scripts.js' ) ;
 
 	}
-	add_action('admin_enqueue_scripts', 'bzmndsgn_admin_stylesheet');
+	add_action('admin_enqueue_scripts', __NAMESPACE__.'\bzmndsgn_admin_stylesheet');
 endif;
 
 if ( ! function_exists ( 'bzmndsgn_footer_site_name' ) ):
@@ -133,7 +133,7 @@ if ( ! function_exists ( 'bzmndsgn_footer_site_name' ) ):
 		return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> (%3$s)',get_bloginfo ( 'name' ), home_url ( ), $environment );
 	}
 	if ( _is_enabled ( 'checkbox-show_site_name', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'admin_footer_text', 'bzmndsgn_footer_site_name' );
+		add_filter( 'admin_footer_text', __NAMESPACE__.'\bzmndsgn_footer_site_name' );
 	}
 endif;
 
@@ -154,7 +154,7 @@ if ( ! function_exists ( 'bzmndsgn_footer_credit' ) ):
 		return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', BZMNDSGN_AUTHOR_COMPANY, BZMNDSGN_AUTHOR_COMPANY_URL ) ;
 	}
 	if ( _is_enabled ( 'checkbox-show_marketing', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'update_footer', 'bzmndsgn_footer_credit', 11 );
+		add_filter( 'update_footer', __NAMESPACE__.'\bzmndsgn_footer_credit', 11 );
 	}
 endif ;
 
@@ -183,7 +183,7 @@ if ( ! function_exists ('bzmndsgn_set_dashboard_background_color' ) ):
 			printf ('<!-- Special over-ride to distinguish dev and staging sites from production. --><style type="text/css">body { background-color: %s }</style>', $body_background_color );
 		}
 	}
-	add_action( 'admin_head', 'bzmndsgn_set_dashboard_background_color' );
+	add_action( 'admin_head', __NAMESPACE__.'\bzmndsgn_set_dashboard_background_color' );
 endif;
 
 if ( ! function_exists('bzmndsgn_site_warning' ) ) {
@@ -200,7 +200,7 @@ if ( ! function_exists('bzmndsgn_site_warning' ) ) {
     }
 
     if ( _is_enabled ('checkbox-show_global_site_warning', $bzmndsgn_config_options_database ) ) {
-        add_action ( 'admin_notices', 'bzmndsgn_site_warning' ) ;
+        add_action ( 'admin_notices', __NAMESPACE__.'\bzmndsgn_site_warning' ) ;
     }
 }
 
@@ -214,7 +214,7 @@ if ( ! function_exists('bzmndsgn_issue_link')):
         // Set position in preferences too?
         // $menu[28][2] = 'https://bitbucket.org/baizmandesign/carroll-and-sons-wp-plugin/issues/new' ;
     }
-    add_action ( 'admin_menu' , 'bzmndsgn_issue_link' ) ;
+    add_action ( 'admin_menu' , __NAMESPACE__.'\bzmndsgn_issue_link' ) ;
 endif ;
 
 if ( ! function_exists('bzmndsgn_quell_toolset_expiration_notice')) :
@@ -228,7 +228,7 @@ if ( ! function_exists('bzmndsgn_quell_toolset_expiration_notice')) :
 		printf ( '</style>' ) ;
 	}
 	if ( _is_enabled ('checkbox-hide_toolset_expiration_notice', $bzmndsgn_config_options_database ) ) {
-		add_action( 'admin_head', 'bzmndsgn_quell_toolset_expiration_notice' );
+		add_action( 'admin_head', __NAMESPACE__.'\bzmndsgn_quell_toolset_expiration_notice' );
 	}
 endif;
 
@@ -252,7 +252,7 @@ if ( ! function_exists ( 'bzmndsgn_add_fixed_header_to_admin_tables' ) ) :
 	}
 
 	if ( _is_enabled ('checkbox-enable_fixed_admin_table_headers', $bzmndsgn_config_options_database ) ) {
-		add_action( 'admin_head', 'bzmndsgn_add_fixed_header_to_admin_tables' );
+		add_action( 'admin_head', __NAMESPACE__.'\bzmndsgn_add_fixed_header_to_admin_tables' );
 	}
 endif;
 
@@ -285,6 +285,6 @@ if ( ! function_exists ('bzmndsgn_sort_custom_toolset_taxonomies') ) :
 		return $taxonomies;
 	}
 	if ( _is_enabled ('checkbox-enable_toolset_taxonomy_sort', $bzmndsgn_config_options_database ) ) {
-		add_filter( 'option_wpcf-custom-taxonomies', 'bzmndsgn_sort_custom_toolset_taxonomies' );
+		add_filter( 'option_wpcf-custom-taxonomies', __NAMESPACE__.'\bzmndsgn_sort_custom_toolset_taxonomies' );
 	}
 endif;

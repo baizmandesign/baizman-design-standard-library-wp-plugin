@@ -6,6 +6,8 @@
  * @version 0.1
  */
 
+namespace baizman_design ;
+
 class email_input extends text_input {
 
 	public function __construct( $text_field_label, $text_field_input_name, $text_field_placeholder, $text_field_default_value ) {
