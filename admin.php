@@ -161,6 +161,10 @@ namespace baizman_design {
 		$error_404_log_submenu = new submenu ( '404 Error Log', 'bzmndsgn_404_error_log' );
 		$parent_menu->add_submenu_item( $error_404_log_submenu );
 
+		/* WP constants submenu. */
+		$wp_constants_submenu = new submenu ( 'WP Constants', 'bzmndsgn_wp_constants' );
+		$parent_menu->add_submenu_item( $wp_constants_submenu );
+
 		/* Advanced submenu. */
 		if ( WP_DEBUG ) {
 			$advanced_submenu = new submenu( 'Advanced', 'bzmndsgn_advanced_settings' );

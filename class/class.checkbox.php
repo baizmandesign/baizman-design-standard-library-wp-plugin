@@ -64,10 +64,11 @@ class checkbox extends field {
 			printf('</th>' );
 
 			printf (
-				'<td><input type="checkbox" name="%2$s" id="%3$s" value="1"%1$s/>',
+				'<td><input type="checkbox" name="%2$s" id="%3$s" value="1"%1$s %4$s/>',
 				checked ( '1', $this->get_field_default_value( ), false ),
 				esc_attr ( $this->get_field_input_name( ) ),
-				$this->get_field_id()
+				$this->get_field_id(),
+				$this->get_is_disabled() ? 'disabled' : ''
 			) ;
 			if ( $this->get_field_help_text() ) {
 				printf(
@@ -90,11 +91,12 @@ class checkbox extends field {
 			$checked = in_array ( $this->get_field_default_value(), $dashboard_links_to_hide ) ? 'checked' : '' ;
 
 			printf(
-				'<input type="checkbox" name="%2$s" id="%3$s" value="%4$s"%1$s/>',
+				'<input type="checkbox" name="%2$s" id="%3$s" value="%4$s"%1$s %5$s/>',
 				$checked,
 				esc_attr( $this->get_field_input_name() ),
 				$this->get_field_id(),
-				$this->get_field_default_value()
+				$this->get_field_default_value(),
+				$this->get_is_disabled() ? 'disabled' : ''
 			);
 			printf( ' <label for="%1$s">%2$s</label><br>',
 				esc_attr( $this->get_field_input_name() ),

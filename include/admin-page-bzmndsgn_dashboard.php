@@ -3,7 +3,6 @@
  * WP dashboard customization.
  * @package Baizman Design Standard Library
  * @version 0.1
- * FIXME: add setting for fixed column headings.
  */
 
 namespace baizman_design ;

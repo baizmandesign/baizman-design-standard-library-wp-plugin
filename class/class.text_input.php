@@ -65,11 +65,12 @@ class text_input extends field {
 		}
 		printf ('</th>' );
 		printf (
-			'<td><input type="text" name="%1$s" id="%4$s" placeholder="%2$s" value="%3$s" size="50">',
+			'<td><input type="text" name="%1$s" id="%4$s" placeholder="%2$s" value="%3$s" size="50" %5$s>',
 			esc_attr ( $this->get_field_input_name() ),
 			esc_attr ( $this->get_text_field_placeholder() ),
 			esc_attr ( $this->get_field_default_value() ),
-			$this->get_field_id()
+			$this->get_field_id(),
+			$this->get_is_disabled() ? 'disabled' : ''
 		);
 		if ( $this->get_field_help_text() ) {
 			printf (

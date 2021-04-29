@@ -20,6 +20,7 @@ abstract class field
 	protected $label_help_text ;
 	// Show the label (boolean). Default: true.
 	protected $show_label ;
+	protected $is_disabled ;
 
 	/**
 	 * field constructor.
@@ -29,6 +30,7 @@ abstract class field
 		$this->set_field_input_name ( $field_input_name ) ;
 		$this->set_field_id ( $field_input_name ) ;
 		$this->set_show_label ( true ) ;
+		$this->set_is_disabled ( false ) ;
 	}
 
 	/**
@@ -155,6 +157,20 @@ abstract class field
 	 */
 	public function set_field_id( $field_id ) {
 		$this->field_id = $field_id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function get_is_disabled() {
+		return $this->is_disabled;
+	}
+
+	/**
+	 * @param mixed $status
+	 */
+	public function set_is_disabled ( $status ) {
+		$this->is_disabled = $status;
 	}
 
 	/**
