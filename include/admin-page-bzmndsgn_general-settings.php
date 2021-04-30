@@ -42,15 +42,6 @@ function bzmndsgn_general_settings () {
 
 	$general_settings_form->add_form_field( $local_plugin_option_name );
 
-	// Suppress auto-update email notifications for plugins
-	$disable_plugin_auto_update_email_notifications = new checkbox( 'Suppress auto-update email notifications for plugins?','checkbox-disable_plugin_auto_update_email_notifications',$bzmndsgn_config_options_database['checkbox-disable_plugin_auto_update_email_notifications']) ;
-	$general_settings_form->add_form_field ($disable_plugin_auto_update_email_notifications) ;
-
-	// Suppress auto-update email notifications for themes
-	$disable_theme_auto_update_email_notifications = new checkbox( 'Suppress auto-update email notifications for themes?','checkbox-disable_theme_auto_update_email_notifications',$bzmndsgn_config_options_database['checkbox-disable_theme_auto_update_email_notifications']) ;
-	$general_settings_form->add_form_field ($disable_theme_auto_update_email_notifications) ;
-
-
 	// var_dump($bzmndsgn_config_options_database);
 	// print_r($form_database_settings);
 	$general_settings_form->render_form();

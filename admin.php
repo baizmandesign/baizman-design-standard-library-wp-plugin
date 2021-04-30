@@ -37,7 +37,7 @@ namespace baizman_design {
 
 // Per-site database fields and default values.
 
-	$site_defaults = array (
+	$site_defaults = [
 		'google_analytics_id'                                     => '',
 		'google_measurement_id'                                   => '',
 		'log_file_prefix'                                         => str_replace( ' ', '-', strtolower( get_bloginfo( 'name' ) ) ),
@@ -88,7 +88,21 @@ namespace baizman_design {
 		// email sender address (WP default is "wordpress@domain")
 		'email_reply_to_address'                                  => '',
 		// email reply-to address (WP default is absent)
-	);
+		'checkbox-disable_all_updates' => '0',
+		// do not disable all wordpress updates
+		'checkbox-enable_core_updates_only' => '0',
+		// do not enable core wordpress updates only
+		'checkbox-enable_updates_if_vcs_present' => '0',
+		// do not enable wordpress updates if a VCS folder is present
+		'checkbox-enable_automatic_plugin_updates' => '0',
+		// do not enable automatic updates for all plugins
+		'checkbox-enable_automatic_theme_updates' => '0',
+		// do not enable automatic updates for all themes
+		'checkbox-disable_translation_updates' => '0',
+		// do not disable translation updates
+		'checkbox-disable_core_auto_update_email_notifications' => '1',
+		// disable core auto-update email notifications
+	];
 
 	define( 'SITE_OPTIONS_DEFAULTS', $site_defaults );
 
@@ -164,6 +178,10 @@ namespace baizman_design {
 		/* WP constants submenu. */
 		$wp_constants_submenu = new submenu ( 'WP Constants', 'bzmndsgn_wp_constants' );
 		$parent_menu->add_submenu_item( $wp_constants_submenu );
+
+		/* WP constants submenu. */
+		$wp_updates_submenu = new submenu ( 'WP Updates', 'bzmndsgn_wp_updates' );
+		$parent_menu->add_submenu_item( $wp_updates_submenu );
 
 		/* Advanced submenu. */
 		if ( WP_DEBUG ) {
