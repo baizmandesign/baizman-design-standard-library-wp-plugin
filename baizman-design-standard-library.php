@@ -38,8 +38,6 @@ define( 'BZMNDSGN_PLUGIN_FOLDER_URL', trailingslashit( plugin_dir_url( __FILE__ 
 
 define( 'BZMNDSGN_PLUGIN_ADMIN_URI', BZMNDSGN_PLUGIN_FOLDER_URI . 'admin.php' );
 
-define( 'BZMNDSGN_PLUGIN_WP_CLI', BZMNDSGN_PLUGIN_FOLDER_URI . 'cli/class.wp-cli.php' );
-
 define( 'BZMNDSGN_AUTHOR_NAME', 'Saul Baizman' );
 
 define( 'BZMNDSGN_AUTHOR_EMAIL', 'saul@baizmandesign.com' );
@@ -77,16 +75,37 @@ if ( BZMNDSGN_IS_MULTISITE ) {
 // https://www.smashingmagazine.com/2015/05/how-to-use-autoloading-and-a-plugin-container-in-wordpress-plugins/
 spl_autoload_register( function ( $class_name ) {
 	$original_class_name = $class_name;
-	$class_name          = str_replace( BZMNDSGN_NAMESPACE . '\\', '', $class_name );
-	$class_file          = sprintf( '%1$sclass%2$sclass.%3$s.php', BZMNDSGN_PLUGIN_FOLDER_URI, DIRECTORY_SEPARATOR, $class_name );
+//	printf ("original_class_name: %s\n",$original_class_name) ;
+	/* divvy up class name into separate parts. */
+	$class_path_parts = explode('\\',$class_name) ;
+	// remove namespace from array
+	array_shift($class_path_parts) ;
 
-	/* We check for the existence of the file in our plugin, because this spl_autoload_register() tries to autoload _all_ classes. */
-	if ( false !== strpos( $original_class_name, BZMNDSGN_NAMESPACE ) ) {
+	// build new array of path parts.
+	$class_file = [] ;
+	$class_file[] = untrailingslashit ( BZMNDSGN_PLUGIN_FOLDER_URI ) ;
+	$class_file[] = 'class' ;
+	for ( $path_part = 0 ; $path_part < count($class_path_parts); $path_part++ ) {
 
-		if ( file_exists( $class_file ) ) {
-			require_once( $class_file );
+		// on the last path element. format the correct filename.
+		if ( $path_part == (count($class_path_parts)-1) ) {
+			$class_file[] = sprintf ('class.%s.php', $class_path_parts[$path_part]) ;
+		}
+		else {
+			$class_file[] = $class_path_parts[$path_part] ;
 		}
 	}
+
+	$class_file_path = implode ( DIRECTORY_SEPARATOR, $class_file ) ;
+//	printf ("class_file_path: %s\n",$class_file_path) ;
+
+	/* We check for the existence of the file in our plugin, because this spl_autoload_register() tries to autoload _all_ classes. */
+	if ( false !== strpos( $original_class_name, BZMNDSGN_NAMESPACE.'\\' ) ) {
+		if ( file_exists( $class_file_path ) ) {
+			require_once( $class_file_path );
+		}
+	}
+
 } );
 
 if ( ! function_exists( '_require_once_folder' ) ):
@@ -126,7 +145,6 @@ if ( BZMNDSGN_DEBUG ) {
  * Include admin interface if we are viewing the backend.
  */
 if ( is_admin() && file_exists( BZMNDSGN_PLUGIN_ADMIN_URI ) ) {
-	/* */
 	require_once( BZMNDSGN_PLUGIN_ADMIN_URI );
 }
 
@@ -134,15 +152,6 @@ if ( is_admin() && file_exists( BZMNDSGN_PLUGIN_ADMIN_URI ) ) {
  * Include support for WP CLI, if appropriate.
  */
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once( BZMNDSGN_PLUGIN_WP_CLI );
-
-	\WP_CLI::add_command( 'bzmndsgn', 'bzmndsgn', array (
-			'before_invoke' => function () {
-				// admin.php has an important constant (SITE_OPTIONS_DEFAULTS), so we need to load it prior to calling WP CLI commands.
-				// https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/
-				require_once( BZMNDSGN_PLUGIN_ADMIN_URI );
-			},
-		)
-	);
+	$wp_cli = new baizman_design\cli\wp_cli ( ) ;
 }
 
