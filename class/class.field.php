@@ -1,7 +1,6 @@
 <?php
 /**
  * Field class for a generic form field.
- * Note: this file begins with an underscore because the order it is loaded matters.
  * @package Baizman Design Standard Library
  * @version 0.1
  */

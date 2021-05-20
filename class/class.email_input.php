@@ -1,7 +1,6 @@
 <?php
 /**
  * Class email_input.
- * The file has a funky name because it has to load _after_ class.text.php.
  * @package Baizman Design Standard Library
  * @version 0.1
  */

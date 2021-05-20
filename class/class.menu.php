@@ -33,32 +33,35 @@ class menu {
 	 * @var
 	 */
 	private $icon_url ;
-	/**
-	 * @var
-	 */
-	private $parent_menu_slug ;
-
-	// Array of submenu items.
-	/**
-	 * @var array
-	 */
-	private $submenu_items = [] ;
 
 	/**
 	 * menu constructor.
 	 *
 	 * @param $page_title
 	 * @param $menu_slug
+	 * @param $callback
+	 * @param bool $is_parent_menu
 	 * @param string $icon_url
 	 * @param string $capability
 	 */
-	public function __construct( $page_title, $menu_slug, $icon_url = '', $capability = 'manage_options' ) {
+	public function __construct( $page_title, $menu_slug, $callback, $is_parent_menu = false, string $icon_url = '', string $capability = 'manage_options' ) {
 		$this->set_page_title( $page_title );
 		$this->set_menu_title( $page_title );
 		$this->set_capability ( $capability ) ;
 		$this->set_menu_slug( $menu_slug );
-		$this->set_function( $menu_slug );
+		$this->set_function( $callback );
 		$this->set_icon_url( $icon_url );
+
+		if ( $is_parent_menu ) {
+			$this->add_hook();
+		}
+
+	}
+
+	private function add_hook () {
+		if (bdsl::show_dashboard_interface) {
+			add_action( 'admin_menu', [ $this, 'render_menu' ], 1 );
+		}
 	}
 
 	/**
@@ -121,7 +124,7 @@ class menu {
 	 * @param $function
 	 */
 	public function set_function ( $function ) {
-		$this->function = __NAMESPACE__.'\\' . $function ;
+		$this->function = $function ;
 	}
 
 	/**
@@ -146,23 +149,10 @@ class menu {
 	}
 
 	/**
-	 * @param submenu $submenu_item
-	 */
-	public function add_submenu_item ( submenu $submenu_item ) {
-		$this->submenu_items[] = $submenu_item ;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_submenus () {
-		return $this->submenu_items ;
-	}
-
-	/**
-	 * Render the menu and submenu(s).
+	 * Render the menu.
 	 */
 	public function render_menu ( ) {
+
 		add_menu_page (
 			$this->get_page_title(),
 			$this->get_menu_title(),
@@ -172,9 +162,5 @@ class menu {
 			$this->get_icon_url()
 		) ;
 
-		foreach ( $this->get_submenus( ) as $submenu_item ) {
-			$submenu_item->render_submenu ( $this->get_menu_slug() ) ;
-		}
 	}
-
 }

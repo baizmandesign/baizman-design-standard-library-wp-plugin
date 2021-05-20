@@ -1,10 +1,12 @@
 <?php
 /**
  * Class button.
+ * @package Baizman Design Standard Library
+ * @version 0.1
  */
 
 /*
- * FIXME: add $other_attributes.
+ * TODO: add $other_attributes.
  */
 
 namespace baizman_design ;

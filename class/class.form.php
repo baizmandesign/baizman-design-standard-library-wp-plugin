@@ -13,23 +13,6 @@ class form {
 	 * @var
 	 */
 	private $form_name ;
-	/**
-	 * @var
-	 */
-	private $form_action ;
-	/**
-	 * @var
-	 */
-	private $form_nonce ;
-	/**
-	 * @var
-	 */
-	private $form_post_direct ;
-
-	/**
-	 * @var array
-	 */
-	private $form_sections = [] ;
 
 	/**
 	 * @var array
@@ -40,11 +23,6 @@ class form {
 	 * @var array
 	 */
 	private $form_database_settings = [] ;
-
-	/**
-	 * @var array
-	 */
-	private $form_default_settings = [] ;
 
 	/**
 	 * @var
@@ -70,6 +48,15 @@ class form {
 		$this->set_form_name ( $form_name ) ;
 		$this->add_table_class ( 'form-table' );
 		$this->add_table_class ( $form_name.'-table' );
+//		add_action( 'admin_init', [ $this, 'site_config_settings' ] );
+//		add_action( 'admin_post_update_bdsl', [$this,'save_form_data'] );
+
+		// TODO: replace function with variable.
+//		if ( is_multisite() ) {
+//			add_action( 'network_admin_edit_bzmndsgn_save_network_config_settings', [$this, 'save_network_form_data'] );
+//			add_action( 'admin_init', [$this, 'network_config_settings'] );
+//		}
+
 	}
 
 	/**
@@ -80,83 +67,6 @@ class form {
 	}
 
 	/**
-	 * @return mixed
-	 */
-	public function get_form_name () {
-		return $this->form_name ;
-	}
-
-	/**
-	 * @param $form_action
-	 */
-	public function set_form_action ( $form_action ):void {
-		$this->form_action = $form_action ;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_form_action () {
-		return $this->form_action ;
-	}
-
-	/**
-	 * @param $form_nonce
-	 */
-	public function set_form_nonce ( $form_nonce ):void {
-		$this->form_nonce = $form_nonce ;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_form_nonce () {
-		return $this->form_nonce ;
-	}
-
-	/**
-	 * @param $form_post_direct
-	 */
-	public function set_form_post_direct ( $form_post_direct ):void {
-		$this->form_post_direct = $form_post_direct ;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_form_post_direct () {
-		return $this->form_post_direct ;
-	}
-
-	/**
-	 * @param $form_section
-	 */
-	public function add_form_section ( $form_section ):void {
-		$this->form_section[] = $form_section ;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_form_sections () {
-		return $this->form_section ;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function get_form_default_settings(): array {
-		return $this->form_default_settings;
-	}
-
-	/**
-	 * @param array $form_default_settings
-	 */
-	public function set_form_default_settings( array $form_default_settings ): void {
-		$this->form_default_settings = $form_default_settings;
-	}
-
-	/**
 	 * @return array
 	 */
 	public function get_form_database_settings (): array {
@@ -164,31 +74,11 @@ class form {
 	}
 
 	/**
-	 * @param $form_database_settings
-	 */
-	public function set_form_database_settings ( array $form_database_settings ):void {
-		$this->form_database_settings = $form_database_settings ;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_settings_fields_option_group() {
-		return $this->settings_fields_option_group;
-	}
-
-	/**
 	 * @param mixed $settings_fields_option_group
 	 */
+	// FIXME: replace with call to bdsl constant, and revise calls to instantiate form.
 	public function set_settings_fields_option_group( $settings_fields_option_group ): void {
 		$this->settings_fields_option_group = $settings_fields_option_group;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function get_settings_fields_page() {
-		return $this->settings_fields_page;
 	}
 
 	/**
@@ -271,9 +161,146 @@ class form {
 		// Action value must match hook. update_bdsl --> admin_post_update_bdsl
 		printf ( '<input type="hidden" name="action" value="update_bdsl" />' ) ;
 		printf ( '<input type="hidden" name="option_page" value="bzmndsgn-standard-library-plugin-settings-group">' ) ;
-        wp_nonce_field ( 'bzmndsgn_save_config' );
+        wp_nonce_field ( bdsl::nonce_name );
 
         submit_button ( ) ;
+
+	}
+	/**
+	 * Register per-site settings.
+	 */
+	public static function site_config_settings() {
+		foreach ( preferences::get_default_database_options ( ) as $key => $value ) {
+			register_setting( bdsl::settings_group, $key );
+		}
+	}
+
+	/**
+	 * Register network settings.
+	 */
+	public static function network_config_settings() {
+		// Network Settings.
+
+		foreach ( preferences::get_default_network_database_options() as $key => $value ) {
+			register_setting( bdsl::network_settings_group, $key );
+		}
+	}
+
+	/**
+	 * Save per-site settings to database.
+	 */
+	public static function save_form_data () {
+		// Check that user has proper security level.
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'You do not have permission to update these settings.' );
+		}
+
+		// Check referrer.
+		check_admin_referer( bdsl::nonce_name );
+
+		// Store updated settings.
+		$updated_options = [];
+
+		foreach ( preferences::get_database_options() as $option => $value ) {
+			if ( isset ( $_POST[ $option ] ) ) {
+				$updated_options[ $option ] = stripslashes_deep( $_POST[ $option ] ); // sanitize_option, sanitize_textarea_field
+			}
+		}
+
+		$checkboxes = [];
+		// Identify the checkboxes. Get them from the hidden field, "single_checkboxes".
+		if ( isset ( $_POST['single_checkboxes'] ) ) {
+			$checkboxes = explode( ',', $_POST['single_checkboxes'] );
+		}
+
+		// Force the values for checkboxes.
+		if ( count( $checkboxes ) > 0 ) {
+			foreach ( $checkboxes as $checkbox ) {
+				if ( isset ( $_POST[ $checkbox ] ) ) {
+					// The field is checked. Set field value to '1'.
+					$updated_options[ $checkbox ] = '1';
+				} else {
+					// The field was unchecked. Set field value to '0'.
+					$updated_options[ $checkbox ] = '0';
+				}
+			}
+		}
+
+		$checkbox_groups = [];
+		// Identify checkbox groups. Get them from the hidden field, "checkbox_groups".
+		if ( isset ( $_POST['checkbox_groups'] ) ) {
+			$checkbox_groups = explode( ',', $_POST['checkbox_groups'] );
+		}
+
+		// Force the values for checkbox groups.
+		if ( count( $checkbox_groups ) > 0 ) {
+			foreach ( $checkbox_groups as $checkbox_group ) {
+				if ( isset ( $_POST[ $checkbox_group ] ) ) {
+					// A field in the group is checked. Set the field value to its array in the $_POST variable.
+					$updated_options[ $checkbox_group ] = $_POST[ $checkbox_group ];
+				} else {
+					// No fields in the group are checked. Set the field value to an empty array.
+					$updated_options[ $checkbox_group ] = [];
+				}
+			}
+		}
+
+		// Update the options.
+		$merged_options = wp_parse_args( $updated_options, preferences::get_database_options() );
+		preferences::set_database_options( $merged_options );
+
+		utility::form_redirect( 'The settings have been saved.' );
+
+		exit;
+	}
+
+	/**
+	 * Save network settings to database.
+	 */
+	public static function save_network_form_data() {
+
+		// Check that user has proper security level.
+		if ( ! current_user_can( 'manage_network_options' ) ) {
+			wp_die( 'You do not have permission to update the network-level settings.' );
+		}
+
+		// Check referrer.
+		check_admin_referer( 'bzmndsgn_save_network_config' );
+
+		// Get current settings.
+		$bzmndsgn_network_config_options_database = get_site_option( bdsl::multisite_config_options_key );
+
+		// Store updated settings.
+		$updated_options = array ();
+
+		foreach ( $bzmndsgn_network_config_options_database as $option => $value ) {
+			if ( isset ( $_POST[ $option ] ) ) {
+				$updated_options[ $option ] = stripslashes_deep( $_POST[ $option ] ); // sanitize_option, sanitize_textarea_field
+			}
+		}
+
+		// Update the options.
+		$merged_options = wp_parse_args( $updated_options, $bzmndsgn_network_config_options_database );
+		update_site_option( bdsl::multisite_config_options_key, $merged_options );
+
+		// Get the referring page from the query string ($_GET['page']).
+		$referrer   = $_POST['_wp_http_referer'];
+		$link_parts = parse_url( $referrer );
+		$query      = $link_parts['query'];
+		parse_str( $query, $query_array );
+
+		// Redirect with success=1 query string.
+		wp_redirect(
+			add_query_arg(
+				array (
+					'page'    => $query_array['page'],
+					'message' => '1',
+				),
+				network_admin_url( 'admin.php' )
+			)
+		);
+
+		exit;
 
 	}
 

@@ -82,7 +82,7 @@ class checkbox extends field {
 
 		// in checkbox group. do not print in table row.
 		if ( $this->get_is_in_checkbox_group() ) {
-			$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+			$bzmndsgn_config_options_database = preferences::get_database_options() ;
 
 			$dashboard_links_to_hide = $bzmndsgn_config_options_database['checkboxes-dashboard_links_to_hide'] ;
 

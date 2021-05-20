@@ -9,38 +9,36 @@
 namespace baizman_design\cli ;
 
 use baizman_design;
+use baizman_design\bdsl;
+use baizman_design\page\advanced_config;
+use baizman_design\preferences;
 
 class wp_cli {
 
-	public function __construct () {
-		\WP_CLI::add_command( 'bzmndsgn', $this, array (
-				'before_invoke' => function () {
-					// admin.php has an important constant (SITE_OPTIONS_DEFAULTS), so we need to load it prior to calling WP CLI commands.
-					// https://make.wordpress.org/cli/handbook/references/internal-api/wp-cli-add-hook/
-					require_once( BZMNDSGN_PLUGIN_ADMIN_URI );
-				},
-			)
+	public static function add_command () {
+		\WP_CLI::add_command( bdsl::prefix, __NAMESPACE__.'\wp_cli', [
+				'shortdesc' => 'WP CLI interface for Baizman Design Standard Library (BDSL).',
+			]
 		);
 	}
 
 	/**
 	 * Reserialize the database data, incorporating changes to fields.
 	 * @subcommand refresh
-	 * @param $args
 	 */
-	public function reserialize ( $args ) {
-		baizman_design\__bzmndsgn_reserialize_data( ) ;
+	 public function reserialize ( ) {
+		advanced_config::__reserialize_data() ;
 		\WP_CLI::success( 'The configuration data has been reserialized.' );
 	}
 
 	/**
 	 * Reset the plugin data to the defaults.
 	 * @subcommand reset
-	 * @param $args
 	 */
-	public function reinitialize ( $args ) {
+	public function reinitialize ( ) {
+		\WP_CLI::confirm( "Are you sure you want to reset the settings to their defaults?" );
 
-		baizman_design\__bzmndsgn_reinitialize_default_data () ;
+		preferences::set_default_database_options() ;
 
 		\WP_CLI::success( 'The default plugin configuration has been reinitialized.' );
 	}

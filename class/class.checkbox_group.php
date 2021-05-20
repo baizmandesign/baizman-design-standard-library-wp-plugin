@@ -44,7 +44,7 @@ class checkbox_group {
 	public function __construct ( $checkbox_label, $checkbox_input_name, $items ) {
 		$this->set_checkbox_label ( $checkbox_label ) ;
 
-		$bzmndsgn_config_options_database = get_option ( BZMNDSGN_CONFIG_OPTIONS );
+		$bzmndsgn_config_options_database = preferences::get_database_options() ;
 
 		$dashboard_links_to_remove = $bzmndsgn_config_options_database['checkboxes-dashboard_links_to_hide'] ;
 

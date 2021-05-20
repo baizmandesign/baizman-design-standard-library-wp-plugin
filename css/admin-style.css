@@ -21,3 +21,25 @@ table.form-table.content_sanitizers_settings-table th:nth-child(1){
 table.form-table.dashboard_settings-table th:nth-child(1){
     width: 40% ;
 }
+
+p span.constant_name {
+    font-weight: bold;
+}
+
+p span.value_true, p span.value_string {
+    /*color: rgb(0,0,0) ;*/
+}
+
+p span.value_false {
+    color: rgb(245,0,0) ;
+}
+
+p span.value_undefined {
+    color: rgb(170,170,170) ;
+}
+
+div.constants {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    width: 550px ;
+}
