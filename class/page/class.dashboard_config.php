@@ -58,6 +58,17 @@ class dashboard_config extends page {
 			add_filter( 'admin_footer_text',[$this,'footer_site_name'] );
 		}
 
+		if ( utility::is_enabled ( 'checkbox-show_dashboard_widget' ) && bdsl::show_dashboard_widget ) {
+			// Add to network dashboard.
+			if ( $this->plugin['is_multisite'] ) {
+				add_action( 'wp_network_dashboard_setup', [$this,'add_admin_dashboard_widget'] );
+			}
+			// Add to non-network dashboard.
+			add_action( 'wp_dashboard_setup', [$this,'add_admin_dashboard_widget'] );
+		}
+        
+		add_action('admin_menu', [$this,'disable_dashboard_widgets']);
+
 		add_action('admin_bar_menu', [$this,'add_toolbar_items'], 100);
 
 		// frontend
@@ -71,6 +82,9 @@ class dashboard_config extends page {
 		add_action( 'wp_enqueue_scripts', [$this,'enqueue_qm_ajax'] );
 
         add_action( 'wp_ajax_toggle_query_monitor', [$this,'ajax_toggle_query_monitor'] );
+
+		add_action ( 'init', [$this, 'custom_editor_styles'] ) ;
+
 	}
 
 	/**
@@ -531,6 +545,67 @@ class dashboard_config extends page {
 		wp_send_json ( [ 'return_status' => $result ] ) ;
 
 		wp_die(); // All ajax handlers die when finished
+	}
+
+	/**
+     * Callback for outputting contents of the widget.
+	 * @return void
+	 */
+	public function admin_dashboard_widget( ) {
+
+		$substitutions = array (
+			'{author_company}' => bdsl::author_company,
+			'{author_company_url}' => bdsl::author_company_url,
+			'{home_url}' => home_url(),
+			'{hostname}' => parse_url(home_url(),PHP_URL_HOST),
+			'{support_email}' => bdsl::plugin_support_email,
+			'{support_phone}' => bdsl::plugin_author_phone,
+			'{videoconference_url}' => 'https://meet.google.com',
+		) ;
+
+		$dashboard_widget_body = preferences::get_database_option('textarea-dashboard_widget_body') ;
+		if ( $dashboard_widget_body ) {
+			$dashboard_widget_body = strtr ( $dashboard_widget_body, $substitutions ) ;
+			printf ( '%s', $dashboard_widget_body ) ;
+
+			if ( get_bloginfo('admin_email') != bdsl::plugin_author_email ) {
+				printf('<p><small>Note: the admin email address of this site is set to <strong>%1$s</strong>, which means Baizman Design may miss critical system notifications. <a href="%2$s">Update the admin address here.</a></small></p>', get_bloginfo('admin_email'), admin_url('options-general.php') ) ;
+			}
+		}
+	}
+
+	/**
+	 * @return void
+	 */
+	public function add_admin_dashboard_widget( ) {
+		$dashboard_widget_title = preferences::get_database_option('text-dashboard_widget_title') ?? 'Widget Title' ;
+
+		// Only display the widget if the user is an admin.
+        // Note: this is a rare instance of a hook *not* located in the constructor.
+		if ( current_user_can ( 'manage_options' ) ) {
+			wp_add_dashboard_widget( bdsl::prefix.'_admin_dashboard_widget',
+				$dashboard_widget_title,
+				 [$this,'admin_dashboard_widget'] );
+		}
+	}
+
+	/**
+	 * Remove WP admin dashboard widgets.
+	 * https://isabelcastillo.com/remove-wordpress-dashboard-widgets
+	 * TODO: make this a setting in the admin panel?
+	 */
+	public function disable_dashboard_widgets ( ) {
+		// remove_meta_box('dashboard_right_now', 'dashboard', 'normal');// Remove "At a Glance"
+		remove_meta_box ('dashboard_activity', 'dashboard', 'normal');// Remove "Activity" which includes "Recent Comments"
+		remove_meta_box ('dashboard_quick_press', 'dashboard', 'side');// Remove Quick Draft
+		remove_meta_box ('dashboard_primary', 'dashboard', 'core');// Remove WordPress Events and News
+	}
+
+	/**
+	 * Add custom styles to tinyMCE editor.
+	 */
+	function custom_editor_styles ( ) {
+		add_editor_style ( $this->plugin['plugin_folder_url'] . 'css/editor-styles.css' ) ;
 	}
 
 }
