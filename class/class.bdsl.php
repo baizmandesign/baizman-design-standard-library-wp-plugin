@@ -115,7 +115,7 @@ class bdsl implements \ArrayAccess {
 
 		if ( $file == $plugin_parent_folder . $plugin_name ) {
 			$links[] = sprintf( '<a href="%s" rel="noopener"><span class="dashicons dashicons-admin-generic"></span> Settings</a>', home_url( '/wp-admin/admin.php?page=bzmndsgn_general_settings' ) );
-			$links[] = sprintf( '<a href="%s"  rel="noopener" target="%s"><span class="dashicons dashicons-welcome-write-blog"></span> Report an Issue</a>', 'https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library/issues/new', '_blank' );
+			$links[] = sprintf( '<a href="%s"  rel="noopener" target="%s"><span class="dashicons dashicons-welcome-write-blog"></span> Report an Issue</a>', 'https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/issues/new', '_blank' );
 		}
 
 		return $links;
