@@ -16,10 +16,7 @@ class preferences {
 
 	public static array $database_options = [];
 
-	private static preferences $instance;
-
-
-	// do not instantiate
+	// do not instantiate outside class.
 	private function __construct () {
 		if ( empty ( self::$database_options ) ) {
 			self::$database_options = get_option( bdsl::config_options_key );
@@ -29,7 +26,6 @@ class preferences {
 			// Per-site database fields and default values.
 			self::$default_database_options = [
 				'google_analytics_id'                                     => '',
-				'google_measurement_id'                                   => '',
 				'log_file_prefix'                                         => str_replace( ' ', '-', strtolower( get_bloginfo( 'name' ) ) ),
 				// dashboard
 				'local_dashboard_background_color'                        => '#e8f5f8',
@@ -102,7 +98,7 @@ class preferences {
 	/**
 	 * @return array
 	 */
-	static function get_database_options () {
+	static function get_database_options (): array {
 		( new preferences )->__construct ( ) ;
 		return self::$database_options;
 	}
@@ -115,9 +111,9 @@ class preferences {
 	}
 
 	/**
-	 * @return void
+	 * @return array
 	 */
-	static function get_default_database_options () {
+	static function get_default_database_options (): array {
 		( new preferences )->__construct ( ) ;
 		return self::$default_database_options ;
 	}
