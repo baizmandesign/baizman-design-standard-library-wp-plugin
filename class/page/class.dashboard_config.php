@@ -457,17 +457,20 @@ class dashboard_config extends page {
 			] ;
 		}
 
-		// add link to enable / disable query monitor, if needed.
-		$all_plugins = get_plugins();
-		if ( in_array ( 'query-monitor/query-monitor.php', array_keys ( $all_plugins ) ) ) {
-			$menu_items[] = [
-				'id'     => 'toggle-qm',
-				'parent' => '',
-				'title'  => 'Toggle QM',
-				'href'   => '',
-				'meta'   => [],	] ;
-		}
+		// add link to enable / disable query monitor, if needed, but only for admins.
+        $user_data = get_userdata (get_current_user_id());
+        if ( in_array ('administrator',$user_data->roles ) ) {
 
+            $all_plugins = get_plugins();
+            if (in_array('query-monitor/query-monitor.php', array_keys($all_plugins))) {
+                $menu_items[] = [
+                    'id' => 'toggle-qm',
+                    'parent' => '',
+                    'title' => 'Toggle QM',
+                    'href' => '',
+                    'meta' => [],];
+            }
+        }
 		foreach ( $menu_items as $menu_item ) {
 			// TODO: check if the item is already in the list of menu items.
 			$admin_bar->add_menu( $menu_item );
