@@ -50,6 +50,10 @@ class wp_constants extends page {
 		$constants[] = 'WP_ALLOW_MULTISITE';
 		$constants[] = 'WP_MEMORY_LIMIT';
 		$constants[] = 'WP_DISABLE_FATAL_ERROR_HANDLER';
+		$constants[] = 'WP_MAX_MEMORY_LIMIT';
+		$constants[] = 'EMPTY_TRASH_DAYS';
+		$constants[] = 'CONCATENATE_SCRIPTS';
+		$constants[] = 'ALLOW_UNFILTERED_UPLOADS';
 
 		$user_defined_constants = get_defined_constants(true) ;
 		sort ($constants) ;
