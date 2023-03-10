@@ -27,7 +27,8 @@ class wp_cli {
 	 * @subcommand refresh
 	 */
 	 public function reserialize ( ) {
-		advanced_config::__reserialize_data() ;
+		 \WP_CLI::confirm('Are you sure you want to reserialize the database settings?');
+		 advanced_config::__reserialize_data() ;
 		\WP_CLI::success( 'The configuration data has been reserialized.' );
 	}
 
