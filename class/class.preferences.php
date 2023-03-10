@@ -35,6 +35,7 @@ class preferences {
 				'local_plugin_option_name'                                => '',
 				'checkbox-show_site_name'                                 => '1',
 				'checkbox-show_marketing'                                 => '1',
+				'checkbox-hide_comments'                                   => '0',
 				// content sanitizers
 				'checkbox-strip_double_spaces_on_save'                    => '0',
 				'checkbox-strip_double_spaces_on_display'                 => '0',

@@ -66,6 +66,24 @@ class dashboard_config extends page {
 			// Add to non-network dashboard.
 			add_action( 'wp_dashboard_setup', [$this,'add_admin_dashboard_widget'] );
 		}
+
+        // https://www.wpbeginner.com/wp-tutorials/how-to-completely-disable-comments-in-wordpress/
+        if ( utility::is_enabled ('checkbox-hide_comments')) {
+            add_action ('wp_before_admin_bar_render',[$this,'hide_comments_on_admin_bar']) ;
+	        // Remove comments metabox from dashboard.
+            remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+            // Close comments on the front-end.
+	        add_filter('comments_open', '__return_false', 20, 2);
+	        add_filter('pings_open', '__return_false', 20, 2);
+
+            // Hide existing comments.
+	        add_filter('comments_array', '__return_empty_array', 10, 2);
+
+            // Remove comments page in menu.
+	        add_action('admin_menu', function () {
+		        remove_menu_page('edit-comments.php');
+	        });
+        }
         
 		add_action('admin_menu', [$this,'disable_dashboard_widgets']);
 
@@ -164,11 +182,17 @@ class dashboard_config extends page {
 
 		$dashboard_settings_form->add_form_field ($branding_info) ;
 
+		$hide_comments = new checkbox ('Disable WordPress comments?',
+			'checkbox-hide_comments',
+			preferences::get_database_option('checkbox-hide_comments')
+		) ;
+		$hide_comments->set_label_help_text('If your site does not use comments, disable and hide them.');
+		$dashboard_settings_form->add_form_field ($hide_comments) ;
+
 		if ( utility::get_environment_type ( ) != 'Production' ) {
 			$show_site_warning = new checkbox ('Display global site warning?',
 				'checkbox-show_global_site_warning',
-				preferences::get_database_option('checkbox-show_global_site_warning')
-			) ;
+				preferences::get_database_option('checkbox-show_global_site_warning')			) ;
 			$show_site_warning->set_label_help_text('This message appears as a call-out at the top of every page in the dashboard.') ;
 			$show_site_warning->set_field_help_text('Enter global site warning in the field below.') ;
 
@@ -611,4 +635,13 @@ class dashboard_config extends page {
 		add_editor_style ( $this->plugin['plugin_folder_url'] . 'css/editor-styles.css' ) ;
 	}
 
+	/**
+     * Remove icon for comments in WP admin bar.
+     * @link https://wordpress.stackexchange.com/questions/178678/how-to-remove-comments-option-from-wp-admin-bar-and-modify-profile-icon
+	 * @return void
+	 */
+	function hide_comments_on_admin_bar() {
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_menu('comments');
+	}
 }
