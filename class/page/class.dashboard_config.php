@@ -150,10 +150,6 @@ class dashboard_config extends page {
 			$dashboard_background_color->set_field_id ( 'wp_dashboard_color' );
 			$dashboard_settings_form->add_form_field( $dashboard_background_color );
 		}
-		/*
-		$production_dashboard_background_color = new text_input( 'Production dashboard background', 'english, hex, rgb, rgba, hsl, hsla color', preferences::get_database_option('production_dashboard_background_color') ) ;
-		$general_settings_form->add_form_field($production_dashboard_background_color);
-		*/
 
 		$show_site_name = new checkbox ('Replace thank-you text with site name?',
 			'checkbox-show_site_name',
@@ -175,11 +171,9 @@ class dashboard_config extends page {
 			'textarea-branding_info',
 			'Your Company, Inc.',
 			preferences::get_database_option('textarea-branding_info')) ;
-		// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
 		$branding_info->set_show_label( false ) ;
 		$branding_info->set_rows ( 2 );
 		$branding_info->set_field_help_text('Note: HTML is OK.');
-
 		$dashboard_settings_form->add_form_field ($branding_info) ;
 
 		$hide_comments = new checkbox ('Disable WordPress comments?',
@@ -192,7 +186,8 @@ class dashboard_config extends page {
 		if ( utility::get_environment_type ( ) != 'Production' ) {
 			$show_site_warning = new checkbox ('Display global site warning?',
 				'checkbox-show_global_site_warning',
-				preferences::get_database_option('checkbox-show_global_site_warning')			) ;
+				preferences::get_database_option('checkbox-show_global_site_warning')
+			) ;
 			$show_site_warning->set_label_help_text('This message appears as a call-out at the top of every page in the dashboard.') ;
 			$show_site_warning->set_field_help_text('Enter global site warning in the field below.') ;
 
@@ -203,7 +198,6 @@ class dashboard_config extends page {
 				'textarea-global_site_warning',
 				'Your Company, Inc.',
 				preferences::get_database_option('textarea-global_site_warning')) ;
-			// $branding_info->set_field_help_text('Enter one tag per line, no angle brackets (&lt;&gt;) necessary.');
 			$global_site_warning->set_show_label( false ) ;
 			$global_site_warning->set_rows ( 4 );
 			$global_site_warning->set_field_help_text('Note: HTML is OK.');
