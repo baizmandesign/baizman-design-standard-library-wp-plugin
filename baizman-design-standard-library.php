@@ -1,17 +1,21 @@
 <?php
 /**
- Plugin Name: Baizman Design Standard Library
- Plugin URI: https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library
- Description: A standard set of frequently desired WordPress features in a customizable interface.
- Author: Baizman Design
- Version: 1.1
- Author URI: https://baizmandesign.com
- License: GPLv2
-
- * @package Baizman Design Standard Library
- * @version 1.1
+ * Baizman Design Standard Library
+ *
+ * @author          Baizman Design
+ * @package         Baizman Design Standard Library
+ * @version         1.1
+ *
+ * @wordpress-plugin
+ * Plugin Name:     Baizman Design Standard Library
+ * Plugin URI:      https://bitbucket.org/baizmandesign/baizman-design-wp-plugin-standard-library
+ * Description:     A standard set of frequently desired WordPress features in a customizable interface.
+ * Author:          Baizman Design
+ * Version:         1.1
+ * Author URI:      https://baizmandesign.com
+ * License:         GPLv2
+ * Update URI:      https://wp.baizmandesign.com/bdsl.php
  */
-
 namespace baizman_design ;
 
 use baizman_design\page\advanced_config;
@@ -153,6 +157,12 @@ function bdsl_init() {
 		}
 
 	}
+	/**
+	 * Include support for WP CLI, if appropriate.
+	 */
+	if ( defined( 'WP_CLI' ) && WP_CLI ) {
+		cli\wp_cli::add_command( $plugin ) ;
+	}
 
 }
 // "Adding the code via the add_action() filter is important as this will make our plugin overridable by using remove_action. An example use case would be a premium plugin overriding the free version." –SM article
@@ -172,10 +182,4 @@ if ( bdsl::debug ) {
 	utility::debug( $user_defined_constants );
 }
 
-/**
- * Include support for WP CLI, if appropriate.
- */
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	cli\wp_cli::add_command() ;
-}
 

@@ -18,7 +18,6 @@ use baizman_design\page\email_config;
 use baizman_design\page\error_log;
 use baizman_design\page\general_settings;
 use baizman_design\page\content_sanitizer;
-use baizman_design\page\login_screen;
 use baizman_design\page\wp_constants;
 use baizman_design\page\wp_updates;
 
@@ -52,9 +51,11 @@ class bdsl implements \ArrayAccess {
 
 	const author_company_url = 'https://baizmandesign.com' ;
 
-	const version = '1.1' ;
+	const plugin_directory = 'baizman-design-standard-library' ;
 
-	const prefix = 'bzmndsgn' ;
+	const plugin_filename = 'baizman-design-standard-library.php' ;
+
+	const prefix = 'bdsl' ;
 
 	const parent_menu_slug = 'bzmndsgn_general_settings';
 
@@ -79,16 +80,19 @@ class bdsl implements \ArrayAccess {
 			add_action( 'admin_menu', [ $this, 'print_admin_menu' ], 1 );
 		}
 
-		add_action( 'admin_init', [ 'baizman_design\form', 'site_config_settings' ] );
-		add_action( 'admin_post_update_bdsl', ['baizman_design\form','save_form_data'] );
+		add_action( 'admin_init', [ __NAMESPACE__.'\form', 'site_config_settings' ] );
+		add_action( 'admin_post_update_bdsl', [ __NAMESPACE__.'\form','save_form_data'] );
 
 		// TODO: replace function with variable.
 		if ( is_multisite() ) {
-			add_action( 'network_admin_edit_bzmndsgn_save_network_config_settings', ['baizman_design\form', 'save_network_form_data'] );
-			add_action( 'admin_init', ['baizman_design\form', 'network_config_settings'] );
+			add_action( 'network_admin_edit_bzmndsgn_save_network_config_settings', [__NAMESPACE__.'\form', 'save_network_form_data'] );
+			add_action( 'admin_init', [__NAMESPACE__.'\form', 'network_config_settings'] );
 		}
 
 		add_action ( 'admin_enqueue_scripts', [$this,'load_js_and_css'] ) ;
+
+		// check for updates
+		updater::add_filter();
 
 	}
 
