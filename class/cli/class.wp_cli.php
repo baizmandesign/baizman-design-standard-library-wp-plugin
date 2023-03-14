@@ -16,7 +16,8 @@ use SebastianBergmann\CodeCoverage\Report\PHP;
 
 class wp_cli {
 
-	private string $transient_option_key = '_site_transient_update_plugins' ;
+	private string $transient_option_key_plugin = '_site_transient_update_plugins' ;
+	private string $transient_option_key_theme = '_site_transient_update_themes' ;
 
 	private static string $plugin_path = '' ;
 
@@ -104,9 +105,36 @@ class wp_cli {
 			\WP_CLI::confirm( "Are you sure you want to delete the update plugins transient?" );
 		}
 
-		delete_option ( $this->transient_option_key ) ;
+		delete_option ( $this->transient_option_key_plugin ) ;
 
 		\WP_CLI::success( 'The update plugins transient has been deleted.' );
+	}
+
+	/**
+	 * Delete update themes transient.
+	 *
+	 * ## EXAMPLES
+	 *
+	 * wp bdsl delete-themes-transient
+	 * wp bdsl delete-themes-transient --yes
+	 *
+	 * @subcommand delete-themes-transient
+	 * @synopsis [--yes]
+	 */
+	public function delete_update_themes_transient ( $args, $assoc_args ) {
+		$defaults = [
+			'yes' => false,
+		];
+		$assoc_args = wp_parse_args ($assoc_args,$defaults) ;
+		$skip_confirmation = $assoc_args['yes'] ;
+
+		if ( ! $skip_confirmation ) {
+			\WP_CLI::confirm( "Are you sure you want to delete the update themes transient?" );
+		}
+
+		delete_option ( $this->transient_option_key_theme ) ;
+
+		\WP_CLI::success( 'The update themes transient has been deleted.' );
 	}
 
 	/**
