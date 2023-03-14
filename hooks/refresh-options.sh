@@ -6,4 +6,4 @@
 
 WP=$(which wp)
 
-$WP bzmndsgn refresh
+$WP bdsl refresh
