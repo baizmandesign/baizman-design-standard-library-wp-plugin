@@ -19,6 +19,8 @@ use baizman_design\utility;
 
 class dashboard_config extends page {
 
+    // path to query monitor plugin (folder/filename).
+    private string $qm_plugin = 'query-monitor/query-monitor.php' ;
 	/**
 	 * @param $plugin
 	 * @param $page_title
@@ -361,7 +363,9 @@ class dashboard_config extends page {
 	}
 
 	/**
-	 * FIXME: this doesn't work anymore.
+     * This function makes the admin table headers sticky. When scrolling,
+     * they adhere to the top of the screen.
+     *
 	 * @return void
 	 */
 	public function add_fixed_header_to_admin_tables ( ) {
@@ -480,7 +484,7 @@ class dashboard_config extends page {
         if ( in_array ('administrator',$user_data->roles ) ) {
 
             $all_plugins = get_plugins();
-            if (in_array('query-monitor/query-monitor.php', array_keys($all_plugins))) {
+            if (in_array($this->qm_plugin, array_keys($all_plugins))) {
                 $menu_items[] = [
                     'id' => 'toggle-qm',
                     'parent' => '',
@@ -538,6 +542,7 @@ class dashboard_config extends page {
 		);
 
 	}
+
 	/**
 	 * Handle AJAX request to toggle Query Monitor plugin.
 	 *
@@ -548,19 +553,16 @@ class dashboard_config extends page {
 		check_ajax_referer( 'toggle_qm' );
 
 		// is query monitor installed?
-
-		$qm_plugin = 'query-monitor/query-monitor.php' ;
-
-		// is plugin active?
+		// is the plugin active?
 		// https://developer.wordpress.org/reference/functions/is_plugin_active/
-		if ( in_array($qm_plugin, apply_filters('active_plugins', get_option('active_plugins'))) ) {
+		if ( in_array($this->qm_plugin, apply_filters('active_plugins', get_option('active_plugins'))) ) {
 			// no return value
-			$result = deactivate_plugins( $qm_plugin );
+			$result = deactivate_plugins( $this->qm_plugin );
 		} else {
 			// activate plugin
 			// https://developer.wordpress.org/reference/functions/activate_plugin/
 			// returns null on success
-			$result = activate_plugin( $qm_plugin );
+			$result = activate_plugin( $this->qm_plugin );
 		}
 
 		wp_send_json ( [ 'return_status' => $result ] ) ;
@@ -570,6 +572,7 @@ class dashboard_config extends page {
 
 	/**
      * Callback for outputting contents of the widget.
+     *
 	 * @return void
 	 */
 	public function admin_dashboard_widget( ) {
@@ -596,6 +599,8 @@ class dashboard_config extends page {
 	}
 
 	/**
+     * Add custom widget to Dashboard > Home screen.
+     *
 	 * @return void
 	 */
 	public function add_admin_dashboard_widget( ) {
@@ -614,16 +619,24 @@ class dashboard_config extends page {
 	 * Remove WP admin dashboard widgets.
 	 * https://isabelcastillo.com/remove-wordpress-dashboard-widgets
 	 * TODO: make this a setting in the admin panel?
+     *
+     * @return void
 	 */
 	public function disable_dashboard_widgets ( ) {
-		// remove_meta_box('dashboard_right_now', 'dashboard', 'normal');// Remove "At a Glance"
-		remove_meta_box ('dashboard_activity', 'dashboard', 'normal');// Remove "Activity" which includes "Recent Comments"
-		remove_meta_box ('dashboard_quick_press', 'dashboard', 'side');// Remove Quick Draft
-		remove_meta_box ('dashboard_primary', 'dashboard', 'core');// Remove WordPress Events and News
+        // Remove "At a Glance"
+		// remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
+        // Remove "Activity" which includes "Recent Comments"
+		remove_meta_box ('dashboard_activity', 'dashboard', 'normal');
+        // Remove Quick Draft
+		remove_meta_box ('dashboard_quick_press', 'dashboard', 'side');
+        // Remove WordPress Events and News
+		remove_meta_box ('dashboard_primary', 'dashboard', 'core');
 	}
 
 	/**
 	 * Add custom styles to tinyMCE editor.
+     *
+     * @return void
 	 */
 	function custom_editor_styles ( ) {
 		add_editor_style ( $this->plugin['plugin_folder_url'] . 'css/editor-styles.css' ) ;
@@ -632,6 +645,7 @@ class dashboard_config extends page {
 	/**
      * Remove icon for comments in WP admin bar.
      * @link https://wordpress.stackexchange.com/questions/178678/how-to-remove-comments-option-from-wp-admin-bar-and-modify-profile-icon
+     *
 	 * @return void
 	 */
 	function hide_comments_on_admin_bar() {
