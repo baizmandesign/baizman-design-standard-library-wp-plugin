@@ -1,0 +1,14 @@
+# create a zip archive (without bitbucket-pipelines.yml) and copy it to wp.baizmandesign.com.
+
+pipelines:
+  default:
+    - step:
+        name: Deploy ZIP to wp.baizmandesign.com.
+        script:
+          - git archive -o $TARGET_ZIP_FILENAME -9 --prefix=$PLUGIN_SLUG/ HEAD
+          - pipe: atlassian/scp-deploy:0.3.3
+            variables:
+              USER: $SSH_USER
+              SERVER: $SSH_HOST
+              REMOTE_PATH: $SSH_HOST_SUBDIR
+              LOCAL_PATH: $TARGET_ZIP_FILENAME

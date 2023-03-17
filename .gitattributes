@@ -1,0 +1,2 @@
+# exclude bitbucket-pipelines.yml from archives
+bitbucket-pipelines.yml export-ignore
