@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FF0000;}
+	.st1{fill:#231F20;}
+	.st2{font-family:'HelveticaLTStd-UltraComp';}
+	.st3{font-size:142px;}
+	.st4{fill:#FFFFFF;}
+</style>
+<font horiz-adv-x="1000">
+<!-- Copyright 1988, 1990, 1991, 2002 Adobe Systems Incorporated. All rights reserved. Helvetica is a trademark of Linotype Corp. registered in the U.S. Patent and Trademark Office and may be registered in certain other jurisdictions in the name of Linotype Corp. or its licensee Linotype GmbH. -->
+<font-face font-family="HelveticaLTStd-UltraComp" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<missing-glyph horiz-adv-x="500" d="M0,0l500,0l0,700l-500,0M250,395l-170,255l340,0M280,350l170,255l0,-510M80,50l170,255l170,-255M50,605l170,-255l-170,-255z"/>
+<glyph unicode="A" horiz-adv-x="333" d="M135,286l26,296l7,0l22,-296M6,0l96,0l23,193l75,0l20,-193l107,0l-81,712l-159,0z"/>
+<glyph unicode="B" horiz-adv-x="333" d="M134,631l24,0C185,631 196,619 196,578l0,-108C196,429 185,417 158,417l-24,0M28,0l149,0C266,0 305,65 305,150l0,113C305,343 271,361 204,374l0,2C265,390 301,409 302,471l0,113C302,660 263,712 178,712l-150,0M134,332l21,0C185,332 199,320 199,276l0,-135C199,97 185,85 155,85l-21,0z"/>
+<glyph unicode="D" horiz-adv-x="333" d="M28,0l151,0C261,0 305,61 305,129l0,422C305,676 261,712 156,712l-128,0M134,627l25,0C186,627 199,620 199,574l0,-436C199,92 186,85 159,85l-25,0z"/>
+<glyph unicode="E" horiz-adv-x="278" d="M269,0l0,93l-132,0l0,250l125,0l0,93l-125,0l0,183l130,0l0,93l-236,0l0,-712z"/>
+<glyph unicode="G" horiz-adv-x="333" d="M157,355l0,-85l42,0l0,-155C199,79 188,71 167,71C145,71 134,79 134,115l0,482C134,633 145,641 167,641C188,641 199,633 199,597l0,-142l106,0l0,151C305,699 232,726 166,726C101,726 28,699 28,606l0,-500C28,13 101,-14 151,-14C193,-14 228,6 247,45l2,0l3,-45l53,0l0,355z"/>
+<glyph unicode="I" horiz-adv-x="167" d="M136,0l0,712l-106,0l0,-712z"/>
+<glyph unicode="L" horiz-adv-x="278" d="M272,0l0,93l-135,0l0,619l-106,0l0,-712z"/>
+<glyph unicode="M" horiz-adv-x="481" d="M289,0l37,307C330,345 346,528 352,581l4,0C353,491 352,412 352,328l0,-328l93,0l0,712l-157,0l-29,-295C253,360 252,270 249,196l-5,0C243,286 233,374 227,418l-34,294l-157,0l0,-712l93,0l0,442C129,485 126,538 125,581l4,0C136,520 146,416 154,343l38,-343z"/>
+<glyph unicode="N" horiz-adv-x="389" d="M31,712l0,-712l87,0l0,516C117,546 115,577 115,608l4,0C128,524 134,444 151,356l50,-356l157,0l0,712l-87,0l0,-362C271,281 275,211 274,142l0,-38l-4,0C261,238 244,375 220,507l-30,205z"/>
+<glyph unicode="R" horiz-adv-x="333" d="M134,0l0,330C183,332 199,315 199,272C199,189 194,82 212,0l106,0C301,98 307,198 301,293C297,358 247,374 200,380l0,2C290,392 305,436 305,489l0,101C305,682 253,712 168,712l-140,0l0,-712M134,627l25,0C183,627 199,619 199,592l0,-129C199,437 191,417 154,417l-20,0z"/>
+<glyph unicode="S" horiz-adv-x="333" d="M134,270l-106,0l0,-164C28,13 101,-14 166,-14C232,-14 305,13 305,106l0,126C305,304 134,458 134,509l0,88C134,633 145,641 167,641C188,641 199,633 199,597l0,-141l106,0l0,150C305,699 232,726 166,726C101,726 28,699 28,606l0,-102C28,388 199,290 199,190l0,-75C199,79 188,71 167,71C145,71 134,79 134,115z"/>
+<glyph unicode="T" horiz-adv-x="315" d="M12,712l0,-93l93,0l0,-619l106,0l0,619l92,0l0,93z"/>
+<glyph unicode="Y" horiz-adv-x="333" d="M4,712l109,-446l0,-266l106,0l0,271l109,441l-99,0l-38,-160C180,506 176,459 173,403l-2,0C162,478 163,488 148,557l-35,155z"/>
+<glyph unicode="Z" horiz-adv-x="259" d="M13,712l0,-93l121,0l-123,-545l0,-74l236,0l0,93l-125,0l124,541l0,78z"/>
+</font>
+
+	<g>
+	<rect class="st0" width="512" height="512"/>
+</g>
+<text transform="matrix(1 0 0 1 23.4152 128.7205)"><tspan x="0" y="0" class="st1 st2 st3">BAIZMAN</tspan><tspan x="0" y="120" class="st4 st2 st3">DESIGN</tspan><tspan x="0" y="240" class="st1 st2 st3">STANDARD</tspan><tspan x="0" y="360" class="st4 st2 st3">LIBRARY</tspan></text>
+</svg>

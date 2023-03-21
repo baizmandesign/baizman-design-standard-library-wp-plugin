@@ -1,2 +1,3 @@
 # exclude bitbucket-pipelines.yml from archives
 bitbucket-pipelines.yml export-ignore
+img/icons/bdsl-icon.ai export-ignore
