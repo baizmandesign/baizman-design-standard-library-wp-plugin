@@ -4,14 +4,14 @@
  *
  * @author          Baizman Design
  * @package         Baizman Design Standard Library
- * @version         1.2.0
+ * @version         1.2.1
  *
  * @wordpress-plugin
  * Plugin Name:     Baizman Design Standard Library
  * Plugin URI:      https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/
  * Description:     A standard set of frequently desired WordPress features in a customizable interface.
  * Author:          Baizman Design
- * Version:         1.2.0
+ * Version:         1.2.1
  * Author URI:      https://baizmandesign.com
  * License:         GPLv2
  * Update URI:      https://wp.baizmandesign.com/bdsl.php

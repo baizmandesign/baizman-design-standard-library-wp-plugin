@@ -33,8 +33,6 @@ class updater {
 
 			$custom_plugins_data = json_decode( $response['body'], true );
 
-			file_put_contents('json.txt',print_r($custom_plugins_data,true),FILE_APPEND);
-
 			if ( ! empty( $custom_plugins_data[ $plugin_file ] ) ) {
 				return $custom_plugins_data[ $plugin_file ];
 			}
