@@ -1,4 +1,4 @@
-# exclude bitbucket-pipelines.yml from archives
+# exclude these files from archives
 bitbucket-pipelines.yml export-ignore
 img/icons/bdsl-icon.ai export-ignore
 .gitattributes export-ignore
