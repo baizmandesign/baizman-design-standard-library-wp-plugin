@@ -24,7 +24,15 @@ class updater {
 			}
 
 			if ( $response === false ) {
-				$response = wp_remote_get( $plugin_data['UpdateURI'] );
+				// https://rudrastyh.com/wordpress/check-license-key-in-plugin-updates.html
+				$response = wp_remote_get(
+					add_query_arg (
+					[
+						'referrer_domain' => urlencode ( $_SERVER['HTTP_HOST'] ),
+					    'wp_plugin_url' => urlencode (WP_PLUGIN_URL
+					  )
+					],
+					$plugin_data['UpdateURI'] ) );
 			}
 
 			if ( empty( $response['body'] ) ) {
