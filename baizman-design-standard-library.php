@@ -4,14 +4,14 @@
  *
  * @author          Baizman Design
  * @package         Baizman Design Standard Library
- * @version         1.2.2
+ * @version         1.2.3
  *
  * @wordpress-plugin
  * Plugin Name:     Baizman Design Standard Library
  * Plugin URI:      https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/
  * Description:     A standard set of frequently desired WordPress features in a customizable interface.
  * Author:          Baizman Design
- * Version:         1.2.2
+ * Version:         1.2.3
  * Author URI:      https://baizmandesign.com
  * License:         GPLv2
  * Update URI:      https://wp.baizmandesign.com/bdsl.php
@@ -105,10 +105,10 @@ function bdsl_init() {
 	$general_settings = new general_settings ( $plugin, 'General Settings', bdsl::parent_menu_slug, true ) ;
 
 	/* Content Sanitizers configuration page. */
-	$content_sanitizers = new content_sanitizer ( $plugin, 'Content Sanitizers', bdsl::prefix.'_content_sanitizers' );
+	$content_sanitizers = new content_sanitizer ( $plugin, 'Content Sanitizers', preferences::prefix.'_content_sanitizers' );
 
 	/* Dashboard configuration page. */
-	$dashboard_configuration = new dashboard_config ( $plugin, 'Dashboard', bdsl::prefix.'_dashboard' );
+	$dashboard_configuration = new dashboard_config ( $plugin, 'Dashboard', preferences::prefix.'_dashboard' );
 
 	/* Email configuration page. */
 	/* Hide menu / page if Easy WP SMTP is active. */
@@ -116,22 +116,27 @@ function bdsl_init() {
 		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 	}
 	if ( ! is_plugin_active( 'easy-wp-smtp/easy-wp-smtp.php' ) ) {
-		$email_config = new email_config ( $plugin, 'Email', bdsl::prefix.'_email' );
+		$email_config = new email_config ( $plugin, 'Email', preferences::prefix.'_email' );
 	}
 
 	/* 404 error log page. */
-	$error_log_404 = new error_log ( $plugin, '404 Error Log', bdsl::prefix.'_404_error_log' );
+	$error_log_404 = new error_log ( $plugin, '404 Error Log', preferences::prefix.'_404_error_log' );
 
 	/* WP constants page. */
-	$wp_constants = new wp_constants ( $plugin, 'WP Constants', bdsl::prefix.'_wp_constants' );
+	$wp_constants = new wp_constants ( $plugin, 'WP Constants', preferences::prefix.'_wp_constants' );
 
 	/* WP updates page. */
-	$wp_updates = new wp_updates ( $plugin, 'WP Updates', bdsl::prefix.'_wp_updates' );
+	$wp_updates = new wp_updates ( $plugin, 'WP Updates', preferences::prefix.'_wp_updates' );
 
 	/* Advanced page. */
 	if ( bdsl::debug ) {
-		$advanced = new advanced_config ( $plugin, 'Advanced', bdsl::prefix.'_advanced_settings' );
+		$advanced = new advanced_config ( $plugin, 'Advanced', preferences::prefix.'_advanced_settings' );
 	}
+
+	// save plugin slug / folder name
+	preferences::$plugin_slug = plugin_basename( __DIR__ );
+	preferences::$plugin_file_path = __FILE__;
+	preferences::$plugin_basename = plugin_basename( __FILE__ );
 
 	/**
 	 * Include admin interface if we are viewing the backend.
@@ -147,16 +152,14 @@ function bdsl_init() {
 		}
 		$plugin->has_toolset = is_plugin_active( 'types/wpcf.php' );
 
-		$plugin->plugin_file_path = __FILE__;
-
 		// See https://developer.wordpress.org/reference/functions/register_activation_hook/ for the syntax.
-		register_activation_hook( $plugin->plugin_file_path, [ 'preferences', 'set_default_database_options' ] );
+		register_activation_hook( preferences::$plugin_file_path, [ 'preferences', 'set_default_database_options' ] );
 		if ( $plugin->is_multisite ) {
-			register_activation_hook( $plugin->plugin_file_path, [ 'preferences', 'set_default_network_database_options' ] );
-
+			register_activation_hook( preferences::$plugin_file_path, [ 'preferences', 'set_default_network_database_options' ] );
 		}
 
 	}
+
 	/**
 	 * Include support for WP CLI, if appropriate.
 	 */
@@ -169,17 +172,4 @@ function bdsl_init() {
 add_action( 'plugins_loaded', __NAMESPACE__.'\bdsl_init' );
 
 define( 'BZMNDSGN_NOT_FOUND_404_LOG_FILE', sprintf( '%s-%s', preferences::get_database_option('log_file_prefix'), '404.log' ) );
-
-if ( bdsl::debug ) {
-	$defined_constants      = get_defined_constants( true );
-	$user_defined_constants = print_r( $defined_constants['user'], true );
-
-	// TODO: this is running too soon. Add it to an appropriate hook? That didn't seem to work for me.
-	echo( '<!-- ' );
-	// Note: sprintf() won't print the contents of this variable.
-	echo $user_defined_constants;
-	echo( ' -->' );
-	utility::debug( $user_defined_constants );
-}
-
 

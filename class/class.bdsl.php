@@ -32,19 +32,16 @@ class bdsl {
 
 	const plugin_name = 'Baizman Design Standard Library';
 
-	const author_company = 'Baizman Design' ;
-
-	const author_company_url = 'https://baizmandesign.com' ;
-
-	const plugin_directory = 'baizman-design-standard-library' ;
-
+	// FIXME: this should be dynamically calculated
 	const plugin_filename = 'baizman-design-standard-library.php' ;
-
-	const prefix = 'bdsl' ;
 
 	const parent_menu_slug = 'bzmndsgn_general_settings';
 
 	const plugin_namespace = __NAMESPACE__;
+
+	const plugin_author_company = 'Baizman Design' ;
+
+	const plugin_author_company_url = 'https://baizmandesign.com' ;
 
 	const plugin_author_name = 'Saul Baizman';
 
@@ -53,6 +50,24 @@ class bdsl {
 	const plugin_support_email = 'support@baizmandesign.com';
 
 	const plugin_author_phone = '1-617-863-7165';
+
+	public bool $is_multisite;
+
+	public string $multisite_network_name;
+
+	public string $document_root_uri;
+
+	public string $document_root_url;
+
+	public string $theme_folder_uri;
+
+	public string $theme_folder_url;
+
+	public string $plugin_folder_uri;
+
+	public string $plugin_folder_url;
+
+	public bool $has_toolset;
 
 	/**
 	 * bdsl constructor.
@@ -84,8 +99,8 @@ class bdsl {
 	 * @return void
 	 */
 	public function load_js_and_css ( ) {
-		wp_enqueue_script ( bdsl::prefix.'-js', $this->plugin_folder_url . 'js/admin-scripts.js', false, false, true) ;
-		wp_enqueue_style( bdsl::prefix.'-css', $this->plugin_folder_url . 'css/admin-style.css', false, false, 'all' ) ;
+		wp_enqueue_script ( preferences::prefix.'-js', $this->plugin_folder_url . 'js/admin-scripts.js', false, false, true) ;
+		wp_enqueue_style( preferences::prefix.'-css', $this->plugin_folder_url . 'css/admin-style.css', false, false, 'all' ) ;
 	}
 
 	/**
@@ -96,12 +111,11 @@ class bdsl {
 	 * @return mixed
 	 */
 	public function filter_plugin_links( $links, $file ) {
-		$plugin_info          = get_plugins( '/' . explode( '/', plugin_basename( __FILE__ ) )[0] );
-		$plugin_parent_folder = trailingslashit( basename( dirname( $this->plugin_file_path ) ) );
 
-		$plugin_name = utility::array_key_first( $plugin_info );
+		// "folder/filename.php"
+		$plugin_folder_and_filename = trailingslashit(preferences::$plugin_slug) . basename(preferences::$plugin_file_path) ;
 
-		if ( $file == $plugin_parent_folder . $plugin_name ) {
+		if ( $file == $plugin_folder_and_filename ) {
 			$links[] = sprintf( '<a href="%s" rel="noopener"><span class="dashicons dashicons-admin-generic"></span> Settings</a>', home_url( '/wp-admin/admin.php?page=bzmndsgn_general_settings' ) );
 			$links[] = sprintf( '<a href="%s"  rel="noopener" target="%s"><span class="dashicons dashicons-welcome-write-blog"></span> Report an Issue</a>', 'https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/issues/new', '_blank' );
 		}

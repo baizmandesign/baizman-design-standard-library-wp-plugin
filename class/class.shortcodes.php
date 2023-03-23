@@ -15,9 +15,9 @@ class shortcodes {
 
 	public static function load_shortcodes ( $plugin ) {
 		self::$plugin = $plugin ;
-		add_shortcode ( bdsl::prefix.'_get_site_database_setting', [__CLASS__,'get_site_database_setting'] ) ;
+		add_shortcode ( preferences::prefix.'_get_site_database_setting', [__CLASS__,'get_site_database_setting'] ) ;
 
-		add_shortcode ( bdsl::prefix.'_get_theme_directory', [__CLASS__,'get_theme_directory'] ) ;
+		add_shortcode ( preferences::prefix.'_get_theme_directory', [__CLASS__,'get_theme_directory'] ) ;
 	}
 
 	/**

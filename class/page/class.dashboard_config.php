@@ -305,7 +305,7 @@ class dashboard_config extends page {
 			return preferences::get_database_option('textarea-branding_info') ;
 		}
 		// The default, if 'checkbox-show_marketing' is checked but the  'textarea-branding_info' is empty.
-		return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', bdsl::author_company, bdsl::author_company_url ) ;
+		return sprintf ( 'Website design and development by <a target="_blank" href="%2$s">%1$s</a>', bdsl::plugin_author_company, bdsl::plugin_author_company_url ) ;
 	}
 
 	/**
@@ -578,8 +578,8 @@ class dashboard_config extends page {
 	public function admin_dashboard_widget( ) {
 
 		$substitutions = array (
-			'{author_company}' => bdsl::author_company,
-			'{author_company_url}' => bdsl::author_company_url,
+			'{author_company}' => bdsl::plugin_author_company,
+			'{author_company_url}' => bdsl::plugin_author_company_url,
 			'{home_url}' => home_url(),
 			'{hostname}' => parse_url(home_url(),PHP_URL_HOST),
 			'{support_email}' => bdsl::plugin_support_email,
@@ -609,7 +609,7 @@ class dashboard_config extends page {
 		// Only display the widget if the user is an admin.
         // Note: this is a rare instance of a hook *not* located in the constructor.
 		if ( current_user_can ( 'manage_options' ) ) {
-			wp_add_dashboard_widget( bdsl::prefix.'_admin_dashboard_widget',
+			wp_add_dashboard_widget( preferences::prefix.'_admin_dashboard_widget',
 				$dashboard_widget_title,
 				 [$this,'admin_dashboard_widget'] );
 		}

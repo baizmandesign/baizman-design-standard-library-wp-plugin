@@ -22,7 +22,7 @@ class wp_cli {
 	private static string $plugin_path = '' ;
 
 	public static function add_command ( $plugin ) {
-		\WP_CLI::add_command( bdsl::prefix, __NAMESPACE__.'\wp_cli', [
+		\WP_CLI::add_command( preferences::prefix, __NAMESPACE__.'\wp_cli', [
 				'shortdesc' => 'WP CLI interface for Baizman Design Standard Library (BDSL).',
 			]
 		);
