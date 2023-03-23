@@ -29,10 +29,14 @@ class updater {
 					add_query_arg (
 					[
 						'referrer_domain' => urlencode ( $_SERVER['HTTP_HOST'] ),
-					    'wp_plugin_url' => urlencode (WP_PLUGIN_URL
-					  )
+					    'wp_plugin_url' => urlencode (WP_PLUGIN_URL ),
+						'current_version' => urlencode ( $plugin_data['Version']),
 					],
 					$plugin_data['UpdateURI'] ) );
+			}
+
+			if ( is_wp_error($response)) {
+				return $update;
 			}
 
 			if ( empty( $response['body'] ) ) {
