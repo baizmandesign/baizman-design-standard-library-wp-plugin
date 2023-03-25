@@ -8,22 +8,7 @@
 
 namespace baizman_design ;
 
-/*
- * ArrayAccess allows us to use array syntax to dynamically set the keys and values of an object.
- */
-
-use baizman_design\page\advanced_config;
-use baizman_design\page\dashboard_config;
-use baizman_design\page\email_config;
-use baizman_design\page\error_log;
-use baizman_design\page\general_settings;
-use baizman_design\page\content_sanitizer;
-use baizman_design\page\wp_constants;
-use baizman_design\page\wp_updates;
-
-class bdsl implements \ArrayAccess {
-
-	protected array $contents;
+class bdsl {
 
 	// toggle visibility of menus in wp dashboard
 	const show_dashboard_interface = true ;
@@ -73,7 +58,6 @@ class bdsl implements \ArrayAccess {
 	 * bdsl constructor.
 	 */
 	public function __construct( ) {
-		$this->contents = [];
 		add_filter( 'plugin_row_meta', [$this, 'filter_plugin_links'], 10, 2 );
 
 		if (bdsl::show_dashboard_interface) {
@@ -100,8 +84,8 @@ class bdsl implements \ArrayAccess {
 	 * @return void
 	 */
 	public function load_js_and_css ( ) {
-		wp_enqueue_script ( bdsl::prefix.'-js', $this['plugin_folder_url'] . 'js/admin-scripts.js', false, false, true) ;
-		wp_enqueue_style( bdsl::prefix.'-css', $this['plugin_folder_url'] . 'css/admin-style.css', false, false, 'all' ) ;
+		wp_enqueue_script ( bdsl::prefix.'-js', $this->plugin_folder_url . 'js/admin-scripts.js', false, false, true) ;
+		wp_enqueue_style( bdsl::prefix.'-css', $this->plugin_folder_url . 'css/admin-style.css', false, false, 'all' ) ;
 	}
 
 	/**
@@ -113,7 +97,7 @@ class bdsl implements \ArrayAccess {
 	 */
 	public function filter_plugin_links( $links, $file ) {
 		$plugin_info          = get_plugins( '/' . explode( '/', plugin_basename( __FILE__ ) )[0] );
-		$plugin_parent_folder = trailingslashit( basename( dirname( $this['plugin_file_path'] ) ) );
+		$plugin_parent_folder = trailingslashit( basename( dirname( $this->plugin_file_path ) ) );
 
 		$plugin_name = utility::array_key_first( $plugin_info );
 
@@ -135,45 +119,6 @@ class bdsl implements \ArrayAccess {
 	}
 
 	/**
-	 * @param mixed $offset
-	 *
-	 * @return bool
-	 */
-	public function offsetExists( $offset ) {
-		return isset( $this->contents[$offset] );
-	}
-
-	/**
-	 * @param mixed $offset
-	 *
-	 * @return mixed
-	 *
-	 * Null coalescing operator:
-	 * @link https://www.php.net/manual/en/migration70.new-features.php
-	 */
-	public function offsetGet( $offset ) {
-		if( is_callable($this->contents[$offset]) ){
-			return call_user_func( $this->contents[$offset], $this );
-		}
-		return $this->contents[ $offset ] ?? null;
-	}
-
-	/**
-	 * @param mixed $offset
-	 * @param mixed $value
-	 */
-	public function offsetSet( $offset, $value ) {
-		$this->contents[$offset] = $value;
-	}
-
-	/**
-	 * @param mixed $offset
-	 */
-	public function offsetUnset( $offset ) {
-		unset( $this->contents[$offset] );
-	}
-
-	/**
 	 * Add hooks for the login page.
 	 * @return void
 	 */
@@ -186,7 +131,7 @@ class bdsl implements \ArrayAccess {
 	 * Add custom styles on WP login screen.
 	 */
 	public function login_stylesheet ( ) {
-		wp_enqueue_style ( 'custom-login', $this['plugin_folder_url'] . 'css/login-styles.css' ) ;
+		wp_enqueue_style ( 'custom-login', $this->plugin_folder_url . 'css/login-styles.css' ) ;
 	}
 
 	/**
@@ -201,8 +146,8 @@ class bdsl implements \ArrayAccess {
 	public function login_screen_message ( $message ): string {
 		if ( empty ( $message ) ) {
 			$website_name = get_bloginfo('name') ;
-			if ( $this['is_multisite'] ) {
-				$h2_text = $this['multisite_network_name'] ;
+			if ( $this->is_multisite ) {
+				$h2_text = $this->multisite_network_name ;
 				$h3_text = $website_name ;
 			}
 			else {

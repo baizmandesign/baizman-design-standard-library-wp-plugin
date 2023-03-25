@@ -76,25 +76,25 @@ spl_autoload_register( function ( $class_name ) {
 function bdsl_init() {
 
 	$plugin = new bdsl ( ) ;
-	$plugin['is_multisite'] = is_multisite();
-	if ( $plugin['is_multisite'] ) {
-		$plugin['multisite_network_name'] = get_network()->site_name;
+	$plugin->is_multisite = is_multisite();
+	if ( $plugin->is_multisite ) {
+		$plugin->multisite_network_name = get_network()->site_name;
 	}
-	$plugin['document_root_uri'] = trailingslashit( $_SERVER['DOCUMENT_ROOT'] );
+	$plugin->document_root_uri = trailingslashit( $_SERVER['DOCUMENT_ROOT'] );
 	/* https://developer.wordpress.org/reference/functions/home_url/ */
 	/* https://developer.wordpress.org/reference/functions/get_home_url/ */
-	$plugin['document_root_url'] = trailingslashit( home_url() );
+	$plugin->document_root_url = trailingslashit( home_url() );
 	/* Note: this only retrieves the *child* theme path, not the parent theme. */
 	/* https://developer.wordpress.org/reference/functions/get_stylesheet_directory_uri/ */
-	$plugin['theme_folder_uri'] = trailingslashit( get_stylesheet_directory() );
-	$plugin['theme_folder_url'] = trailingslashit( get_stylesheet_directory_uri() );
-	$plugin['plugin_folder_uri'] = trailingslashit( plugin_dir_path( __FILE__ ) );
-	$plugin['plugin_folder_url'] = trailingslashit( plugin_dir_url( __FILE__ ) );
+	$plugin->theme_folder_uri = trailingslashit( get_stylesheet_directory() );
+	$plugin->theme_folder_url = trailingslashit( get_stylesheet_directory_uri() );
+	$plugin->plugin_folder_uri = trailingslashit( plugin_dir_path( __FILE__ ) );
+	$plugin->plugin_folder_url = trailingslashit( plugin_dir_url( __FILE__ ) );
 
 	/* Multisite configuration variables. */
-	if ( $plugin['is_multisite'] ) {
+	if ( $plugin->is_multisite ) {
 		$network = get_network();
-		$plugin['multisite_network_name'] = $network->site_name;
+		$plugin->multisite_network_name = $network->site_name;
 	}
 
 	$plugin->add_login_hooks() ;
@@ -145,14 +145,14 @@ function bdsl_init() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		}
-		$plugin['has_toolset'] = is_plugin_active( 'types/wpcf.php' );
+		$plugin->has_toolset = is_plugin_active( 'types/wpcf.php' );
 
-		$plugin['plugin_file_path'] = __FILE__;
+		$plugin->plugin_file_path = __FILE__;
 
 		// See https://developer.wordpress.org/reference/functions/register_activation_hook/ for the syntax.
-		register_activation_hook( $plugin['plugin_file_path'], [ 'preferences', 'set_default_database_options' ] );
-		if ( $plugin['is_multisite'] ) {
-			register_activation_hook( $plugin['plugin_file_path'], [ 'preferences', 'set_default_network_database_options' ] );
+		register_activation_hook( $plugin->plugin_file_path, [ 'preferences', 'set_default_database_options' ] );
+		if ( $plugin->is_multisite ) {
+			register_activation_hook( $plugin->plugin_file_path, [ 'preferences', 'set_default_network_database_options' ] );
 
 		}
 

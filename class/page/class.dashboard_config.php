@@ -62,7 +62,7 @@ class dashboard_config extends page {
 
 		if ( utility::is_enabled ( 'checkbox-show_dashboard_widget' ) && bdsl::show_dashboard_widget ) {
 			// Add to network dashboard.
-			if ( $this->plugin['is_multisite'] ) {
+			if ( $this->plugin->is_multisite ) {
 				add_action( 'wp_network_dashboard_setup', [$this,'add_admin_dashboard_widget'] );
 			}
 			// Add to non-network dashboard.
@@ -267,7 +267,7 @@ class dashboard_config extends page {
 		$dashboard_settings_form->add_form_field ( $disable_file_editing ) ;
 
 		// only show if toolset plugin is enabled.
-		if ( $this->plugin['has_toolset'] ) {
+		if ( $this->plugin->has_toolset ) {
 			// hide toolset expiration notice.
 			$hide_toolset_expiration_notice = new checkbox ( 'Hide Toolset plugin expiration notice?',
 				'checkbox-hide_toolset_expiration_notice',
@@ -278,7 +278,7 @@ class dashboard_config extends page {
 		}
 
 		// only show if toolset plugin is enabled.
-		if ( $this->plugin['has_toolset'] ) {
+		if ( $this->plugin->has_toolset ) {
 			// sort Toolset custom taxonomies alphabetically.
 			$enable_toolset_taxonomy_sort = new checkbox ( 'Sort Toolset custom taxonomies alphabetically?',
 				'checkbox-enable_toolset_taxonomy_sort',
@@ -412,11 +412,11 @@ class dashboard_config extends page {
 		$environment = utility::get_environment_type ( );
 		$server_name = gethostname() ;
 
-		if ( $this->plugin['is_multisite'] ) {
+		if ( $this->plugin->is_multisite ) {
 			// https://wordpress.stackexchange.com/questions/15309/how-to-get-blog-name-when-using-wordpress-multisite
 			global $blog_id;
 			$current_blog_details = get_blog_details ( array( 'blog_id' => $blog_id ) );
-			return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> &gt; <a href="%4$s" target="_blank">%3$s</a> (%5$s on %6$s)', $this->plugin['multisite_network_name'],
+			return sprintf ( '<a href="%2$s" target="_blank">%1$s</a> &gt; <a href="%4$s" target="_blank">%3$s</a> (%5$s on %6$s)', $this->plugin->multisite_network_name,
 				network_home_url (),
 				$current_blog_details->blogname,
 				$current_blog_details->home,
@@ -526,7 +526,7 @@ class dashboard_config extends page {
 
 		wp_enqueue_script(
 			'ajax-script',
-			$this->plugin['plugin_folder_url'] . 'js/ajax.js',
+			$this->plugin->plugin_folder_url . 'js/ajax.js',
 			array( 'jquery' ),
 			'1.0.0',
 			true
@@ -639,7 +639,7 @@ class dashboard_config extends page {
      * @return void
 	 */
 	function custom_editor_styles ( ) {
-		add_editor_style ( $this->plugin['plugin_folder_url'] . 'css/editor-styles.css' ) ;
+		add_editor_style ( $this->plugin->plugin_folder_url . 'css/editor-styles.css' ) ;
 	}
 
 	/**

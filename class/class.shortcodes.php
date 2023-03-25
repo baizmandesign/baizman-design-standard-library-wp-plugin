@@ -49,6 +49,6 @@ class shortcodes {
 	 * @return string
 	 */
 	public static function get_theme_directory ( ): string {
-		return self::$plugin['theme_folder_uri'] ;
+		return self::$plugin->theme_folder_uri ;
 	}
 }

@@ -26,7 +26,7 @@ class wp_cli {
 				'shortdesc' => 'WP CLI interface for Baizman Design Standard Library (BDSL).',
 			]
 		);
-		self::$plugin_path = $plugin['plugin_folder_uri'] ;
+		self::$plugin_path = $plugin->plugin_folder_uri ;
 	}
 
 	/**

@@ -129,7 +129,7 @@ class wp_updates extends page {
 		) ;
 		if ( defined ( 'AUTOMATIC_UPDATER_DISABLED' ) && AUTOMATIC_UPDATER_DISABLED === true ) {
 			$disable_all_updates->set_is_disabled(true);
-			$disable_all_updates->set_field_help_text('Constant AUTOMATIC_UPDATER_DISABLED is set in wp-config.php.');
+			$disable_all_updates->set_field_help_text('Constant AUTOMATIC_UPDATER_DISABLED is set in wp-config.php or elsewhere.');
 		}
 		$wordpress_updates_settings_form->add_form_field ( $disable_all_updates ) ;
 
