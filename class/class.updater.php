@@ -74,8 +74,6 @@ class updater {
 
 		$update = self::check_for_updates( '', get_plugin_data(preferences::$plugin_file_path), preferences::$plugin_basename ) ;
 
-//		var_dump($update);
-		
 		if( ! $update ) {
 			return $result;
 		}
