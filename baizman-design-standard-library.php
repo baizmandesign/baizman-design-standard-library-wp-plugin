@@ -7,14 +7,16 @@
  * @version         1.2.3
  *
  * @wordpress-plugin
- * Plugin Name:     Baizman Design Standard Library
- * Plugin URI:      https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/
- * Description:     A standard set of frequently desired WordPress features in a customizable interface.
- * Author:          Baizman Design
- * Version:         1.2.3
- * Author URI:      https://baizmandesign.com
- * License:         GPLv2
- * Update URI:      https://wp.baizmandesign.com/bdsl.php
+ * Plugin Name:         Baizman Design Standard Library
+ * Plugin URI:          https://bitbucket.org/baizmandesign/baizman-design-standard-library-wp-plugin/
+ * Description:         A standard set of frequently desired WordPress features in a customizable interface.
+ * Author:              Baizman Design
+ * Version:             1.2.3
+ * Author URI:          https://baizmandesign.com
+ * Requires at least:   5.8
+ * Requires PHP:        7.4
+ * License:             GPLv2
+ * Update URI:          https://wp.baizmandesign.com/wp-updater.php
  */
 namespace baizman_design ;
 
