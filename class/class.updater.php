@@ -28,21 +28,29 @@ class updater {
 			// https://rudrastyh.com/wordpress/check-license-key-in-plugin-updates.html
 			// to quell wp cli warning about an undefined array key
 			$referrer_domain = $_SERVER['HTTP_HOST'] ?? '[unknown domain]' ;
-			$response = wp_remote_get(
-				add_query_arg (
+			$remote_get_url = add_query_arg (
 				[
+					'asset' => urlencode (preferences::$plugin_slug),
 					'referrer_domain' => urlencode ( $referrer_domain ),
-				    'wp_plugin_url' => urlencode (WP_PLUGIN_URL ),
+					'wp_plugin_url' => urlencode (WP_PLUGIN_URL ),
 					'current_version' => urlencode ( $plugin_data['Version']),
 				],
-				$plugin_data['UpdateURI'] ) );
+				$plugin_data['UpdateURI'] );
+
+			$response = wp_remote_get(
+				esc_url($remote_get_url),
+				[
+					'timeout' => 10,
+					'headers' => [ 'Accept' => 'application/json', ]
+				]
+			);
 		}
 
 		if ( is_wp_error ( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) || empty ( wp_remote_retrieve_body( $response ) ) ) {
 			return $update;
 		}
 
-		$custom_plugin_data = json_decode( $response['body'], true );
+		$custom_plugin_data = json_decode(wp_remote_retrieve_body( $response ),true);
 
 		if ( ! empty( $custom_plugin_data[ $plugin_file ] ) ) {
 			return $custom_plugin_data[ $plugin_file ];
@@ -89,12 +97,13 @@ class updater {
 		$result->author_profile = ''; //$update['author_profile'];
 		$result->download_link = ''; //$update['download_url'];
 		$result->trunk = ''; //$update['download_url'];
+		$result->homepage = $update['homepage'];
 		$result->requires_php = $update['requires_php'];
 		$result->last_updated = $update['last_updated'];
 
 		$result->sections = [
 			'description' => $update['sections']['description'],
-			'installation' => '', //$update['sections']['installation'],
+			'installation' => $update['sections']['installation'],
 			'changelog' => $update['sections']['changelog'],
 		];
 
