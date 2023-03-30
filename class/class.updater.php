@@ -12,8 +12,7 @@ namespace baizman_design ;
 class updater {
 
 	public static string $production_update_domain = 'wp.baizmandesign.com' ;
-	public static string $localhost_update_domain = 'localhost' ;
-	public static int $localhost_update_port = 8000 ;
+	public static string $localhost_update_domain = 'wp-updater.test' ;
 
 	public static function add_filter () {
 		// don't change the filter name for localhost over-ride
@@ -31,16 +30,22 @@ class updater {
 
 		if ( $response === false ) {
 
-			// over-ride production hostname
+			$update_uri = $plugin_data['UpdateURI'] ;
+			$curl_args = [
+				'timeout' => 10,
+				'headers' => [ 'Accept' => 'application/json', ]
+			] ;
+
+			// over-ride production hostname.
+			// disable ssl certificate verification.
 			if ( wp_get_environment_type() == 'local' ) {
 				$update_uri = str_replace (
-					'https://'. self::$production_update_domain,
-					'http://' . self::$localhost_update_domain.':'. self::$localhost_update_port,
+					self::$production_update_domain,
+					self::$localhost_update_domain,
 					$plugin_data['UpdateURI'] ) ;
+				$curl_args['sslverify'] = false ;
 			}
-			else {
-				$update_uri = $plugin_data['UpdateURI'] ;
-			}
+
 
 			// https://rudrastyh.com/wordpress/check-license-key-in-plugin-updates.html
 			// to quell wp cli warning about an undefined array key
@@ -57,10 +62,7 @@ class updater {
 			$response = wp_remote_get(
 				// FIXME: esc_url() broke url here.
 				$remote_get_url,
-				[
-					'timeout' => 10,
-					'headers' => [ 'Accept' => 'application/json', ]
-				]
+				$curl_args
 			);
 		}
 
